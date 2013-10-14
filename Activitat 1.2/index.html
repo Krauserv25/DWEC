@@ -1,16 +1,100 @@
 <html>
 	<head>
 		<title>Ejemplos JavaScript</title>
-		<link rel="stylesheet" type="text/css" href="estilos/design.css">
+		<script type="text/javascript">
+			function changeTema (n)
+			{
+				var inputElement = document.getElementById("tema"+n);
+				var titol = inputElement.value;
+
+				var tema = document.getElementById("titolTema");
+				tema.innerHTML = titol;
+
+				var codi = document.getElementById("codiTema");
+				var result = document.getElementById("resultatTema");
+
+				switch (n)
+				{
+					case 0:
+					codi.innerHTML = "TEMA VARIABLES";
+					resultatTema.innerHTML = "Resultado VARIABLES";
+					break;
+
+					case 1:
+					codi.innerHTML = "TEMA DATA TYPES";
+					resultatTema.innerHTML = "Resultado DATA TYPES";
+					break;
+
+					case 2:
+					codi.innerHTML = "TEMA OBJECTS";
+					resultatTema.innerHTML = "Resultado OBJECTS";
+					break;
+
+					case 3:
+					codi.innerHTML = "TEMA FUNCTIONS";
+					resultatTema.innerHTML = "Resultado FUNCTIONS";
+					break;
+
+					case 4:
+					codi.innerHTML = "TEMA OPERATORS";
+					resultatTema.innerHTML = "Resultado OPERATORS";
+					break;
+
+					case 5:
+					codi.innerHTML = "TEMA COMPARISONS";
+					resultatTema.innerHTML = "Resultado COMPARISONS";
+					break;
+
+					case 6:
+					codi.innerHTML = "TEMA CONDITIONS";
+					resultatTema.innerHTML = "Resultado CONDITIONS";
+					break;
+
+					case 7:
+					codi.innerHTML = "TEMA SWITCH";
+					resultatTema.innerHTML = "Resultado SWITCH";
+					break;
+
+					case 8:
+					codi.innerHTML = "TEMA LOOP FOR";
+					resultatTema.innerHTML = "Resultado LOOP FOR";
+					break;
+
+					case 9:
+					codi.innerHTML = "TEMA LOOP WHILE";
+					resultatTema.innerHTML = "Resultado LOOP WHILE";
+					break;
+				}
+			}
+		</script>
 	</head>
 	<body>
-		<div id="divTot">
-			<div id="divTitol">HOLA</div>
-			<div id="divContingut">
-				<div id="divCodi"></div>
-				<div id="divDreta">
-					<div id="divLlista"></div>
-					<div id="divResultat"></div>
+		<div id="divTot" style="width: 90%; height: 90%; border-style: solid; border-width: 3px; border-color: #5E2217;">
+			<div id="divTitol" style="width:100%; height: 5%; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #5E2217; background-color: #7F5217;">
+				<span id="titolTema" style="color: white; margin-left: 45%; font-size: 20px;"></span>
+			</div>
+			<div id="divContingut" style="width: 100%; height: 94%;">
+				<div id="divCodi" style="float:left; width: 75%; height: 100.5%; border-right-style: solid; border-right-width: 3px; border-right-color: #5E2217; background-color: #BDB76B;">
+					<span id="codiTema" style="color: white; font-size: 30px;"></span>
+				</div>
+				<div id="divDreta" style="float:left; width: 24.73%; height: 100%;">
+					<div id="divLlista" style="width: 100%; height: 50%; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #5E2217; background-color: #6B8E23;">						
+						<ul style="display: block; margin-left: 4%; position: absolute;">
+							<li style="list-style-type: none;"><input id="tema0" type="button" value="JS Variables" onclick="changeTema(0);"></input></li>
+							<li style="list-style-type: none;"><input id="tema1" type="button" value="JS Data Types" onclick="changeTema(1);"></input></li>
+							<li style="list-style-type: none;"><input id="tema2" type="button" value="JS Objects" onclick="changeTema(2);"></input></li>
+							<li style="list-style-type: none;"><input id="tema3" type="button" value="JS Functions" onclick="changeTema(3);"></input></li>
+							<li style="list-style-type: none;"><input id="tema4" type="button" value="JS Operators" onclick="changeTema(4);"></input></li>
+							<li style="list-style-type: none;"><input id="tema5" type="button" value="JS Comparisons" onclick="changeTema(5);"></input></li>
+							<li style="list-style-type: none;"><input id="tema6" type="button" value="JS Conditions" onclick="changeTema(6);"></input></li>
+							<li style="list-style-type: none;"><input id="tema7" type="button" value="JS Switch" onclick="changeTema(7);"></input></li>
+							<li style="list-style-type: none;"><input id="tema8" type="button" value="JS Loop For" onclick="changeTema(8);"></input></li>
+							<li style="list-style-type: none;"><input id="tema9" type="button" value="JS Loop While" onclick="changeTema(9);"></input></li>
+						</ul>
+					</div>
+					<div id="divResultat" style="width: 100%; height: 50%; background-color: #99C68E;">
+						<span id="resultatTema" style="color: white; font-size: 20px;"></span>
+					</div>
 				</div>
 			</div>
 		</div>
