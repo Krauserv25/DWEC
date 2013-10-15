@@ -16,18 +16,34 @@
 				switch (n)
 				{
 					case 0:
-					codi.innerHTML = "TEMA VARIABLES";
-					resultatTema.innerHTML = "Resultado VARIABLES";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;&lt;/head&gt;\n" +
+					"    &lt;body&gt;\n        &lt;script&gt;\n            var x=5;\n            var y=6;\n            var z=x+y;\n\n"+
+					"            document.write(x + &lt;br&gt;);\n            document.write(y + &lt;br&gt;);\n            document.write(z + &lt;br&gt;);\n        &lt;/script&gt;\n    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "5\n6\n11";
 					break;
 
 					case 1:
-					codi.innerHTML = "TEMA DATA TYPES";
-					resultatTema.innerHTML = "Resultado DATA TYPES";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;&lt;/head&gt;\n" +
+					"    &lt;body&gt;\n        &lt;script&gt;\n            var x=3;\n            var y=5;\n\n"+
+					"            document.write((x+y) + &lt;br&gt;);\n\n            x=\"Candidato num: \";\n            document.write((x+y) + &lt;br&gt;);\n\n            x=null;\n            y=false;\n" +
+					"        &lt;/script&gt;\n    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "8\nCandidato num: 5";
 					break;
 
 					case 2:
-					codi.innerHTML = "TEMA OBJECTS";
-					resultatTema.innerHTML = "Resultado OBJECTS";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;&lt;/head&gt;\n" +
+					"    &lt;body&gt;\n        &lt;script&gt;\n            var pokemon=new Object();\n            pokemon.nivel=20;\n"+
+					"            pokemon.nombre=\"Pikachu\";\n            pokemon.tipo=\"Electr.\";\n            pokemon.color=\"amarillo\";\n"+
+					"            pokemon.getInfo=function()\n            {\n                return this.nombre + \" es del tipo \" + this.tipo +"+
+					"\". Es de color \" + this.color + \" y se encuentra al nivel \" + this.nivel;\n            }\n" +
+					"            pokemon.increaseLevel=function()\n            {\n                this.nivel++;\n"+
+					"                return this.nombre + \" ha subido de nivel!\";\n            }\n\n"+
+					"            document.write(pokemon.getInfo() + &lt;br&gt;);\n            document.write(pokemon.increaseLevel() + &lt;br&gt;);\n"+
+					"            document.write(pokemon.getInfo() + &lt;br&gt;);\n "+
+					"        &lt;/script&gt;\n    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "Pikachu es del tipo Electr.. Es de color amarillo y se encuentra al nivel 20\n"+
+					"Pikachu ha subido de nivel!\n"+
+					"Pikachu es del tipo Electr.. Es de color amarillo y se encuentra al nivel 20";
 					break;
 
 					case 3:
@@ -74,8 +90,8 @@
 				<span id="titolTema" style="color: white; margin-left: 45%; font-size: 20px;"></span>
 			</div>
 			<div id="divContingut" style="width: 100%; height: 94%;">
-				<div id="divCodi" style="float:left; width: 75%; height: 100.5%; border-right-style: solid; border-right-width: 3px; border-right-color: #5E2217; background-color: #BDB76B;">
-					<span id="codiTema" style="color: white; font-size: 30px;"></span>
+				<div id="divCodi" style="float:left; width: 75%; height: 100.5%; border-right-style: solid; border-right-width: 3px; border-right-color: #5E2217; background-color: #BDB76B; overflow:auto;">
+					<pre id="codiTema" style="color: white; font-size: 15px;"></pre>
 				</div>
 				<div id="divDreta" style="float:left; width: 24.73%; height: 100%;">
 					<div id="divLlista" style="width: 100%; height: 50%; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #5E2217; background-color: #6B8E23;">						
@@ -92,8 +108,8 @@
 							<li style="list-style-type: none;"><input id="tema9" type="button" value="JS Loop While" onclick="changeTema(9);"></input></li>
 						</ul>
 					</div>
-					<div id="divResultat" style="width: 100%; height: 50%; background-color: #99C68E;">
-						<span id="resultatTema" style="color: white; font-size: 20px;"></span>
+					<div id="divResultat" style="width: 100%; height: 50%; background-color: #99C68E; overflow:auto;">
+						<pre id="resultatTema" style="color: white; font-size: 15px; margin: 0;"></pre>
 					</div>
 				</div>
 			</div>
