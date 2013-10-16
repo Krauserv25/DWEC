@@ -2,6 +2,159 @@
 	<head>
 		<title>Ejemplos JavaScript</title>
 		<script type="text/javascript">
+			function multiplicar (a, b)
+			{
+				var multFn = document.getElementById("multFunctions");
+				multFn.innerHTML = (a*b);
+			}
+
+			function mostrarSaludo ()
+			{
+				var saludoFn = document.getElementById("saludoFunctions");
+				saludoFn.innerHTML = "HOLA!";
+			}
+
+			function calcularSuma ()
+			{
+				var sumaFn = document.getElementById("sumaFunctions");
+				var opA = parseInt(document.getElementById("opA").value);
+				var opB = parseInt(document.getElementById("opB").value);
+				sumaFn.innerHTML = (opA+opB);
+			}
+
+			function operar ()
+			{
+				var opFn = document.getElementById("operations");
+				var opA = parseInt(document.getElementById("opA").value);
+				var opB = parseInt(document.getElementById("opB").value);
+				var index = document.getElementById("selectOp").options.selectedIndex;
+				var selectOp = document.getElementById("selectOp").options[index].text;
+				
+				switch (selectOp)
+				{
+					case '+':
+					opA += opB;
+					break;
+
+					case '-':
+					opA -= opB;
+					break;
+
+					case '*':
+					opA *= opB;
+					break;
+
+					case '/':
+					if (opB != 0) opA /= opB;
+					break;
+
+					case '%':
+					opA %= opB;
+					break;
+				}
+
+				if (opB != 0) opFn.innerHTML = opA;
+				else opFn.innerHTML = "No se puede dividir por 0";
+			}
+
+			function increaseValor ()
+			{
+				var opC = parseInt(document.getElementById("opC").value);
+				opC++;
+				document.getElementById("opC").value = opC;
+			}
+
+			function decreaseValor ()
+			{
+				var opC = parseInt(document.getElementById("opC").value);
+				opC--;
+				document.getElementById("opC").value = opC;
+			}
+
+			function compare ()
+			{
+				var compFn = document.getElementById("comparisons");
+				var opA = parseInt(document.getElementById("opA").value);
+				var opB = parseInt(document.getElementById("opB").value);
+
+				if (opA < 0 || opB < 0) compFn.innerHTML = "Al menos uno de ellos no ha nacido!";
+				else
+				{
+					if (opA == opB) compFn.innerHTML = "Ambos tienen la misma edad";
+					else
+					if (opA >= 18 && opB >= 18) compFn.innerHTML = "Ambos son mayores de edad";
+					else
+					if (opA < 18 && opB < 18) compFn.innerHTML = "Se encuentran en plena juventud";
+					else
+					if (opA > opB) compFn.innerHTML = "El primero es mayor que el segundo";
+					else compFn.innerHTML = "El primero es menor que el segundo";
+				}
+			}
+
+			function checkValor ()
+			{
+				var checkFn = document.getElementById("check");
+				var opA = parseInt(document.getElementById("opA").value);
+
+				if (!(opA % 2)) checkFn.innerHTML = "Ese valor es par";
+				else checkFn.innerHTML = "Ese valor es impar";
+			}
+
+			function checkEstrellas ()
+			{
+				var estFn = document.getElementById("estrellas");
+				var index = document.getElementById("selectEst").options.selectedIndex;
+				var selectEst = parseInt(document.getElementById("selectEst").options[index].text);
+
+				switch (selectEst)
+				{
+					case 1:
+					estFn.innerHTML = "El hotel es de muy mala calidad";
+					break;
+
+					case 2:
+					estFn.innerHTML = "El hotel es de mala calidad";
+					break;
+
+					case 3:
+					estFn.innerHTML = "El hotel es de calidad normal";
+					break;
+
+					case 4:
+					estFn.innerHTML = "El hotel es de buena calidad";
+					break;
+
+					case 5:
+					estFn.innerHTML = "El hotel es de muy buena calidad";
+					break;
+				}
+			}
+
+			function countFor ()
+			{
+				var countFn = document.getElementById("count");
+				countFn.innerHTML = "";
+				var i;
+
+				for (i = 1; i <= 10; i++)
+				{
+					countFn.innerHTML += i+"</br>";
+				}
+			}
+
+			function countWhile ()
+			{
+				var countFn = document.getElementById("count");
+				countFn.innerHTML = "";
+				var i = 1;
+
+				while (i <= 10)
+				{
+					countFn.innerHTML += i+"</br>";
+					i++;
+				}
+			}
+
 			function changeTema (n)
 			{
 				var inputElement = document.getElementById("tema"+n);
@@ -47,38 +200,160 @@
 					break;
 
 					case 3:
-					codi.innerHTML = "TEMA FUNCTIONS";
-					resultatTema.innerHTML = "Resultado FUNCTIONS";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;\n        &lt;script&gt;\n"+
+					"            function multiplicar(a, b)\n            {\n                var multFn=document.getElementById(\"multFunctions\");\n"+
+					"                multFn.innerHTML=(a*b);\n            }\n            funcion mostrarSaludo()\n            {\n                var"+    " saludoFn=document.getElementById(\"saludoFunctions\");\n                saludoFn.innerHTML=\"HOLA!\";\n            }\n"+
+					"            function calcularSuma()\n            {\n                var sumaFn=document.getElementById(\"sumaFunctions\");\n"+
+					"                var opA=parseInt(document.getElementById(\"opA\").value);\n"+
+					"                var opB=parseInt(document.getElementById(\"opB\").value);\n                sumaFn.innerHTML=(opA+opB);\n"+
+					"            }\n        &lt;/script&gt;\n    &lt;/head&gt;\n    &lt;body&gt;\n"+
+					"        &lt;button onclick='multiplicar(7, 4);'&gt;Multiplicar 7X4&lt;/button&gt;&lt;span id='multFunctions'&gt;&lt;/span&gt;&lt;/br&gt;&lt;/br&gt;\n        &lt;button onclick='mostrarSaludo();'&gt;Mostrar Saludo&lt;/button&gt;&lt;"+
+					"span id='saludoFunctions'&gt;&lt;/span&gt;&lt;/br&gt;&lt;/br&gt;\n"+
+					"        &lt;input id='opA' maxlength='2' style='width:30px;'&gt;&lt;/input&gt;&lt;input id='opB' maxlength='2' style='width:30px;'&gt;&lt;/input&gt;"+
+					"&lt;button onclick='calcularSuma();'&gt;Suma&lt;/button&gt;&lt;span id='sumaFunctions'&gt;&lt;/span&gt;\n"+
+					"    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "<button onclick='multiplicar(7, 4);'>Multiplicar 7X4</button><span id='multFunctions'></span></br></br>"+
+					"<button onclick='mostrarSaludo();'Mostrar Saludo</button><span id='saludoFunctions'></span></br></br>"+
+					"<input id='opA' maxlength='2' style='width:30px;'></input><input id='opB' maxlength='2' style='width:30px;'></input><button onclick='calcularSuma();'>Suma</button><span id='sumaFunctions'></span>";
 					break;
 
 					case 4:
-					codi.innerHTML = "TEMA OPERATORS";
-					resultatTema.innerHTML = "Resultado OPERATORS";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;\n        &lt;script&gt;\n"+
+					"            function operar()\n            {\n                var opFn=document.getElementById(\"operations\");\n"+
+					"                var opA=parseInt(document.getElementById(\"opA\").value);\n"+
+					"                var opB=parseInt(document.getElementById(\"opB\").value);\n"+
+					"                var index = document.getElementById(\"selectOp\").options.selectedIndex;\n"+
+					"                var selectOp = document.getElementById(\"selectOp\").options[index].text;\n\n"+
+					"                switch (selectOp)\n                {\n                    case '+':\n"+
+					"                    opA += opB;\n                    break;\n\n                    case '-':\n"+
+					"                    opA -= opB;\n                    break;\n\n                    case '*':\n"+
+					"                    opA /= opB;\n                    break;\n\n                    case '/':\n"+
+					"                    opA %= opB;\n                    break;\n\n                    case '%':\n"+
+					"                    opA -= opB;\n                    break;\n\n                }\n\n"+
+					"                if (opB != 0) opFn.innerHTML = opA;\n                else opFn.innerHTML = \"No se puede dividir por 0\";\n"+
+					"            }\n            funcion increaseValor()\n            {\n                var"+    
+					" opC=parseInt(document.getElementById(\"opC\").value);\n                opC++;\n"+
+					"                document.getElementById(\"opC\").value = opC;\n            }\n"+
+					"            funcion decreaseValor()\n            {\n                var opC=parseInt(document.getElementById(\"opC\").value);\n"+
+					"                opC--;\n                document.getElementById(\"opC\").value = opC;\n            }\n"+
+					"        &lt;/script&gt;\n    &lt;/head&gt;\n    &lt;body&gt;\n"+
+					"        &lt;input id='opA' maxlength='2' style='width:30px;'&gt;&lt;/input&gt;\n"+
+					"        &lt;select id='selectOp'&gt;\n            &lt;option value='+' selected='selected'&gt;+&lt;/option&gt;\n"+
+					"            &lt;option value='-'&gt;-&lt;/option&gt;\n"+
+					"            &lt;option value='*'&gt;*&lt;/option&gt;\n"+
+					"            &lt;option value='/'&gt;/&lt;/option&gt;\n"+
+					"            &lt;option value='%'&gt;%&lt;/option&gt;\n"+
+					"        &lt;/select&gt;\n"+
+					"        &lt;input id='opB' maxlength='2' style='width:30px;'&gt;&lt;/input&gt;&lt;/br&gt;\n"+
+					"        &lt;button onclick='operar();'&gt;Operar&lt;/button&gt;&lt;span id='operations'&gt;&lt;/span&gt;&lt;/br&gt;"+
+					"&lt;button onclick='decreaseValor();'&gt;--&lt;/button&gt;&lt;input id='opC' value='0' maxlength='2' style='width:30px;'&gt;"+
+					"&lt;/input&gt;&lt;button onclick='increaseValor();'&gt;++&lt;/button&gt;\n"+
+					"    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "<input id='opA' maxlength='2' style='width:30px;'></input>"+
+					"<select id='selectOp'><option value='+' selected='selected'>+</option>"+
+					"<option value='-'>-</option>"+
+					"<option value='*'>*</option>"+
+					"<option value='/'>/</option>"+
+					"<option value='%'>%</option>"+
+					"</select>"+
+					"<input id='opB' maxlength='2' style='width:30px;'></input></br>"+
+					"<button onclick='operar();'>Operar</button><span id='operations'></span></br>"+
+					"<button onclick='decreaseValor();'>--</button><input id='opC' value='0' maxlength='2' style='width:30px;'></input>"+
+					"<button onclick='increaseValor();'>++</button>";
 					break;
 
 					case 5:
-					codi.innerHTML = "TEMA COMPARISONS";
-					resultatTema.innerHTML = "Resultado COMPARISONS";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;\n        &lt;script&gt;\n"+
+					"            function compare()\n            {\n                var compFn=document.getElementById(\"comparisons\");\n"+
+					"                var opA=parseInt(document.getElementById(\"opA\").value);\n"+
+					"                var opB=parseInt(document.getElementById(\"opB\").value);\n\n"+
+					"                if (opA < 0 || opB < 0) compFn.innerHTML = \"Al menos uno de ellos no ha nacido!\";\n"+
+					"                else\n                {\n                    if (opA == opB) compFn.innerHTML = \"Ambos tienen la misma edad\";\n"+
+					"                else\n                if (opA >= 18 && opB >= 18) compFn.innerHTML = \"Ambos son mayores de edad\";\n"+
+					"                else\n                if (opA < 18 && opB < 18) compFn.innerHTML = \"Se encuentran en plena juventud\";\n"+
+					"                else\n                if (opA > opB) compFn.innerHTML = \"El primero es mayor que el segundo\";\n"+
+					"                compFn.innerHTML = \"El primero es menor que el segundo\";\n            }\n"+
+					"        &lt;/script&gt;\n    &lt;/head&gt;\n    &lt;body&gt;\n"+
+					"        &lt;input id='opA' value='0' maxlength='2' style='width:30px;'&gt;&lt;/input&gt;"+
+					"&lt;input id='opB' value='0' maxlength='2' style='width:30px;'&gt;&lt;/input&gt;&lt;/br&gt;\n"+
+					"        &lt;button onclick='compare();'&gt;Comparar&lt;/button&gt;&lt;span id='comparisons'&gt;&lt;/span&gt;\n"+
+					"    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "<input id='opA' value='0' maxlength='2' style='width:30px;'></input>"+
+					"<input id='opB' value='0' maxlength='2' style='width:30px;'></input></br>"+
+					"<button onclick='compare();'>Comparar</button><span id='comparisons'></span>";
 					break;
 
 					case 6:
-					codi.innerHTML = "TEMA CONDITIONS";
-					resultatTema.innerHTML = "Resultado CONDITIONS";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;\n        &lt;script&gt;\n"+
+					"            function checkValor()\n            {\n                var checkFn=document.getElementById(\"check\");\n"+
+					"                var opA = parseInt(document.getElementById(\"opA\").value);\n\n"+
+					"                if (!(opA % 2)) checkFn.innerHTML = \"Ese valor es par\";\n"+
+					"                else checkFn.innerHTML = \"Ese valor es impar\";\n            }\n"+
+					"        &lt;/script&gt;\n    &lt;/head&gt;\n    &lt;body&gt;\n"+
+					"        &lt;input id='opA' value='0' maxlength='2' style='width:30px;'&gt;&lt;/input&gt;&lt;/br&gt;\n"+
+					"        &lt;button onclick='checkValor();'&gt;Comprobar&lt;/button&gt;&lt;span id='check'&gt;&lt;/span&gt;\n"+
+					"    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "<input id='opA' value='0' maxlength='2' style='width:30px;'></input></br>"+
+					"<button onclick='checkValor();'>Comprobar</button><span id='check'></span>";
 					break;
 
 					case 7:
-					codi.innerHTML = "TEMA SWITCH";
-					resultatTema.innerHTML = "Resultado SWITCH";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;\n        &lt;script&gt;\n"+
+					"            function checkEstrellas()\n            {\n                var estFn=document.getElementById(\"estrellas\");\n"+
+					"                var index = document.getElementById(\"selectEst\").options.selectedIndex;\n"+
+					"                var selectEst = parseInt(document.getElementById(\"selectEst\").options[index].text);\n\n"+
+					"                switch (selectEst)\n                {\n                    case 1:\n"+
+					"                    estFn.innerHTML = \"El hotel es de muy mala calidad\";\n                    break;\n\n"+
+					"                    case 2:\n"+
+					"                    estFn.innerHTML = \"El hotel es de mala calidad\";\n                    break;\n\n"+
+					"                    case 3:\n"+
+					"                    estFn.innerHTML = \"El hotel es de calidad normal\";\n                    break;\n\n"+
+					"                    case 4:\n"+
+					"                    estFn.innerHTML = \"El hotel es de buena calidad\";\n                    break;\n\n"+
+					"                    case 5:\n"+
+					"                    estFn.innerHTML = \"El hotel es de muy buena calidad\";\n                    break;\n                }\n"+
+					"            }\n        &lt;/script&gt;\n    &lt;/head&gt;\n    &lt;body&gt;\n"+
+					"        Estrellas del hotel (1-5): "+
+					"&lt;select id='selectEst'&gt;\n         &lt;option value='1' selected='selected'&gt;1&lt;/option&gt;\n"+
+					"            &lt;option value='2'&gt;2&lt;/option&gt;\n"+
+					"            &lt;option value='3'&gt;3&lt;/option&gt;\n"+
+					"            &lt;option value='4'&gt;4&lt;/option&gt;\n"+
+					"            &lt;option value='5'&gt;5&lt;/option&gt;\n"+
+					"        &lt;/select&gt;\n"+
+					"        &lt;button onclick='checkEstrellas();'&gt;Comprobar&lt;/button&gt;&lt;span id='estrellas'&gt;&lt;/span&gt;\n"+
+					"    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "Estrellas del hotel (1-5): "+
+					"<select id='selectEst'><option value='1' selected='selected'>1</option>"+
+					"<option value='2'>2</option>"+
+					"<option value='3'>3</option>"+
+					"<option value='4'>4</option>"+
+					"<option value='5'>5</option>"+
+					"</select></br>"+
+					"<button onclick='checkEstrellas();'>Comprobar</button><span id='estrellas'></span>";
 					break;
 
 					case 8:
-					codi.innerHTML = "TEMA LOOP FOR";
-					resultatTema.innerHTML = "Resultado LOOP FOR";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;\n        &lt;script&gt;\n"+
+					"            function countFor()\n            {\n                var countFn=document.getElementById(\"count\");\n"+
+					"                countFn.innerHTML = \"\";\n                var i;\n\n"+
+					"                for (i = 1; i <= 10; i++)\n                {\n"+
+					"                    countFn.innerHTML += i+\"&lt;/br&gt;\";\n                }\n"+
+					"            }\n        &lt;/script&gt;\n    &lt;/head&gt;\n    &lt;body&gt;\n"+
+					"        &lt;button onclick='countFor();'&gt;Start&lt;/button&gt;&lt;/br&gt;&lt;span id='count'&gt;&lt;/span&gt;\n"+
+					"    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "<button onclick='countFor();'>Start</button></br><span id='count'></span>";
 					break;
 
 					case 9:
-					codi.innerHTML = "TEMA LOOP WHILE";
-					resultatTema.innerHTML = "Resultado LOOP WHILE";
+					codi.innerHTML = "&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n" + "    &lt;head&gt;\n        &lt;script&gt;\n"+
+					"            function countWhile()\n            {\n                var countFn=document.getElementById(\"count\");\n"+
+					"                countFn.innerHTML = \"\";\n                var i=1;\n\n"+
+					"                while (i <= 10)\n                {\n"+
+					"                    countFn.innerHTML += i+\"&lt;/br&gt;\";\n                    i++;\n                }\n"+
+					"            }\n        &lt;/script&gt;\n    &lt;/head&gt;\n    &lt;body&gt;\n"+
+					"        &lt;button onclick='countWhile();'&gt;Start&lt;/button&gt;&lt;/br&gt;&lt;span id='count'&gt;&lt;/span&gt;\n"+
+					"    &lt;/body&gt;\n&lt;/html&gt;";
+					resultatTema.innerHTML = "<button onclick='countWhile();'>Start</button></br><span id='count'></span>";
 					break;
 				}
 			}
