@@ -1,0 +1,57 @@
+#divSuperior
+{
+	width: 100%;
+	height: 20%;
+}
+
+#divButtons
+{
+	width: 50%;
+	height: 250px;
+	margin-left: 25%;
+	background-color: #F5F590;
+	-webkit-border-bottom-right-radius: 100px;
+	-webkit-border-bottom-left-radius: 100px;
+	-moz-border-radius-bottomright: 100px;
+	-moz-border-radius-bottomleft: 100px;
+	border-bottom-right-radius: 100px;
+	border-bottom-left-radius: 100px;
+	border-style: solid;
+	border-width: 20px;
+	border-color: orange;
+}
+
+.classButton
+{
+	width:20%; 
+	height:80%; 
+	color:white; 
+	font-size:50px; 
+	background-color:black; 
+	border-color: #FB8702;
+	float:left;
+	margin-top: 1%;
+	margin-left:10%;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	border-width: 20px;
+}
+
+.classExplicacion
+{
+	width: 80%;
+	height: 500px;
+	margin-top: 50px;
+	margin-left: 10%;
+	padding-left: 2%;
+	padding-top: 2%;
+	font-size: 100px;
+	background-color: #F5F590;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	border-style: solid;
+	border-width: 20px;
+	border-color: orange;
+}

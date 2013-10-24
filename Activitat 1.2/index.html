@@ -45,7 +45,7 @@
 					break;
 
 					case '/':
-					if (opB != 0) opA /= opB;
+					if (opB != 0 && selectOp == '/') opA /= opB;
 					break;
 
 					case '%':
@@ -53,8 +53,8 @@
 					break;
 				}
 
-				if (opB != 0) opFn.innerHTML = opA;
-				else opFn.innerHTML = "No se puede dividir por 0";
+				if (opB == 0 && selectOp == '/') opFn.innerHTML = "No se puede dividir por 0";
+				else opFn.innerHTML = opA;
 			}
 
 			function increaseValor ()
@@ -231,7 +231,8 @@
 					"                    opA /= opB;\n                    break;\n\n                    case '/':\n"+
 					"                    opA %= opB;\n                    break;\n\n                    case '%':\n"+
 					"                    opA -= opB;\n                    break;\n\n                }\n\n"+
-					"                if (opB != 0) opFn.innerHTML = opA;\n                else opFn.innerHTML = \"No se puede dividir por 0\";\n"+
+					"                if (opB == 0 && selectOp == '/') opFn.innerHTML = \"No se puede dividir por 0\";\n                "+
+					"else opFn.innerHTML = opA;\n"+
 					"            }\n            funcion increaseValor()\n            {\n                var"+    
 					" opC=parseInt(document.getElementById(\"opC\").value);\n                opC++;\n"+
 					"                document.getElementById(\"opC\").value = opC;\n            }\n"+
