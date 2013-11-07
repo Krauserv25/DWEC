@@ -148,6 +148,11 @@ li
 	color: black;
 }
 
+#divLetrasUsadas > span
+{
+	color: white;
+}
+
 #imageAhorcado
 {
 	width: 30%;
