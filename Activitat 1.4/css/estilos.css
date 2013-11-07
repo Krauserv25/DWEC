@@ -99,14 +99,23 @@ li
 	margin-top: 5%;
 	margin-left: 1%;
 	margin-right: 1%;
+	color: black;
+	border-color: black;
+}
+
+.classShowLetter
+{
+	text-align: center;
+	font-weight: bold;	
+	text-transform: capitalize;
 }
 
 #divInputLetter
 {
-	margin-top: 0;
-	width: 8%;
+	width: 7%;
 	margin-left: 2%;
 	margin-right: 4%;
+	color: red;
 }
 
 #divWriteWord
