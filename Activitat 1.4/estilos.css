@@ -1,0 +1,101 @@
+#divTodo
+{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+#divContingut
+{
+	margin-left: 7.5%;
+	width: 85%;
+	height: 50%;
+}
+
+#divEsquerre
+{
+	float:left;
+	width: 20%;
+	height: 100%;
+	background-color: pink;
+}
+
+#divLogo
+{
+	width: 100%;
+	height: 50%;
+	background-color: green;
+}
+
+ul
+{
+	margin-top: 30%;
+	margin-left: 0%;
+}
+
+li
+{
+	display: block;
+	text-decoration: none;
+}
+
+.classLI
+{
+	margin-top: 6%;
+}
+
+#divDisplayInteractive
+{
+
+	float:left;
+	width: 80%;
+	height: 100%;
+}
+
+#divTitleDisplay
+{
+	width: 100%;
+	height: 8%;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	background-color: black;
+}
+
+#divPlayGame
+{
+	width: 100%;
+	height: 92.25%;
+}
+
+#divShowGame
+{
+	width: 80%;
+	height: 88%;
+	float: left;
+	background-color: blue;
+}
+
+#divImageAhorcado
+{
+	width: 20%;
+	height: 88%;
+	float:right;
+	background-color: purple;s
+}
+
+#divShowTime
+{
+	clear: both;
+	width: 100%;
+	height: 12%;
+	background-color: yellow;
+}
+
+#divClockImage
+{
+	width: 6%;
+	height: 100%;
+	float: left;
+	background-color: gray;
+}
