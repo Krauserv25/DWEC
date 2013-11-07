@@ -14,7 +14,7 @@
 					<img src="images/ahorcado.jpeg" id="imageLogo" alt="Logo">
 					<div id="divButtonsMenu">
 						<ul>
-							<li class="classLI"><button type="button"  class="btn btn-success">START</button></li>
+							<li class="classLI"><button type="button" class="btn btn-success">START</button></li>
 							<li class="classLI"><button type="button" class="btn btn-success">ADD WORD</button></li>
 							<li class="classLI"><button type="button" class="btn btn-success">NADA</button></li>
 						</ul>
@@ -24,7 +24,7 @@
 					<div id="divTitleDisplay">AHORCADO</div>
 					<div id="divPlayGame">
 						<div id="divShowGame">
-							<div id="divWord">
+							<span>
 								<input type="text" class="classLetters" value=""/>
 								<input type="text" class="classLetters" value=""/>
 								<input type="text" class="classLetters" value=""/>
@@ -33,6 +33,14 @@
 								<input type="text" class="classLetters" value=""/>
 								<input type="text" class="classLetters" value=""/>
 								<input type="text" class="classLetters" value=""/>
+							</span>
+							<div id="divWriteWord">
+								<span>PRUEBA UNA LETRA:</span>
+								<input type="text" id="divInputLetter" value=""/>
+								<button type="button" class="btn btn-success">CHECK</button>
+							</div>
+							<div id="divLetrasUsadas">
+								LETRAS USADAS:<br /><span>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span>
 							</div>
 						</div>
 						<img src="images/GIFS/Life4.gif" id="imageAhorcado" alt="Life">
