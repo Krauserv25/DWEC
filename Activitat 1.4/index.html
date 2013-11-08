@@ -22,7 +22,7 @@
 					</div>
 				</div>
 				<div id="divDisplayInteractive">
-					<div id="divTitleDisplay">AHORCADO</div>
+					<div id="divTitleDisplay" hidden>AHORCADO</div>
 					<div id="divPlayGame" hidden>
 						<div id="divShowGame">
 							<span>
@@ -30,17 +30,27 @@
 							</span>
 							<div id="divWriteWord">
 								<span>PRUEBA UNA LETRA:</span>
-								<input type="text" id="divInputLetter" class="classShowLetter" maxlength="1" value=""/>
-								<button type="button" class="btn btn-success" onclick="checkLetter();">CHECK</button>
+								<input type="text" id="divInputLetter" class="classShowLetter" maxlength="1" value="" onkeyup="checkWrite();" />
+								<button type="button" id="buttonCheck" class="btn btn-success" onclick="checkLetter();">CHECK</button>
 							</div>
 							<div id="divLetrasUsadas">
 								LETRAS USADAS:<br /><span></span>
 							</div>
 						</div>
 						<img src="images/GIFS/Life4.gif" id="imageAhorcado" alt="Life">
-						<div id="divShowTime">
-							<img src="images/clock2.jpeg" id="imageClock" alt="Clock">
-							hola
+						<div id="divInferior">
+							<div id="divClockTime" class="classDivsInferior">
+								<img src="images/clock2.jpeg" id="imageClock" class="classImagesInferior" alt="Clock">
+								<span>00:00</span>
+							</div>
+							<div id="divCalendarDate" class="classDivsInferior">
+								<img src="images/calendar.png" id="imageCalendar" class="classImagesInferior" alt="Calendar">
+								<span></span>
+							</div>
+							<div id="divVidas" class="classDivsInferior">
+								<img src="images/life.png" id="imageLife" class="classImagesInferior" alt="Life">
+								<span>4</span>
+							</div>
 						</div>
 					</div>
 					<div id="divAddWords" hidden></div>
