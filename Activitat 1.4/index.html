@@ -6,7 +6,6 @@
 		
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		
 	</head>
 	<body>
 		<div id="divTodo">
@@ -15,9 +14,9 @@
 					<img src="images/ahorcado.jpeg" id="imageLogo" alt="Logo">
 					<div id="divButtonsMenu">
 						<ul>
-							<li class="classLI"><button type="button" class="btn btn-success" onclick="startGame();">START</button></li>
-							<li class="classLI"><button type="button" class="btn btn-success">ADD WORD</button></li>
-							<li class="classLI"><button type="button" class="btn btn-success">NADA</button></li>
+							<li class="classLI"><button type="button" id="buttonStart" class="btn btn-success" onclick="startGame();">START</button></li>
+							<li class="classLI"><button type="button" id="buttonAddWord" class="btn btn-success" onclick="showAddWord();">ADD WORD</button></li>
+							<li class="classLI"><button type="button" id="buttonInstructions" class="btn btn-success">INSTRUCTIONS</button></li>
 						</ul>
 					</div>
 				</div>
@@ -25,9 +24,7 @@
 					<div id="divTitleDisplay" hidden>AHORCADO</div>
 					<div id="divPlayGame" hidden>
 						<div id="divShowGame">
-							<span>
-
-							</span>
+							<span></span>
 							<div id="divWriteWord">
 								<span>PRUEBA UNA LETRA:</span>
 								<input type="text" id="divInputLetter" class="classShowLetter" maxlength="1" value="" onkeyup="checkWrite();" />
@@ -37,7 +34,7 @@
 								LETRAS USADAS:<br /><span></span>
 							</div>
 						</div>
-						<img src="images/GIFS/Life4.gif" id="imageAhorcado" alt="Life">
+						<img src="images/GIFS/Life6.gif" id="imageAhorcado" alt="Life">
 						<div id="divInferior">
 							<div id="divClockTime" class="classDivsInferior">
 								<img src="images/clock2.jpeg" id="imageClock" class="classImagesInferior" alt="Clock">
@@ -49,8 +46,22 @@
 							</div>
 							<div id="divVidas" class="classDivsInferior">
 								<img src="images/life.png" id="imageLife" class="classImagesInferior" alt="Life">
-								<span>4</span>
+								<span>6</span>
 							</div>
+						</div>
+					</div>
+					<div id="divMessages" hidden>
+						<div id="divStateMessage">
+							<span></span>
+						</div>
+						<div id="divVidasRestantes" class="classMessages">
+							<span>VIDAS RESTANTES --> 4</span>
+						</div>
+						<div id="divTiempoInvertido" class="classMessages">
+							<span>TIEMPO --> 02:30</span>
+						</div>
+						<div id="divPuntuacion" class="classMessages">
+							<span>PUNTUACION --> 45</span>
 						</div>
 					</div>
 					<div id="divAddWords" hidden></div>
