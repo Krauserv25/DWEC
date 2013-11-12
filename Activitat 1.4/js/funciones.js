@@ -412,7 +412,7 @@ function checkInputWord ()
 			inputWord.value = "";
 			setMessage(3, word);
 			wordLeft.options[wordsArray.length] = new Option(word,"0","0");
-			wordsArray[wordsArray.length] = word;
+			wordsArray.push(word);
 		}
 		else
 		{
