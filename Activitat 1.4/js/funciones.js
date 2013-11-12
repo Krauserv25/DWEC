@@ -10,80 +10,114 @@ var minutes;
 var seconds;
 
 var newWidth;
+var newImageWidth;
 var intervalTime;
 var intervalDivMove;
+var intervalImageMove;
+
+var divMessages;
+var divAddWords;
+var divInstructions;
+var buttonStart;
+var divGame;
+var divTitleGame;
+var inputWord;
+var drawWord;
+var letterBox;
+var chekButton;
+var divCalendar;
+var divLetrasUsadas;
+var divTime;
+var divVida;
+var imageAhorcado;
+var divTiempoInvertido;
+var divVidasRestantes;
+var divPuntuacion;
+var divStateMessage;
+var divWordMessages;
+var succesImage;
+
+function init ()
+{
+	divMessages = document.getElementById("divMessages");
+	divAddWords = document.getElementById("divAddWords");
+	divInstructions = document.getElementById("divInstructions");
+	buttonStart = document.getElementById("buttonStart");
+	divGame = document.getElementById("divPlayGame");
+	divTitleGame = document.getElementById("divTitleDisplay");
+	inputWord = document.getElementById("inputWord");
+	drawWord = document.getElementById("divShowGame");
+	letterBox = document.getElementById("divInputLetter");
+	chekButton = document.getElementById("buttonCheck");
+	divCalendar = document.getElementById("divCalendarDate");
+	divLetrasUsadas = document.getElementById("divLetrasUsadas");
+	divTime = document.getElementById("divClockTime");
+	divVida = document.getElementById("divVidas");
+	imageAhorcado = document.getElementById("imageAhorcado");
+	divTiempoInvertido = document.getElementById("divTiempoInvertido");
+	divVidasRestantes = document.getElementById("divVidasRestantes");
+	divPuntuacion = document.getElementById("divPuntuacion");
+	divStateMessage = document.getElementById("divStateMessage");
+	divWordMessages = document.getElementById("divWordMessages");
+	succesImage = document.getElementById("succesImage");
+}
 
 function reset ()
 {
 	auxWord = wordsArray[0]; //Palabra generada (La primera por defecto)
-
 	letrasUsadas = "";
-	var divLetrasUsadas = document.getElementById("divLetrasUsadas");
+	
 	var innerSpan = divLetrasUsadas.getElementsByTagName("span")[0];
 	innerSpan.innerHTML = letrasUsadas;
 
 	vidas = 6;
 	minutes = 0;
 	seconds = 0;
+	newWidth = 0;
+	newImageWidth = 0;
 
-	var divTime = document.getElementById("divClockTime");
 	innerSpan = divTime.getElementsByTagName("span")[0];
 	innerSpan.innerHTML = "00:00";
-
-	var divVida = document.getElementById("divVidas");
+	
 	var innerSpanVida = divVida.getElementsByTagName("span")[0];
-
 	innerSpanVida.innerHTML = vidas;
-
-	var imageAhorcado = document.getElementById("imageAhorcado");
+	
 	imageAhorcado.src = "images/GIFS/Life6.gif";
-				
-	newWidth = 0;
+					
 	clearInterval(intervalTime);
 	clearInterval(intervalDivMove);
-
-	var divTiempoInvertido = document.getElementById("divTiempoInvertido");
-	var divVidasRestantes = document.getElementById("divVidasRestantes");
-	var divPuntuacion = document.getElementById("divPuntuacion");
+	clearInterval(intervalImageMove);
 
 	divTiempoInvertido.style.width = newWidth+'%';
 	divVidasRestantes.style.width = newWidth+'%';
 	divPuntuacion.style.width = newWidth+'%';
+
+	divWordMessages.innerHTML = "";
+	inputWord.value = "";
 }
 
 function startGame ()
 {
 	reset();
 
-	var divMessages = document.getElementById("divMessages");
 	divMessages.style.display = 'none';
-
-	var buttonStart = document.getElementById("buttonStart");
+	divAddWords.style.display = 'none';
+	divInstructions.style.display = 'none';
 	buttonStart.disabled = true;
-
-	var divGame = document.getElementById("divPlayGame");
-	divGame.style.display = 'inline-block';
-
-	var divTitleGame = document.getElementById("divTitleDisplay");
+	divAddWords.style.display = 'none';
+	divGame.style.display = 'inline-block';	
 	divTitleGame.style.display = 'inline-block';
 
 	var maxWords = wordsArray.length;
 	var aleat = Math.floor(Math.random()*maxWords);
-
 	auxWord = wordsArray[aleat];
 
-	var drawWord = document.getElementById("divShowGame");
 	var innerSpan = drawWord.getElementsByTagName("span")[0];
 
-	var letterBox = document.getElementById("divInputLetter");
-	letterBox.focus();
-
-	var chekButton = document.getElementById("buttonCheck");
+	letterBox.focus();	
 	chekButton.disabled = true;
 
-	var divCalendar = document.getElementById("divCalendarDate");
 	var innerSpanCalendar = divCalendar.getElementsByTagName("span")[0];
-
 	var date = new Date();
 	var day = date.getDate();
 	var month = date.getMonth() + 1;
@@ -103,12 +137,32 @@ function startGame ()
 	innerSpan.innerHTML = allLetters;
 
 	intervalTime = setInterval(increaseTime, 1000);
-	intervalTime();
+}
+
+function showAddWord ()
+{
+	divGame.style.display = 'none';
+	divTitleGame.style.display = 'none';
+	divInstructions.style.display = 'none';
+	divMessages.style.display = 'none';
+	divAddWords.style.display = 'inline-block';
+	buttonStart.disabled = false;
+	
+	inputWord.focus();
+}
+
+function showInstructions ()
+{
+	buttonStart.disabled = false;
+	divGame.style.display = 'none';
+	divTitleGame.style.display = 'none';
+	divAddWords.style.display = 'none';
+	divMessages.style.display = 'none';
+	divInstructions.style.display = 'inline-block';
 }
 
 function checkLetter ()
 {
-	var letterBox = document.getElementById("divInputLetter");
 	var letter = letterBox.value;
 	letter = letter.toUpperCase();
 
@@ -126,19 +180,16 @@ function checkLetter ()
 
 		letterBox.value = ""; //Limpiamos la entrada de la letra
 		letterBox.focus();
-		var chekButton = document.getElementById("buttonCheck");
+
 		chekButton.disabled = true;
 	}
 
 	if (!correct)
 	{
 			vidas--;
-			var divVida = document.getElementById("divVidas");
 			var innerSpanVida = divVida.getElementsByTagName("span")[0];
 
 			innerSpanVida.innerHTML = vidas;
-
-			var imageAhorcado = document.getElementById("imageAhorcado");
 
 			switch (vidas)
 			{
@@ -176,9 +227,7 @@ function checkLetter ()
 
 	if (!lookForLetter(letter)) letrasUsadas = letrasUsadas.concat(letter+" "); 
 
-	var divLetrasUsadas = document.getElementById("divLetrasUsadas");
 	var innerSpan = divLetrasUsadas.getElementsByTagName("span")[0];
-
 	innerSpan.innerHTML = letrasUsadas;
 }
 
@@ -186,12 +235,12 @@ function checkLoose ()
 {
 	if (vidas <= 0)
 	{
-		setMessages("FRACASO", "looseSpin", 0);
-		var buttonStart = document.getElementById("buttonStart");
+		setMessages("FRACASO", 0);
 		buttonStart.disabled = false;
+		succesImage.src = "images/GIFS/Life2.gif";
 
-		intervalDivMove = setInterval(divMove, 30);
-		intervalDivMove();
+		intervalDivMove = setInterval(divMove, 5);
+		intervalImageMove = setInterval(imageMove, 12);
 	}
 }
 
@@ -212,15 +261,15 @@ function checkWin ()
 	if (all)
 	{
 		var points = calculatePuntuation();
-
 		points = points.toFixed(0);
 
-		setMessages("ENHORABUENA", "winSpin", points);
-		var buttonStart = document.getElementById("buttonStart");
+		setMessages("ENHORABUENA", points);
 		buttonStart.disabled = false;
 
-		intervalDivMove = setInterval(divMove, 30);
-		intervalDivMove();
+		succesImage.src = "images/GIFS/Life6.gif";
+
+		intervalDivMove = setInterval(divMove, 5);
+		intervalImageMove = setInterval(imageMove, 12);
 	}
 }
 
@@ -235,28 +284,16 @@ function calculatePuntuation ()
 	return points;
 }
 
-function setMessages (state, image, points)
+function setMessages (state, points)
 {
-	var divGame = document.getElementById("divPlayGame");
 	divGame.style.display = 'none';
-
-	var divTitleGame = document.getElementById("divTitleDisplay");
 	divTitleGame.style.display = 'none';
-
-	var divMessages = document.getElementById("divMessages");
 	divMessages.style.display = 'inline-block';
+	
+	divStateMessage.innerHTML = "<span class='classMessageTitle'>&#161;&#161;&#161;&#161;"+state+"!!!!</span>";
 
-	var divStateMessage = document.getElementById("divStateMessage");
-	divStateMessage.innerHTML = "<img src='images/GIFS/"+image+".gif' class='classImageSpin' alt='looseSpin'><h2>&#161;&#161;&#161;&#161;"+state+"!!!!</h2>"+
-	"<img src='images/GIFS/"+image+".gif' class='classImageSpin' alt='looseSpin'>";
-
-	var divVidasRestantes = document.getElementById("divVidasRestantes");
 	var innerSpanVidasRestantes = divVidasRestantes.getElementsByTagName("span")[0];
-
-	var divTiempoInvertido = document.getElementById("divTiempoInvertido");
 	var innerSpanTiempoInvertido = divTiempoInvertido.getElementsByTagName("span")[0];
-
-	var divPuntuacion = document.getElementById("divPuntuacion");
 	var innerSpanPuntuacion = divPuntuacion.getElementsByTagName("span")[0];
 
 	innerSpanVidasRestantes.innerHTML = "Vidas Restantes: "+vidas;
@@ -282,9 +319,6 @@ function lookForLetter (letter)
 
 function checkWrite ()
 {
-	var chekButton = document.getElementById("buttonCheck");
-
-	var letterBox = document.getElementById("divInputLetter");
 	var letter = letterBox.value;
 
 	if (letter != "")
@@ -296,7 +330,6 @@ function checkWrite ()
 
 function increaseTime()
 {
-	var divTime = document.getElementById("divClockTime");
 	var innerSpan = divTime.getElementsByTagName("span")[0];
 	var auxTime = getTime();
 
@@ -332,11 +365,7 @@ function getTime ()
 
 function divMove ()
 {
-	var divTiempoInvertido = document.getElementById("divTiempoInvertido");
-	var divVidasRestantes = document.getElementById("divVidasRestantes");
-	var divPuntuacion = document.getElementById("divPuntuacion");
-
-	if (newWidth < 40)
+	if (newWidth < 100)
 	{
 		newWidth++; 
 		divTiempoInvertido.style.width = newWidth+'%';
@@ -344,3 +373,87 @@ function divMove ()
 		divPuntuacion.style.width = newWidth+'%';
 	}
 }
+
+function imageMove ()
+{
+	if (newImageWidth < 40)
+	{
+		newImageWidth++;
+		succesImage.style.width = newImageWidth+'%';
+	}
+}
+
+function checkInputWord ()
+{
+	var word = inputWord.value;
+
+	if (word != "")
+	{
+		word = word.toUpperCase();
+		word = getWordLessSpaces(word);
+
+		if (!checkEqualsWord(word))
+		{
+			inputWord.value = "";
+			setMessage(3, word);
+			wordLeft.options[wordsArray.length] = new Option(word,"0","0");
+			wordsArray[wordsArray.length] = word;
+		}
+		else
+		{
+			setMessage(1);
+		}
+	}
+	else setMessage(2);
+
+	inputWord.focus();
+}
+
+function getWordLessSpaces (word)
+{
+	var splitArray = word.split(" ");
+	var auxWord = "";
+	var i;
+
+	for (i = 0; i < splitArray.length; i++)
+	{
+		auxWord += splitArray[i];
+	}
+
+	return auxWord;
+}
+
+function checkEqualsWord (word)
+{
+	var found = false;
+
+	wordsArray.forEach(function(aux)
+	{
+		if (word === aux) found = true;
+	});
+
+	return found;
+}
+
+function setMessage (num, word)
+{
+	switch (num)
+	{
+		case 1:
+		divWordMessages.innerHTML = "ESTA PALABRA YA EXISTE!!";
+		break;
+
+		case 2:
+		divWordMessages.innerHTML = "DEBES ESCRIBIR UNA PALABRA!";
+		break;
+
+		case 3:
+		divWordMessages.innerHTML = "SE HA A&#209;ADIDO LA PALABRA "+word;
+		break;
+
+		default:
+		divWordMessages.innerHTML = "";
+		break;
+	}
+}
+

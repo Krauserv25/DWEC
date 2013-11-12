@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	</head>
-	<body>
+	<body onload="init();">
 		<div id="divTodo">
 			<div id="divContingut">
 				<div id="divEsquerre">
@@ -16,7 +16,7 @@
 						<ul>
 							<li class="classLI"><button type="button" id="buttonStart" class="btn btn-success" onclick="startGame();">START</button></li>
 							<li class="classLI"><button type="button" id="buttonAddWord" class="btn btn-success" onclick="showAddWord();">ADD WORD</button></li>
-							<li class="classLI"><button type="button" id="buttonInstructions" class="btn btn-success">INSTRUCTIONS</button></li>
+							<li class="classLI"><button type="button" id="buttonInstructions" class="btn btn-success" onclick="showInstructions();">INSTRUCTIONS</button></li>
 						</ul>
 					</div>
 				</div>
@@ -50,21 +50,36 @@
 							</div>
 						</div>
 					</div>
-					<div id="divMessages" hidden>
-						<div id="divStateMessage">
-							<span></span>
+					<div id="divMessages" class="classScreenShowed"hidden>
+						<div id="divStateMessage"></div>
+						<div id="divMovedMessages">
+							<div id="divVidasRestantes" class="classMessages">
+								<span></span>
+							</div>
+							<div id="divTiempoInvertido" class="classMessages">
+								<span></span>
+							</div>
+							<div id="divPuntuacion" class="classMessages">
+								<span></span>
+							</div>
 						</div>
-						<div id="divVidasRestantes" class="classMessages">
-							<span>VIDAS RESTANTES --> 4</span>
-						</div>
-						<div id="divTiempoInvertido" class="classMessages">
-							<span>TIEMPO --> 02:30</span>
-						</div>
-						<div id="divPuntuacion" class="classMessages">
-							<span>PUNTUACION --> 45</span>
+						<img src="images/GIFS/Life6.gif" id="succesImage" alt="Success">
+					</div>
+					<div id="divAddWords" class="classScreenShowed" hidden>
+						<div id="divWordSuperior">A&#209;ADE PALABRAS A LA LISTA</div>
+						<h4>NOTA: LAS PALABRAS ESTAN LIMITADAS A 8 CARACTERES</h4>
+						<select name="wordList" id="wordLeft" size="3" disabled="true">
+						    <option value="1">PELOTA</option>
+						    <option value="2">ALIEN</option>
+						    <option value="3">JIRAFA</option>
+						</select>
+						<div id="divWordRight">
+							<input type="text" id="inputWord" maxlength="8" value=""/>
+							<button type="button" id="inputWordButton" class="btn btn-success" onclick="checkInputWord();">ADD</button>
+							<div id="divWordMessages"></div>
 						</div>
 					</div>
-					<div id="divAddWords" hidden></div>
+					<div id="divInstructions" class="classScreenShowed" hidden></div>
 				</div>
 			</div>
 		</div>

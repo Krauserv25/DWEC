@@ -57,7 +57,7 @@ li
 	height: 100%;
 }
 
-#divTitleDisplay
+#divTitleDisplay, #divWordSuperior
 {
 	width: 100%;
 	height: 8%;
@@ -80,9 +80,18 @@ li
 	border-color: black;
 }
 
-#divMessages, #divAddWords
+#divMessages
+{
+	width: 80%;
+}
+
+#divAddWords, #divInstructions
 {
 	width: 100%;
+}
+
+.classScreenShowed
+{
 	height: 100%;
 	border-style: solid;
 	border-left-width: 0;
@@ -95,9 +104,9 @@ li
 
 #divStateMessage
 {
-	width: 80%;
+	width: 100%;
 	height: 30%;
-	margin-left: 13%;
+	text-align: center;
 }
 
 #divStateMessage > h2
@@ -115,7 +124,7 @@ li
 
 #divVidasRestantes, #divTiempoInvertido
 {
-	background-color:green;
+	background-color:#66CC66;
 }
 
 #divPuntuacion
@@ -123,12 +132,28 @@ li
 	background-color:black;	
 }
 
+#divMovedMessages
+{
+	float :left;
+	margin-top: 3.5;
+	width: 40%;
+	height: 70%;
+}
+
+#succesImage
+{
+	float: right;
+	margin-right: 10%;
+	width: 0%;
+	height: 70%;
+}
+
 .classMessages
 {
 	width:0%; 
-	height:10%; 
+	height:15%; 
 	margin-left:0; 
-	margin-top: 3.5%;
+	margin-top: 8%;
 	text-align: center;
 	-webkit-border-top-right-radius: 50px;
 	-webkit-border-bottom-right-radius: 50px;
@@ -145,14 +170,6 @@ li
 	font-weight: bold;
 }
 
-.classImageSpin
-{
-	float: left;
-	margin-top: 4%;
-	width: 10%;
-	height: 50%;
-}
-
 #divShowGame
 {
 	width: 70%;
@@ -165,7 +182,59 @@ li
 {
 	margin-left:15%; 
 	width:70%;
-	background-color:green;
+	background-color:#66CC66;
+}
+
+#wordLeft
+{
+	margin-top: 2%;
+	margin-left: 5%;
+	float:left;
+	width: 40%;
+	height: 60%;
+}
+
+#divWordRight
+{
+	margin-top: 2%;
+	margin-left: 5%;
+	float: left;
+	width: 40%;
+	height: 60%;
+}
+
+#inputWord
+{
+	width: 75%;
+	height: 15%;
+	float: left;
+}
+
+#inputWordButton
+{
+	width: 20%;
+	height: 15%;
+	float: right;
+}
+
+#divWordMessages
+{
+	clear: both;
+	width: 100%;
+	margin-top: 15%;
+	height: 70%;
+	border-style: solid;
+	border-width: 1%;
+	border-color: black;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1em;
+	padding-top: 15%;
+	background-color: #66CC66;
 }
 
 .classLetters
@@ -215,7 +284,7 @@ li
 	margin-left: 15%;
 	margin-top: 6%;
 	padding-bottom: 7%;
-	background-color: green;
+	background-color: #66CC66;
 	border-style: solid;
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
@@ -295,7 +364,19 @@ li
 {
 	float:left;
 	margin-left: 30%;
-	margin-right: 8%;
-	
+	margin-right: 8%;	
 	height: 100%;	
+}
+
+.classMessageTitle
+{
+	text-align: center;
+	font-weight: bold;
+	font-size: 3.5em;
+	color: black;
+}
+
+h4
+{
+	text-align: center;
 }
