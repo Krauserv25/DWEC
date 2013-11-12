@@ -57,7 +57,7 @@ li
 	height: 100%;
 }
 
-#divTitleDisplay, #divWordSuperior
+#divTitleDisplay, #divWordSuperior, #divInstructionsSuperior
 {
 	width: 100%;
 	height: 8%;
@@ -380,3 +380,15 @@ h4
 {
 	text-align: center;
 }
+
+#divInstructions > span
+{
+	font-weight: bold;
+	color: black;
+}
+
+.spanInstructionsArrow
+{
+	color: green;
+}
+

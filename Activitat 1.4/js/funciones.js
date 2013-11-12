@@ -19,6 +19,8 @@ var divMessages;
 var divAddWords;
 var divInstructions;
 var buttonStart;
+var buttonAddWord;
+var buttonInstructions;
 var divGame;
 var divTitleGame;
 var inputWord;
@@ -43,6 +45,8 @@ function init ()
 	divAddWords = document.getElementById("divAddWords");
 	divInstructions = document.getElementById("divInstructions");
 	buttonStart = document.getElementById("buttonStart");
+	buttonAddWord = document.getElementById("buttonAddWord");
+	buttonInstructions = document.getElementById("buttonInstructions");
 	divGame = document.getElementById("divPlayGame");
 	divTitleGame = document.getElementById("divTitleDisplay");
 	inputWord = document.getElementById("inputWord");
@@ -103,7 +107,11 @@ function startGame ()
 	divMessages.style.display = 'none';
 	divAddWords.style.display = 'none';
 	divInstructions.style.display = 'none';
+
 	buttonStart.disabled = true;
+	buttonAddWord.disabled = true;
+	buttonInstructions.disabled = true;
+
 	divAddWords.style.display = 'none';
 	divGame.style.display = 'inline-block';	
 	divTitleGame.style.display = 'inline-block';
@@ -236,7 +244,11 @@ function checkLoose ()
 	if (vidas <= 0)
 	{
 		setMessages("FRACASO", 0);
+
 		buttonStart.disabled = false;
+		buttonAddWord.disabled = false;
+		buttonInstructions.disabled = false;
+
 		succesImage.src = "images/GIFS/Life2.gif";
 
 		intervalDivMove = setInterval(divMove, 5);
@@ -264,7 +276,10 @@ function checkWin ()
 		points = points.toFixed(0);
 
 		setMessages("ENHORABUENA", points);
+
 		buttonStart.disabled = false;
+		buttonAddWord.disabled = false;
+		buttonInstructions.disabled = false;
 
 		succesImage.src = "images/GIFS/Life6.gif";
 
@@ -296,9 +311,9 @@ function setMessages (state, points)
 	var innerSpanTiempoInvertido = divTiempoInvertido.getElementsByTagName("span")[0];
 	var innerSpanPuntuacion = divPuntuacion.getElementsByTagName("span")[0];
 
-	innerSpanVidasRestantes.innerHTML = "Vidas Restantes: "+vidas;
-	innerSpanTiempoInvertido.innerHTML = "Tiempo invertido: "+getTime();
-	innerSpanPuntuacion.innerHTML = "Puntuacion total: "+points+"/100";
+	innerSpanVidasRestantes.innerHTML = "Vidas Restantes:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+vidas;
+	innerSpanTiempoInvertido.innerHTML = "Tiempo invertido:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+getTime();
+	innerSpanPuntuacion.innerHTML = "Puntuacion total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+points+"/100";
 }
 
 function lookForLetter (letter)
