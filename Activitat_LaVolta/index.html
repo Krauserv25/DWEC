@@ -49,19 +49,24 @@
 					<span id="spanColorMessage">Color de equipo:</span>
 					<div id="divContainerColors">
 						<div id="divPanelColors">
-							<input type="button" id="colorSnailButtonBlack" class="classInputColor" value="">
-	                        <input type="button" id="colorSnailButtonBlue" class="classInputColor" value="">
-	                        <input type="button" id="colorSnailButtonRed" class="classInputColor" value="">
-	                        <input type="button" id="colorSnailButtonGreen" class="classInputColor" value="">
-	                        <input type="button" id="colorSnailButtonOrange" class="classInputColor" value="">
-	                        <input type="button" id="colorSnailButtonPurple" class="classInputColor" value="">
+							<input type="button" id="colorSnailButtonBlack" class="classInputColor" onclick="changeSnailColor(1);">
+	                        <input type="button" id="colorSnailButtonBlue" class="classInputColor" onclick="changeSnailColor(2);">
+	                        <input type="button" id="colorSnailButtonRed" class="classInputColor" onclick="changeSnailColor(3);">
+	                        <input type="button" id="colorSnailButtonGreen" class="classInputColor" onclick="changeSnailColor(4);">
+	                        <input type="button" id="colorSnailButtonOrange" class="classInputColor" onclick="changeSnailColor(5);">
+	                        <input type="button" id="colorSnailButtonPurple" class="classInputColor" onclick="changeSnailColor(6);">
 						</div>
 						<img src="images/snailBlack.png" id="imageColor" alt="SnailColor">
-					</div>	
+					</div>				
+
+					<button type="button" id="buttonAddTeam" class="btn btn-danger classButtonsForm"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">A&#209;ADIR</button>
+					<button type="button" id="buttonCancelTeam" class="btn btn-danger classButtonsForm"><img src="images/cancelMark.png" class="innerButtonImage" id="cancelMark" alt="cancel">CANCELAR</button>
 				</section>
 			</article>
 					<br />
 					<br />
+					<br />
+	
 			<article id="articleIndexTeams">
 				<header>
 					<span>Para jugar deben crearse m&#237;nimo dos equipos</span>
