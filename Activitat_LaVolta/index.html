@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+
+		<script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+
+		<script type="text/javascript" src="js/funciones.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	</head>
+	<body onload="init();">
+		<div id="divTodo">
+			<header>
+				<img src="images/snailLogo.png" id="imageLogo" alt="Logo">
+				<span>LA VOLTA</span>
+			</header>
+
+			<article id="articleAddTeams">
+				<header>
+					<span>Informaci&#243;n del equipo</span>
+				</header>
+				<section>
+					<span>Nombre del equipo:</span>
+					<input type="text" id="InputTeamName" class="classInpuTeamName" maxlength="30" />
+					<br />
+					<span>Corredores:&nbsp;<button type="button" class="classImageButton classAddButton" onclick=""><img src="images/addButton.png" id="addButton" alt="addButton"></button></span>
+
+					<div id="divAddCorredores1" class="classAddCorredores">
+						<button type="button" class="classImageButton classRemoveButton" onclick=""><img src="images/removeButton.png" id="removeButton" alt="removeButton"></button>
+						<span>Corredor 1:</span>
+						<select id="selectTipo1" class="classSelect">
+					    	<option value="1">GREGARIO</option>
+					    	<option value="2">JEFE DE FILAS</option>
+						</select>
+					</div>
+
+					<div id="divAddCorredores2" class="classAddCorredores">
+						<button type="button" class="classImageButton classRemoveButton" onclick=""><img src="images/removeButton.png" id="removeButton" alt="removeButton"></button>
+						<span>Corredor 2:</span>
+						<select id="selectTipo2" class="classSelect">
+					    	<option value="1">GREGARIO</option>
+					    	<option value="2">JEFE DE FILAS</option>
+						</select>
+					</div>
+					<br />
+					
+					<span id="spanColorMessage">Color de equipo:</span>
+					<div id="divContainerColors">
+						<div id="divPanelColors">
+							<input type="button" id="colorSnailButtonBlack" class="classInputColor" value="">
+	                        <input type="button" id="colorSnailButtonBlue" class="classInputColor" value="">
+	                        <input type="button" id="colorSnailButtonRed" class="classInputColor" value="">
+	                        <input type="button" id="colorSnailButtonGreen" class="classInputColor" value="">
+	                        <input type="button" id="colorSnailButtonOrange" class="classInputColor" value="">
+	                        <input type="button" id="colorSnailButtonPurple" class="classInputColor" value="">
+						</div>
+						<img src="images/snailBlack.png" id="imageColor" alt="SnailColor">
+					</div>	
+
+				</section>
+			</article>
+
+			<article id="articleIndexTeams">
+				<header>
+					<span>Para jugar deben crearse m&#237;nimo dos equipos</span>
+				</header>
+				<section>
+					<span>A&#241;adir Equipo <button type="button" class="classImageButton classAddButton" onclick=""><img src="images/addButton.png" id="addTeamButton" alt="addButton"></button></span>
+					<select id="selectTeam" class="classSelect">
+						    <option value="1">TEAM1</option>
+						    <option value="2">TEAM2</option>
+					</select>
+				</section>
+			</article>
+		</div>
+	</body>
+</html>
