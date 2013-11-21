@@ -1,9 +1,9 @@
 <html>
 	<head>
-		<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-
-		<script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
-
+		<!--<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>-->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript" src="js/funciones.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
@@ -16,34 +16,17 @@
 				<span>LA VOLTA</span>
 			</header>
 
-			<article id="articleAddTeams">
+			<article id="articleAddTeams" hidden>
 				<header>
 					<span>Informaci&#243;n del equipo</span>
 				</header>
 				<section>
 					<span>Nombre del equipo:</span>
-					<input type="text" id="InputTeamName" class="classInpuTeamName" maxlength="30" />
+					<input type="text" id="InputTeamName" class="classInpuTeamName" maxlength="18" onkeyup="checkInfoRegister();" />
 					<br />
-					<span>Corredores:&nbsp;<button type="button" class="classImageButton classAddButton" onclick=""><img src="images/addButton.png" id="addButton" alt="addButton"></button></span>
+					<span>Corredores:&nbsp;<button type="button" class="classImageButton classAddButton" onclick="appendCorredores(0);"><img src="images/addButton_Normal.png" class="classAddImage" alt="addButton" title="A&#241;ade un corredor al equipo"></button></span>
 
-					<div id="divAddCorredores1" class="classAddCorredores">
-						<button type="button" class="classImageButton classRemoveButton" onclick=""><img src="images/removeButton.png" id="removeButton" alt="removeButton"></button>
-						<span>Corredor 1:</span>
-						<select id="selectTipo1" class="classSelect">
-					    	<option value="1">GREGARIO</option>
-					    	<option value="2">JEFE DE FILAS</option>
-						</select>
-					</div>
-
-					<div id="divAddCorredores2" class="classAddCorredores">
-						<button type="button" class="classImageButton classRemoveButton" onclick=""><img src="images/removeButton.png" id="removeButton" alt="removeButton"></button>
-						<span>Corredor 2:</span>
-						<select id="selectTipo2" class="classSelect">
-					    	<option value="1">GREGARIO</option>
-					    	<option value="2">JEFE DE FILAS</option>
-						</select>
-					</div>
-					<br />
+					<div id="divContainerCorredores"></div>
 					<br />
 					
 					<span id="spanColorMessage">Color de equipo:</span>
@@ -59,24 +42,24 @@
 						<img src="images/snailBlack.png" id="imageColor" alt="SnailColor">
 					</div>				
 
-					<button type="button" id="buttonAddTeam" class="btn btn-danger classButtonsForm"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">A&#209;ADIR</button>
-					<button type="button" id="buttonCancelTeam" class="btn btn-danger classButtonsForm"><img src="images/cancelMark.png" class="innerButtonImage" id="cancelMark" alt="cancel">CANCELAR</button>
+					<button type="button" id="buttonAddTeam" class="btn btn-danger classButtonsForm" onclick="addNewTeam(1);"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">A&#209;ADIR</button>
+
+					<button type="button" id="buttonEditTeam" class="btn btn-danger classButtonsForm" onclick="addNewTeam(2);"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">EDITAR</button>
+
+					<button type="button" id="buttonCancelTeam" class="btn btn-danger classButtonsForm" onclick="cancelAddTeam();"><img src="images/cancelMark.png" class="innerButtonImage" id="cancelMark" alt="cancel">CANCELAR</button>
 				</section>
 			</article>
-					<br />
-					<br />
-					<br />
+
 	
 			<article id="articleIndexTeams">
 				<header>
 					<span>Para jugar deben crearse m&#237;nimo dos equipos</span>
 				</header>
 				<section>
-					<span>A&#241;adir Equipo <button type="button" class="classImageButton classAddButton" onclick=""><img src="images/addButton.png" id="addTeamButton" alt="addButton"></button></span>
-					<select id="selectTeam" class="classSelect">
-						    <option value="1">TEAM1</option>
-						    <option value="2">TEAM2</option>
-					</select>
+					<span>A&#241;adir Equipo <button type="button" class="classImageButton classAddButton" onclick="showAddTeam(1);"><img src="images/addButton_Normal.png" class="classAddImage" alt="addButton" title="A&#241;ade un equipo para la carrera"></button></span>
+					<div id="divContainerEquipos"></div>
+
+					<button type="button" id="buttonPlay" class="btn btn-danger classButtonsForm"><img src="images/playButton.png" class="innerButtonImage" id="playButton" alt="play">PLAY</button>
 				</section>
 			</article>
 		</div>
