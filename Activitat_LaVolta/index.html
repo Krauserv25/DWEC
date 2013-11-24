@@ -1,7 +1,5 @@
 <html>
 	<head>
-		<!--<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>-->
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript" src="js/funciones.js"></script>
@@ -42,15 +40,31 @@
 						<img src="images/snailBlack.png" id="imageColor" alt="SnailColor">
 					</div>				
 
-					<button type="button" id="buttonAddTeam" class="btn btn-danger classButtonsForm" onclick="addNewTeam(1);"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">A&#209;ADIR</button>
+					<button type="button" id="buttonAddTeam" class="btn btn-danger classButtonsForm" onclick="setSpeedModal();" data-toggle="modal" data-target="#modalSpeedCorredores"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">A&#209;ADIR</button>
 
-					<button type="button" id="buttonEditTeam" class="btn btn-danger classButtonsForm" onclick="addNewTeam(2);"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">EDITAR</button>
+					<button type="button" id="buttonEditTeam" class="btn btn-danger classButtonsForm" onclick="setSpeedModal();" data-toggle="modal" data-target="#modalSpeedCorredores"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">EDITAR</button>
 
 					<button type="button" id="buttonCancelTeam" class="btn btn-danger classButtonsForm" onclick="cancelAddTeam();"><img src="images/cancelMark.png" class="innerButtonImage" id="cancelMark" alt="cancel">CANCELAR</button>
 				</section>
 			</article>
 
-	
+			<!-- Modal -->
+			<div class="modal fade" id="modalSpeedCorredores" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="myModalLabel">VELOCIDAD A REPARTIR ENTRE CORREDORES: <span id="spanSpeedPoints">1000</span></h4>
+			      </div>
+			      <div id="divContainerModalSpeed" class="modal-body"></div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			        <button type="button" id="buttonAsignarModal" class="btn btn-danger" onclick="asignarSpeed();" disabled>Asignar</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
 			<article id="articleIndexTeams">
 				<header>
 					<span>Para jugar deben crearse m&#237;nimo dos equipos</span>
@@ -59,7 +73,7 @@
 					<span>A&#241;adir Equipo <button type="button" class="classImageButton classAddButton" onclick="showAddTeam(1);"><img src="images/addButton_Normal.png" class="classAddImage" alt="addButton" title="A&#241;ade un equipo para la carrera"></button></span>
 					<div id="divContainerEquipos"></div>
 
-					<button type="button" id="buttonPlay" class="btn btn-danger classButtonsForm"><img src="images/playButton.png" class="innerButtonImage" id="playButton" alt="play">PLAY</button>
+					<a href="game.html"><button type="button" id="buttonPlay" class="btn btn-danger classButtonsForm"><img src="images/playButton.png" class="innerButtonImage" id="playButton" alt="play">PLAY</button></a>
 				</section>
 			</article>
 		</div>

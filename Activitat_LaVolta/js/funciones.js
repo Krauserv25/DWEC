@@ -3,6 +3,7 @@ var totalCorredoresInTeamRegister;
 var editID;
 var arrayTeams;
 var color;
+var mode;
 
 function init ()
 {
@@ -14,6 +15,7 @@ function init ()
 	totalCorredoresInTeamRegister = 0;
 	editID = 1;
 	color = 1;
+	mode = 1;
 	arrayTeams = new Array();
 }
 
@@ -28,11 +30,13 @@ function showAddTeam (operation)
 
 			if (operation === 1)
 			{
+				mode = 1;
 				getElementHTML("buttonAddTeam").style.display = 'inline-block';
 				getElementHTML("buttonEditTeam").style.display = 'none';
 			}
 			else
 			{
+				mode = 2;
 				getElementHTML("buttonAddTeam").style.display = 'none';
 				getElementHTML("buttonEditTeam").style.display = 'inline-block';
 			}
@@ -53,11 +57,12 @@ function fillInfoToEdit (id)
 
 	for (i = 0; i < maxCorredores; i++)
 	{
-		appendCorredores(corredores[i]);	
+		appendCorredores(corredores[i].rol);	
 	}
 
 	var auxColor = arrayTeams[id-1].color;
 	getElementHTML("imageColor").src = "images/snail"+getTeamColor(auxColor)+".png";
+	color = auxColor;
 }
 
 function cancelAddTeam ()
@@ -135,7 +140,6 @@ function removeCorredores (id)
 		var innerDiv = getElementHTML("divAddCorredores"+(i+1));
 		innerDiv.id = "divAddCorredores"+i;
 		innerDiv.className = 'classAddCorredores';
-		//var selectTipo = innerDiv.getElementsByClass('classSelect'); ¡¡¡¡¡¡NO ME RECONOCE LA FUNCION!!!!!
 		var selectTipo = innerDiv.getElementsByTagName("select")[0];
 		var sel = selectTipo.selectedIndex;
 		innerDiv.innerHTML = getInnerCorredorCode(i, sel);
@@ -175,54 +179,141 @@ function checkInfoRegister ()
 	}
 }
 
-function addNewTeam (operation)
+function setSpeedModal ()
+{
+	var i;
+	var auxRol;
+	var corredores;
+	var maxCorredores;
+	var code = "";
+
+	getElementHTML("buttonAsignarModal").disabled = true;
+	getElementHTML("spanSpeedPoints").innerHTML = "1000";
+
+	corredores = getCorredoresOfRegister();
+	maxCorredores = corredores.length;
+
+	for (i = 0; i < maxCorredores; i++)
+	{
+		if (corredores[i].rol === 0) auxRol = "GREGARIO";
+		else auxRol = "JEFE DE FILAS";
+
+		code += "<div class='classSpeedRol'>"+auxRol+": </div>";
+		code += "<button type='button' id="+("L_Arrow"+(i+1))+" class='classImageButton class_L_ArrowButton' onclick='changeSpeedValue(1, "+(i+1)+");'>";
+		code += "<img src='images/L_ArrowNormal.png' class='class_L_ArrowImage' alt='arrow' title='Decrementa 100 puntos'></button>";
+
+		code += "<input type='text' id="+("inputSpeedCorredor"+(i+1))+" class='classInputModalSpeed' value='0' disabled/>";
+		
+		code += "<button type='button' id="+("R_Arrow"+(i+1))+" class='classImageButton class_R_ArrowButton' onclick='changeSpeedValue(2, "+(i+1)+");'>";
+		code += "<img src='images/R_ArrowNormal.png' class='class_R_ArrowImage' alt='arrow' title='Incrementa 100 puntos'></button>";
+
+		code += " <strong>PUNTOS</strong><br />";
+	}
+	
+	getElementHTML("divContainerModalSpeed").innerHTML = code;
+}
+
+function getCorredoresOfRegister ()
 {
 	var arrayCorredores = new Array();
-	var nombreTeam = getElementHTML("InputTeamName").value;
 	var auxContainerCorredores = getElementHTML("divContainerCorredores");
 	
 	var i;
 	var count = auxContainerCorredores.getElementsByTagName("div").length;
-	count++;
 
-	for (i = 1; i < count; i++)
+	for (i = 1; i <= count; i++)
 	{
 		var innerDiv = getElementHTML("divAddCorredores"+i);
 		var selectTipo = innerDiv.getElementsByTagName("select")[0];
 		var sel = selectTipo.selectedIndex;
 
-		arrayCorredores.push(sel);
+		var auxInfoCorredores =
+		{
+			rol: sel,
+			metrosMaxPorTurno: 0
+		}
+
+		arrayCorredores.push(auxInfoCorredores);
 	}
 
-    if (operation === 1)
-    {
-    	var auxTeam = 
-	    {
-	    	id: arrayTeams.length+1,
-	        nombre: nombreTeam,
-	        corredores: arrayCorredores,
-	        color: color
-	    };
+	return arrayCorredores;
+}
 
+function changeSpeedValue (arrow, id)
+{
+	var total = parseInt(getElementHTML("spanSpeedPoints").innerHTML);
+
+	var auxInputSpeed = getElementHTML("inputSpeedCorredor"+id);
+	var currentSpeed = parseInt(auxInputSpeed.value);
+
+	if (arrow === 1) //Left Arrow
+	{
+		if (currentSpeed != 0 && total < 1000) 
+		{
+			getElementHTML("inputSpeedCorredor"+id).value = currentSpeed - 100;
+			total += 100;
+			getElementHTML("spanSpeedPoints").innerHTML = total;
+		}
+	}
+	else //Right Arrow
+	{
+		if (currentSpeed != 1000 && total > 0) 
+		{
+			getElementHTML("inputSpeedCorredor"+id).value = currentSpeed + 100;
+			total -= 100;
+			getElementHTML("spanSpeedPoints").innerHTML = total;
+		}
+	}
+
+	if (total === 0) getElementHTML("buttonAsignarModal").disabled = false;
+	else getElementHTML("buttonAsignarModal").disabled = true;
+}
+
+function asignarSpeed ()
+{
+	var auxId;
+	var auxTeam = setTeamInfoOnArray();
+
+	if (mode == 1)
+	{		
     	arrayTeams.push(auxTeam);
 		appendTeam();
-    }
-    else
-    {
-	    var auxTeam = 
-	    {
-	    	id: editID,
-	        nombre: nombreTeam,
-	        corredores: arrayCorredores,
-	        color: color
-	    };
+		auxId = arrayTeams.length; //Sé que es el último porque lo acabamos de "registrar"
+	}
+	else auxId = editID; 
 
-	    arrayTeams[editID-1] = auxTeam;
-	    getElementHTML("divAddTeam"+editID).innerHTML = getInnerTeamCode(editID);
-    }
+	var corredores = auxTeam.corredores;
+	var maxCorredores = corredores.length;
 
+	var i;
+
+	for (i = 0; i < maxCorredores; i++)
+	{
+		auxTeam.corredores[i].metrosMaxPorTurno = getElementHTML("inputSpeedCorredor"+(i+1)).value;
+	}
+
+	arrayTeams[auxId-1] = auxTeam;
+
+	getElementHTML("divAddTeam"+auxId).innerHTML = getInnerTeamCode(auxId);
+
+	$('#modalSpeedCorredores').modal('hide');
 	getElementHTML("articleAddTeams").style.display = 'none';
 	getElementHTML("articleIndexTeams").style.display = 'block';
+}
+
+function setTeamInfoOnArray ()
+{
+	var nombreTeam = getElementHTML("InputTeamName").value;
+		
+	var auxTeam = 
+    {
+    	id: arrayTeams.length+1,
+        nombre: nombreTeam,
+        corredores: getCorredoresOfRegister(),
+        color: color
+    };
+
+    return auxTeam;
 }
 
 function appendTeam ()
@@ -247,7 +338,6 @@ function getInnerTeamCode (id)
 	var nombre = arrayTeams[id-1].nombre;
 	var color = arrayTeams[id-1].color;
 	var corredores = arrayTeams[id-1].corredores;
-	var i;
 	var maxCorredores = corredores.length;
 
 	var code = "<button type='button' class='classImageButton classRemoveButton' onclick='removeTeams("+id+");'><img src='images/removeButton_Normal.png'";
@@ -260,12 +350,15 @@ function getInnerTeamCode (id)
 	code += "<div class='btn-group classDropDownCorredores'><button type='button' class='btn btn-danger dropdown-toggle' data-toggle='dropdown'>";
 	code += "CORREDORES <span class='caret'></span></button><ul class='dropdown-menu' role='menu'>";
 
+	var i;
+
 	for (i = 0; i < maxCorredores; i++)
 	{
 		var auxTipo;
+		var auxMetrosPorTurno = corredores[i].metrosMaxPorTurno;
 
-		if (corredores[i] === 0) auxTipo = "GREGARIO";
-		else auxTipo = "JEFE DE FILAS";
+		if (corredores[i].rol === 0) auxTipo = "GREGARIO_"+auxMetrosPorTurno;
+		else auxTipo = "JEFE FIL_"+auxMetrosPorTurno;
 
 		if (i < (maxCorredores-1)) 
 		code += "<li class='classLI_Corredores'>"+auxTipo;
@@ -302,71 +395,6 @@ function removeTeams (id)
 
 	checkCountTeams();
 }
-
-/*
-function addNewTeam ()
-{
-	var arrayCorredores = new Array();
-	var nombreTeam = getElementHTML("InputTeamName").value;
-	var auxContainerCorredores = getElementHTML("divContainerCorredores");
-	
-	var i;
-	var count = auxContainerCorredores.getElementsByTagName("div").length;
-	count++;
-
-	for (i = 1; i < count; i++)
-	{
-		var innerDiv = getElementHTML("divAddCorredores"+i);
-		var selectTipo = innerDiv.getElementsByTagName("select")[0];
-		var sel = selectTipo.selectedIndex;
-
-		arrayCorredores.push(sel);
-	}
-
-    var auxTeam = 
-    {
-    	id: arrayTeams.length+1,
-        nombre: nombreTeam,
-        corredores: arrayCorredores,
-        color: color
-    };
-
-	arrayTeams.push(auxTeam);
-
-	getElementHTML("articleAddTeams").style.display = 'none';
-	getElementHTML("articleIndexTeams").style.display = 'block';
-
-	appendTeam();
-}
-
-
-function updateTeams (id)
-{
-	var arrayCorredores = new Array();
-	var nombreTeam = getElementHTML("InputTeamName").value;
-	var auxContainerCorredores = getElementHTML("divContainerCorredores");
-	
-	var i;
-	var count = auxContainerCorredores.getElementsByTagName("div").length;
-	count++;
-
-	for (i = 1; i < count; i++)
-	{
-		var innerDiv = getElementHTML("divAddCorredores"+i);
-		var selectTipo = innerDiv.getElementsByTagName("select")[0];
-		var sel = selectTipo.selectedIndex;
-
-		arrayCorredores.push(sel);
-	}
-
-	getInnerTeamCode
-
-	var nombre = arrayTeams[id-1].nombre;
-	var color = arrayTeams[id-1].color;
-	var corredores = arrayTeams[id-1].corredores;
-	var i;
-	var maxCorredores = corredores.length;
-}*/
 
 function checkCountTeams ()
 {

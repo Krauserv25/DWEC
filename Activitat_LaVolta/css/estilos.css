@@ -320,3 +320,53 @@ section span
 	text-align: center;
 	color: black;
 }
+
+.classInputModalSpeed
+{
+	width: 8%;
+	text-align: center;
+}
+
+.class_L_ArrowButton
+{
+	width: 6%;
+	height: 8%;
+	margin-left: 5%;
+}
+
+.class_R_ArrowButton
+{
+	width: 6%;
+	height: 8%;
+	margin-right: 5%;
+}
+
+.class_L_ArrowImage, .class_R_ArrowImage
+{
+	width: 100%;
+}
+
+.class_L_ArrowImage:hover
+{
+	height: 80%;
+	content: url('../images/L_ArrowHover.png');
+}
+
+.class_R_ArrowImage:hover
+{
+	height: 80%;
+	content: url('../images/R_ArrowHover.png');
+}
+
+.classSpeedRol
+{
+	float:left;
+	width: 25%;
+	font-weight: bold;
+	line-height: 350%;
+}
+
+#divContainerModalSpeed
+{
+	margin-left: 15%;
+}
