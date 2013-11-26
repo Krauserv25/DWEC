@@ -186,6 +186,7 @@ function setSpeedModal ()
 	var corredores;
 	var maxCorredores;
 	var code = "";
+	var imageSrc;
 
 	getElementHTML("buttonAsignarModal").disabled = true;
 	getElementHTML("spanSpeedPoints").innerHTML = "1000";
@@ -195,10 +196,18 @@ function setSpeedModal ()
 
 	for (i = 0; i < maxCorredores; i++)
 	{
-		if (corredores[i].rol === 0) auxRol = "GREGARIO";
-		else auxRol = "JEFE DE FILAS";
+		if (corredores[i].rol === 0) 
+		{
+			auxRol = "GREGARIO";
+			imageSrc = "images/snail"+getTeamColor(color)+".png";
+		}
+		else 
+		{
+			auxRol = "JEFE DE FILAS";
+			imageSrc = "images/snailBoss"+getTeamColor(color)+".png";
+		}
 
-		code += "<div class='classSpeedRol'>"+auxRol+": </div>";
+		code += "<div class='classSpeedRol'>"+auxRol+": </div><img src="+imageSrc+" class='classImageButton classModalSnailImages'></img>";
 		code += "<button type='button' id="+("L_Arrow"+(i+1))+" class='classImageButton class_L_ArrowButton' onclick='changeSpeedValue(1, "+(i+1)+");'>";
 		code += "<img src='images/L_ArrowNormal.png' class='class_L_ArrowImage' alt='arrow' title='Decrementa 100 puntos'></button>";
 
@@ -230,7 +239,9 @@ function getCorredoresOfRegister ()
 		var auxInfoCorredores =
 		{
 			rol: sel,
-			metrosMaxPorTurno: 0
+			metrosMaxPorTurno: 0,
+			metrosAvanzados: 0,
+			metrosAAvanzar: 0
 		}
 
 		arrayCorredores.push(auxInfoCorredores);
@@ -404,42 +415,9 @@ function checkCountTeams ()
 	else getElementHTML("buttonPlay").disabled = true;
 }
 
-function getTeamColor (code)
+function setAllTeamsInfo ()
 {
-	var auxColor;
-
-	switch(code)
-	{
-		case 1:
-		auxColor = "Black";
-		break;
-
-		case 2:
-		auxColor = "Blue";
-		break;
-
-		case 3:
-		auxColor = "Red";
-		break;
-
-		case 4:
-		auxColor = "Green";
-		break;
-
-		case 5:
-		auxColor = "Orange";
-		break;
-
-		case 6:
-		auxColor = "Purple";
-		break;
-	}
-
-	return auxColor;
-}
-
-//Función que devuelve el elemento div que contiene el id pasado
-function getElementHTML (id)
-{
-	return document.getElementById(id);
+	html5rocks.indexedDB.addTodo(arrayTeams);
+	//addTodo(arrayTeams);
+	//setArrayTeamsInfo(arrayTeams);
 }

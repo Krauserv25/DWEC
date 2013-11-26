@@ -211,27 +211,45 @@ section span
 #buttonAddTeam
 {
 	width: 30%;
+	height: 10%;
 }
 
 #buttonEditTeam
 {
 	width: 30%;
+	height: 10%;
 }
 
 #buttonCancelTeam
 {
-	width: 35%;
+	width: 30%;
+	height: 10%;
 }
 
 #buttonPlay
 {
 	width: 30%;
+	height: 10%;
+}
+
+#buttonPasarTurno
+{
+	clear: both;
+	margin-left: 6%;
+	width: 15%;
+	height: 5%;
+}
+
+#buttonPasarTurno img
+{
+	width: 20%;
+	height: 100%;
 }
 
 .innerButtonImage
 {
-	width: 40%;
-	height: 7.5%;
+	width: 20%;
+	height: 100%;
 }
 
 .classAddImage
@@ -287,7 +305,6 @@ section span
 	width: 40%;
 	height: 100%;
 	display: inline-block;
-
 }
 
 .classShowTeamName span
@@ -369,4 +386,12 @@ section span
 #divContainerModalSpeed
 {
 	margin-left: 15%;
+}
+
+.classModalSnailImages
+{
+	float:left; 
+	margin-top:2%; 
+	width:10%; 
+	height:5%;
 }
