@@ -2,12 +2,14 @@
 var arrayTeams;
 var intervalTime;
 var disabledPasarTurno;
+var randomMessagesList;
 
 function init ()
 {
 	disabledPasarTurno = false;
 
 	arrayTeams = new Array();
+	randomMessagesList = new Array();
 
 	var auxTeamA = 
     {
@@ -27,7 +29,7 @@ function init ()
     };
     arrayTeams.push(auxTeamB);
 
-    var auxTeamC = 
+   var auxTeamC = 
     {
     	id: 3,
         nombre: "Turbo Derrapes",
@@ -41,11 +43,44 @@ function init ()
     	id: 4,
         nombre: "ojos saltones al poder",
         corredores: getCorredores(0, 200, 1, 400, 0, 200, 1, 300, 1, 400),
-        color: 5
+        color: 1
     };
     arrayTeams.push(auxTeamD);
 
+    setRandomMessages();
+
     renderGame();
+}
+
+function setRandomMessages()
+{
+	randomMessagesList.push("Soy el mejor ;)");
+	randomMessagesList.push("Voy a ganar como sea");
+	randomMessagesList.push("Nuestro equipo debe ser vencedor");
+	randomMessagesList.push("Arriba TTTTTTTTTTTN"); //TTTTTTTTTTTN es el código que representa Team Name y va a sustituirse por el mismo
+	randomMessagesList.push("Me llamo Hebensnail");
+	randomMessagesList.push("Caracoles, Cu&aacute;nto caracol!");
+	randomMessagesList.push("Mi abuelo fue corredor");
+	randomMessagesList.push("CCCCCCCCCCCCC color winner"); //CC es el código que representa Code Color y va a sustituirse por el mismo
+	randomMessagesList.push("Vamos equipo. Ui mira que caracola");
+	randomMessagesList.push("Si pierdo el director me echa sal");
+	randomMessagesList.push("No me traje las babas de recambio!");
+	randomMessagesList.push("Mis ojitos enamoran al personal");
+	randomMessagesList.push("Traigo sal en la concha");
+	randomMessagesList.push("Concha lista para derrapar");
+	randomMessagesList.push("Voy a llegar el primero");
+	randomMessagesList.push("Voy a mirar fijamente mi objetivo");
+	randomMessagesList.push("Guerra en la pista!");
+	randomMessagesList.push("A quien se me cruce le golpeo");
+	randomMessagesList.push("TTTTTTTTTTTN rules!");
+	randomMessagesList.push("Me he clavado una piedra antes");
+	randomMessagesList.push("My team is on fire.");
+}
+
+function setInfoBolsa (id)
+{
+
+	console.log("ID -> "+id);
 }
 
 function renderGame ()
@@ -57,6 +92,8 @@ function renderGame ()
 	var auxColor;
 	var par_impar = false;
 	var nombre;
+	var metrosRecorridos;
+	var messageSpeak;
 
 	var i;
 	var j;
@@ -82,21 +119,35 @@ function renderGame ()
 
 			auxColor = getTeamColor(arrayTeams[i].color);
 			nombre = arrayTeams[i].nombre;
-			nombre = nombre.replace(" ","&nbsp;");
+			var pattSpace = / /g;
+
+			nombre = nombre.replace(pattSpace, "&nbsp;");
+
+			metrosRecorridos = arrayTeams[i].corredores[j].metrosAvanzados;
+			messageSpeak = randomMessagesList[Math.floor(Math.random()*(21)+0)]; //21 es el total de mensajes posibles
+			messageSpeak = messageSpeak.replace(pattSpace, "&nbsp;");
+			messageSpeak = messageSpeak.replace("TTTTTTTTTTTN", nombre);
+			messageSpeak = messageSpeak.replace("CCCCCCCCCCCCC", auxColor);
 
 			if (arrayTeams[i].corredores[j].rol === 0) auxImageSrc = "images/snail"+auxColor+".png";
 			else auxImageSrc = "images/snailBoss"+auxColor+".png";
 
-			code += "<div class="+auxClassPar+"><img src="+auxImageSrc+" id="+("snailInCurse"+(i+1)+"_"+(j+1))+" class='classSnailImage' alt='snail'>";
+			code += "<div class="+auxClassPar+"><img src="+auxImageSrc+" onclick='prueba2(\""+(i+1)+"_"+(j+1)+"\");' id="+("snailInCurse"+(i+1)+"_"+(j+1))+" class='classSnailImage' alt='snail' rel='tooltip' title="+messageSpeak+" data-toggle='modal' data-target='#modalSpeedBolsaCorredores'>";
 			code += "</div><img src='images/chess.jpeg' class='classImageGoal' alt='goal'>";
 
-			code += "<div class='progress progress-striped active' style='float: left; margin-left:1%; margin-bottom:0; height: 4%;'>";
-			code += "<div id="+("Progress"+(i+1)+"_"+(j+1))+" class='progress-bar progress-bar-danger' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 0%''>";
-			code += "</div></div>";
+			code += "<div class='progress progress-striped active' style='float: left; margin-left:1%; margin-bottom:0; height: 4%; background-color:gray!important;'>";
+			code += "<div id="+("Progress"+(i+1)+"_"+(j+1))+" class='progress-bar' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 0%; background-color:"+auxColor+"!important;'>";
+			code += "<span id="+("spanMetrosAvanzados"+(i+1)+"_"+(j+1))+" class='classSpanProgress'>"+metrosRecorridos+"/1000</span></div></div>";
+			code += "<img src='images/endFlag"+auxColor+".png' id="+("imagenWin"+(i+1)+"_"+(j+1))+" style='width:3%; height: 4%; margin-left:1%; float:left;' hidden></img>";
 		}
 	}
 
+	code += "<button type='button' id='buttonPasarTurno' class='btn btn-danger' onclick='updateCorredores();''><img src='images/go.png' alt='go'>PASAR TURNO</button>";
 	divContainerCarreras.innerHTML = code;
+
+    $(function () {
+        $('.classSnailImage').tooltip();
+    });
 }
 
 function getCorredores (rA, mA, rB, mB, rC, mC, rD, mD, rE, mE)
@@ -172,7 +223,13 @@ function moveToNextPoint ()
 				}
 				else arrayTeams[i].corredores[j].metrosAvanzados = arrayTeams[i].corredores[j].metrosAAvanzar;
 			}
-			else arrayTeams[i].corredores[j].metrosAvanzados = 100;
+			else 
+			{
+				arrayTeams[i].corredores[j].metrosAvanzados = 100;
+				getElementHTML("imagenWin"+(i+1)+"_"+(j+1)).style.display = 'block';
+			}
+
+			getElementHTML("spanMetrosAvanzados"+(i+1)+"_"+(j+1)).innerHTML = (arrayTeams[i].corredores[j].metrosAvanzados*10)+"/1000";
 		}
 	}
 

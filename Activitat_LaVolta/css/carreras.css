@@ -1,3 +1,4 @@
+
 .classFieldsCarrerasImpar
 {
 	float: left;
@@ -34,7 +35,27 @@
 	filter: FlipH; /* Internet Explorer */
 }
 
+.classSnailImage:hover
+{
+	cursor: pointer;
+}
+
 .progress
 {
-	width: 15%;
+	width: 12%;
+}
+
+.classSpanProgress
+{
+	font-family: fantasy;
+	font-weight: bold;
+	line-height: 200%;
+	color:white;
+	font-size: 1.3em;
+}
+
+.classSnailButton
+{
+	width: 5%;
+	height: 100%;
 }

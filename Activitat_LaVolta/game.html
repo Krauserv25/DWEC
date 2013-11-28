@@ -11,108 +11,23 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	</head>
 	<body onload="init();">
-		<div id="divContainerCarreras" style="width:90%; height:85%; margin-top: 3%; margin-left:5%;">
-			<!--<div class="classFieldsCarrerasImpar">
-				<img src="images/snailPurple.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
+		<div id="divContainerCarreras" style="width:90%; height:95%; margin-top: 3%; margin-left:5%;"></div>
 
-			<div class="classFieldsCarrerasPar">
-			<img src="images/snailBossPurple.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailBossPurple.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-				<img src="images/snailPurple.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailBossPurple.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-				<img src="images/snailBlue.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailBlue.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-			<img src="images/snailBossBlue.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailBlue.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-				<img src="images/snailBossBlue.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailBossRed.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-				<img src="images/snailBossRed.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailRed.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-			<img src="images/snailBossRed.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailBossRed.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-				<img src="images/snailBossOrange.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailBossOrange.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-				<img src="images/snailOrange.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasImpar">
-				<img src="images/snailOrange.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>
-
-			<div class="classFieldsCarrerasPar">
-				<img src="images/snailBossOrange.png" class="classSnailImage" alt="goal">
-				<img src="images/chess.jpeg" class="classImageGoal" alt="goal">
-			</div>-->
-		</div>
-
-		<button type="button" id="buttonPasarTurno" class="btn btn-danger" onclick="updateCorredores();"><img src="images/go.png" alt="go">PASAR TURNO</button>
+		<!-- Modal -->
+			<div class="modal fade" id="modalSpeedBolsaCorredores" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="myModalLabel">MEJRORAR CARACOL</h4>
+			      </div>
+			      <div id="divContainerModalBolsa" class="modal-body"></div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			        <button type="button" id="buttonAceptarModalBolsa" class="btn btn-danger" onclick="" disabled>Aceptar</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 	</body>
 </html>
