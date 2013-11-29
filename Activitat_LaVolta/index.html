@@ -4,7 +4,7 @@
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript" src="js/funciones.js"></script>
 		<script type="text/javascript" src="js/commonFn.js"></script>
-		<!--<script type="text/javascript" src="js/infoEquipos.js"></script>-->
+		<script type="text/javascript" src="js/infoEquipos.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -14,6 +14,18 @@
 			<header>
 				<img src="images/snailLogo.png" id="imageLogo" alt="Logo">
 				<span>LA VOLTA</span>
+				<!-- Single button -->
+				<!--
+<button type="button" id="buttonAddTeam" class="btn btn-danger classButtonsForm" onclick="setSpeedModal();" data-toggle="modal" data-target="#modalSpeedCorredores"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">A&#209;ADIR</button>
+				-->
+				<div id="divButtonOptions" class="btn-group" title="Opciones">
+				  <button type="button" class="btn dropdown-toggle classImageButton" data-toggle="dropdown">
+				    <img src="images/options.png" class="classImageOptions" id="optionsImage" alt="options">
+				  </button>
+				  <ul class="dropdown-menu" role="menu">
+				    <li><a href="#" id="saveTeams" data-toggle="modal" data-target="#modalSaveGame">Guardar Partida</a></li>
+				  </ul>
+				</div>
 			</header>
 
 			<article id="articleAddTeams" hidden>
@@ -62,6 +74,24 @@
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			        <button type="button" id="buttonAsignarModal" class="btn btn-danger" onclick="asignarSpeed();" disabled>Asignar</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+			<div class="modal fade" id="modalSaveGame" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="myModalLabel"><span>Guarda los equipos que tienes en una partida nueva</span></h4>
+			      </div>
+			      <div id="divContainerModalSaveGame" class="modal-body">
+			      	<span>Nombre de la Partida: </span><input type="text" id="inputGameName" class="classInputModalSaveGame" maxlength="15" placeholder="Partida1"/>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			        <button type="button" id="buttonGuardarModal" class="btn btn-danger" onclick="setAllTeamsInfo();">Guardar</button>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->

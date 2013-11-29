@@ -396,3 +396,32 @@ section span
 	width:10%; 
 	height:5%;
 }
+
+#divButtonOptions
+{
+	width: 10%;
+	margin-left: 7%;
+	margin-top: 1%;
+	height: 75%;
+}
+
+#divButtonOptions > button
+{
+	height: 100%;
+	width: 100%;
+	border-style: solid;
+	border-color: white;
+}
+
+.classImageOptions
+{
+	width: 100%;
+	height: 100%;
+}
+
+.classInputModalSaveGame
+{
+	width: 30%;
+	text-align: center;
+	margin-left: 5%;
+}

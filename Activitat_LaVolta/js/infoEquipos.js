@@ -1,152 +1,83 @@
+var db;
+var arrayTeams;
+var pruebaName;
+var auxPartidaName;
 
-/*var auxTeams = new Array();
-
-function setArrayTeamsInfo (aux)
+function setArrayTeams (aux, n)
 {
-	auxTeams = aux;
-	
+	arrayTeams = aux;
+	pruebaName = n;
 }
 
-function getArrayTeamsInfo ()
+function indexedDBOk() 
 {
-	alert(auxTeams[0].color);
-	//return auxTeams;
-	//viewCallback(auxTeams);
-}*/
-
-var html5rocks = {};
-window.indexedDB = window.indexedDB || window.webkitIndexedDB ||
-                   window.mozIndexedDB;
-
-if ('webkitIndexedDB' in window) {
-  window.IDBTransaction = window.webkitIDBTransaction;
-  window.IDBKeyRange = window.webkitIDBKeyRange;
+	return "indexedDB" in window;
 }
 
-html5rocks.indexedDB = {};
-html5rocks.indexedDB.db = null;
+document.addEventListener("DOMContentLoaded", function() 
+{
+    //No support? Go in the corner and pout.
+    if(!indexedDBOk) return;
 
-html5rocks.indexedDB.onerror = function(e) {
-  console.log(e);
-};
+    var openRequest = indexedDB.open("Partidas",3);
 
-html5rocks.indexedDB.open = function() {
-  var request = indexedDB.open("todos");
+    openRequest.onupgradeneeded = function(e) 
+    {
+            var thisDB = e.target.result;
+            var i = 1;
+            var createdTeam = false;
 
-  request.onsuccess = function(e) {
-    var v = 1;
-    html5rocks.indexedDB.db = e.target.result;
-    var db = html5rocks.indexedDB.db;
-    // We can only create Object stores in a setVersion transaction;
-    if (v != db.version) {
-      var setVrequest = db.setVersion(v);
+            	if(!thisDB.objectStoreNames.contains("team2")) 
+	            {
+                    thisDB.createObjectStore("team2",{keyPath: 'partida', autoIncrement:true}, false);
+                    //createdTeam = true;
+	            }
 
-      // onsuccess is the only place we can create Object Stores
-      setVrequest.onerror = html5rocks.indexedDB.onerror;
-      setVrequest.onsuccess = function(e) {
-        if(db.objectStoreNames.contains("todo")) {
-          db.deleteObjectStore("todo");
-        }
+           /* while (i <= 5 && !createdTeam)
+            {   
+            	auxPartidaName = "team"+i;
 
-        var store = db.createObjectStore("todo",
-          {keyPath: "timeStamp"});
-        e.target.transaction.oncomplete = function() {
-          html5rocks.indexedDB.getAllTodoItems();
-        };
-      };
-    } else {
-      request.transaction.oncomplete = function() {
-        html5rocks.indexedDB.getAllTodoItems();
-      };
+	            if(!thisDB.objectStoreNames.contains(auxPartidaName)) 
+	            {
+                    thisDB.createObjectStore(auxPartidaName);
+                    createdTeam = true;
+	            }
+	            else i++;
+            }*/
     }
-  };
-  request.onerror = html5rocks.indexedDB.onerror;
-};
 
-html5rocks.indexedDB.addTodo = function(todoText) {
-  var db = html5rocks.indexedDB.db;
-  var trans = db.transaction(["todo"], "readwrite");
-  var store = trans.objectStore("todo");
+    openRequest.onsuccess = function(e) 
+    {
+        db = e.target.result;
 
-  var data = {
-    "text": todoText,
-    "timeStamp": new Date().getTime()
-  };
+        //Listen for add clicks
+        document.querySelector("#saveTeams").addEventListener("click", addTeam, false);
+    }        
 
-  var request = store.put(data);
+    openRequest.onerror = function(e) 
+    {
+            //Do something for the error
+    }
 
-  request.onsuccess = function(e) {
-    html5rocks.indexedDB.getAllTodoItems();
-  };
+},false);
 
-  request.onerror = function(e) {
-    console.log("Error Adding: ", e);
-  };
-};
 
-html5rocks.indexedDB.deleteTodo = function(id) {
-  var db = html5rocks.indexedDB.db;
-  var trans = db.transaction(["todo"], "readwrite");
-  var store = trans.objectStore("todo");
+function addTeam(e) 
+{
+    var transaction = db.transaction(["team2"],"readwrite");
+    var store = transaction.objectStore("team2");
 
-  var request = store.delete(id);
+    //Perform the add
+    var request = store.add(arrayTeams);
 
-  request.onsuccess = function(e) {
-    html5rocks.indexedDB.getAllTodoItems();
-  };
+    request.onerror = function(e) 
+    {
+    	console.log("Error",e.target.error.name);
+            //some type of error handler
+    }
 
-  request.onerror = function(e) {
-    console.log("Error Adding: ", e);
-  };
-};
-
-html5rocks.indexedDB.getAllTodoItems = function() {
-  var todos = document.getElementById("todoItems");
-  todos.innerHTML = "";
-
-  var db = html5rocks.indexedDB.db;
-  var trans = db.transaction(["todo"], "readwrite");
-  var store = trans.objectStore("todo");
-
-  // Get everything in the store;
-  var cursorRequest = store.openCursor();
-
-  cursorRequest.onsuccess = function(e) {
-    var result = e.target.result;
-    if(!!result == false)
-      return;
-
-    renderTodo(result.value);
-    result.continue();
-  };
-
-  cursorRequest.onerror = html5rocks.indexedDB.onerror;
-};
-
-function renderTodo(row) {
-  var todos = document.getElementById("todoItems");
-  var li = document.createElement("li");
-  var a = document.createElement("a");
-  var t = document.createTextNode(row.text);
-
-  a.addEventListener("click", function() {
-    html5rocks.indexedDB.deleteTodo(row.timeStamp);
-  }, false);
-
-  a.textContent = " [Delete]";
-  li.appendChild(t);
-  li.appendChild(a);
-  todos.appendChild(li);
+    request.onsuccess = function(e) 
+    {
+    	console.log("Woot! Did it");
+    }
 }
-
-function addTodo() {
-  var todo = document.getElementById("todo");
-  html5rocks.indexedDB.addTodo(todo.value);
-  todo.value = "";
-}
-
-function init() {
-  html5rocks.indexedDB.open();
-}
-
-window.addEventListener("DOMContentLoaded", init, false);​

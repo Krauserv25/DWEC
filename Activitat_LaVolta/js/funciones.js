@@ -216,7 +216,7 @@ function setSpeedModal ()
 		code += "<button type='button' id="+("R_Arrow"+(i+1))+" class='classImageButton class_R_ArrowButton' onclick='changeSpeedValue(2, "+(i+1)+");'>";
 		code += "<img src='images/R_ArrowNormal.png' class='class_R_ArrowImage' alt='arrow' title='Incrementa 100 puntos'></button>";
 
-		code += " <strong>PUNTOS</strong><br />";
+		code += " <strong>PUNTOS</strong><br /><br />";
 	}
 	
 	getElementHTML("divContainerModalSpeed").innerHTML = code;
@@ -318,6 +318,7 @@ function setTeamInfoOnArray ()
 		
 	var auxTeam = 
     {
+    	partida: "Partida0",
     	id: arrayTeams.length+1,
         nombre: nombreTeam,
         corredores: getCorredoresOfRegister(),
@@ -417,7 +418,12 @@ function checkCountTeams ()
 
 function setAllTeamsInfo ()
 {
-	html5rocks.indexedDB.addTodo(arrayTeams);
-	//addTodo(arrayTeams);
-	//setArrayTeamsInfo(arrayTeams);
+	var i;
+
+	for (i = 0; i < arrayTeams.length; i++)
+	{
+		arrayTeams[i].partida = getElementHTML("inputGameName").value;
+	}
+
+	setArrayTeams(arrayTeams, "pruebaCORRECTO");
 }
