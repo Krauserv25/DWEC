@@ -38,3 +38,11 @@ function getElementHTML (id)
 {
 	return document.getElementById(id);
 }
+
+function getTeamName()
+{
+    var url = location.search;
+    var splitUrl = url.split("=");
+
+    return splitUrl[1];
+}

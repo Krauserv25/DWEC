@@ -4,6 +4,7 @@ var editID;
 var arrayTeams;
 var color;
 var mode;
+var currentRadioLoad;
 
 function init ()
 {
@@ -16,6 +17,7 @@ function init ()
 	editID = 1;
 	color = 1;
 	mode = 1;
+	currentRadioLoad = 0;
 	arrayTeams = new Array();
 }
 
@@ -288,7 +290,7 @@ function asignarSpeed ()
 	if (mode == 1)
 	{		
     	arrayTeams.push(auxTeam);
-		appendTeam();
+		appendTeam(arrayTeams.length);
 		auxId = arrayTeams.length; //Sé que es el último porque lo acabamos de "registrar"
 	}
 	else auxId = editID; 
@@ -312,6 +314,21 @@ function asignarSpeed ()
 	getElementHTML("articleIndexTeams").style.display = 'block';
 }
 
+function loadTeamsPartida (array)
+{
+	getElementHTML("divContainerEquipos").innerHTML = ""; //Vacíamos los equipos actuales
+	var i;
+	
+	arrayTeams = array;
+	var maxTeams = arrayTeams.length;
+
+	for (i = 1; i <= maxTeams; i++)
+	{
+		appendTeam(i);
+		getElementHTML("divAddTeam"+i).innerHTML = getInnerTeamCode(i);
+	}
+}
+
 function setTeamInfoOnArray ()
 {
 	var nombreTeam = getElementHTML("InputTeamName").value;
@@ -328,17 +345,17 @@ function setTeamInfoOnArray ()
     return auxTeam;
 }
 
-function appendTeam ()
+function appendTeam (id)
 {
-	var totalTeams = arrayTeams.length;
+	//var totalTeams = arrayTeams.length;
 
-	if (totalTeams < 5)
+	if (id < 5)
 	{
 		var iDiv = document.createElement('div');
-		iDiv.id = 'divAddTeam'+totalTeams;
+		iDiv.id = 'divAddTeam'+id;
 		iDiv.className = 'classAddCorredores';
 
-		iDiv.innerHTML = getInnerTeamCode(totalTeams);
+		iDiv.innerHTML = getInnerTeamCode(id);
 		getElementHTML("divContainerEquipos").appendChild(iDiv);
 	}
 
@@ -424,6 +441,17 @@ function setAllTeamsInfo ()
 	{
 		arrayTeams[i].partida = getElementHTML("inputGameName").value;
 	}
+	setArrayTeams(arrayTeams);
 
-	setArrayTeams(arrayTeams, "pruebaCORRECTO");
+	$('#modalSaveGame').modal('hide');
+
+	setTimeout(function ()
+    {
+		goToPage();
+	}, 1000);
 }
+
+function goToPage() 
+{
+	location.href= "game.html?teams="+arrayTeams[0].partida;
+} 

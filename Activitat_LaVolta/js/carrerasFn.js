@@ -3,53 +3,30 @@ var arrayTeams;
 var intervalTime;
 var disabledPasarTurno;
 var randomMessagesList;
+var startGame;
 
 function init ()
 {
 	disabledPasarTurno = false;
+	startGame = true;
 
-	arrayTeams = new Array();
+	var teamName = getTeamName();
+
 	randomMessagesList = new Array();
 
-	var auxTeamA = 
-    {
-    	id: 1,
-        nombre: "Los MCeros",
-        corredores: getCorredores(0, 100, 1, 300, 0, 100, 1, 400, 0, 200),
-        color: 6
-    };
-    arrayTeams.push(auxTeamA);
+	setTimeout(function ()
+	{
+		getCurrentPartida(teamName, function(obj)
+			{
+				arrayTeams = obj;
 
-    var auxTeamB = 
-    {
-    	id: 2,
-        nombre: "Los caracoles del averno",
-        corredores: getCorredores(1, 500, 1, 300, 0, 100, 0, 100, 1, 400),
-        color: 2
-    };
-    arrayTeams.push(auxTeamB);
+				renderGame();
+				moveToNextPoint();
+				startGame = false;
+			});
+	}, 3000);
 
-   var auxTeamC = 
-    {
-    	id: 3,
-        nombre: "Turbo Derrapes",
-        corredores: getCorredores(0, 100, 0, 100, 0, 100, 1, 400, 1, 500),
-        color: 3
-    };
-    arrayTeams.push(auxTeamC);
-
-    var auxTeamD = 
-    {
-    	id: 4,
-        nombre: "ojos saltones al poder",
-        corredores: getCorredores(0, 200, 1, 400, 0, 200, 1, 300, 1, 400),
-        color: 1
-    };
-    arrayTeams.push(auxTeamD);
-
-    setRandomMessages();
-
-    renderGame();
+    setRandomMessages(); 
 }
 
 function setRandomMessages()
@@ -132,7 +109,7 @@ function renderGame ()
 			if (arrayTeams[i].corredores[j].rol === 0) auxImageSrc = "images/snail"+auxColor+".png";
 			else auxImageSrc = "images/snailBoss"+auxColor+".png";
 
-			code += "<div class="+auxClassPar+"><img src="+auxImageSrc+" onclick='prueba2(\""+(i+1)+"_"+(j+1)+"\");' id="+("snailInCurse"+(i+1)+"_"+(j+1))+" class='classSnailImage' alt='snail' rel='tooltip' title="+messageSpeak+" data-toggle='modal' data-target='#modalSpeedBolsaCorredores'>";
+			code += "<div class="+auxClassPar+"><img src="+auxImageSrc+" onclick='setInfoBolsa(\""+(i+1)+"_"+(j+1)+"\");' id="+("snailInCurse"+(i+1)+"_"+(j+1))+" class='classSnailImage' alt='snail' rel='tooltip' title="+messageSpeak+" data-toggle='modal' data-target='#modalSpeedBolsaCorredores'>";
 			code += "</div><img src='images/chess.jpeg' class='classImageGoal' alt='goal'>";
 
 			code += "<div class='progress progress-striped active' style='float: left; margin-left:1%; margin-bottom:0; height: 4%; background-color:gray!important;'>";
@@ -195,6 +172,7 @@ function updateCorredores ()
 
 	clearInterval(intervalTime);
 	intervalTime = setInterval(moveToNextPoint, 300);
+	setArrayTeams(arrayTeams); //Al mismo momento actualiza la partida
 }
 
 function moveToNextPoint ()
@@ -226,6 +204,7 @@ function moveToNextPoint ()
 			else 
 			{
 				arrayTeams[i].corredores[j].metrosAvanzados = 100;
+				checkWinnerTeam();
 				getElementHTML("imagenWin"+(i+1)+"_"+(j+1)).style.display = 'block';
 			}
 
@@ -233,10 +212,39 @@ function moveToNextPoint ()
 		}
 	}
 
-	if (disabledPasarTurno) 
+	if (disabledPasarTurno && !startGame) 
 	{
 		getElementHTML("buttonPasarTurno").disabled = true;
 		disabledPasarTurno = false;
 	}
 	else getElementHTML("buttonPasarTurno").disabled = false;
+}
+
+function checkWinnerTeam ()
+{
+	var i;
+	var j;
+	var allTeamWin = true;
+
+	var totalTeams = arrayTeams.length;
+
+	for (i = 0; i < totalTeams; i++)
+	{
+		var totalCorredores = arrayTeams[i].corredores.length;
+
+		for (j = 0; j < totalCorredores; j++)
+		{
+			if (arrayTeams[i].corredores[j].metrosAvanzados < 100)
+			{
+				allTeamWin = false;
+			}
+		}
+
+		if (allTeamWin)
+		{
+			location.href= "winScreen.html?team="+arrayTeams[i].nombre+"&color="+getTeamColor(arrayTeams[i].color);
+		}
+
+		allTeamWin = true;
+	}
 }

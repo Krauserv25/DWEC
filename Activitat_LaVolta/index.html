@@ -14,16 +14,12 @@
 			<header>
 				<img src="images/snailLogo.png" id="imageLogo" alt="Logo">
 				<span>LA VOLTA</span>
-				<!-- Single button -->
-				<!--
-<button type="button" id="buttonAddTeam" class="btn btn-danger classButtonsForm" onclick="setSpeedModal();" data-toggle="modal" data-target="#modalSpeedCorredores"><img src="images/goodMark.png" class="innerButtonImage" id="goodMark" alt="good">A&#209;ADIR</button>
-				-->
 				<div id="divButtonOptions" class="btn-group" title="Opciones">
 				  <button type="button" class="btn dropdown-toggle classImageButton" data-toggle="dropdown">
 				    <img src="images/options.png" class="classImageOptions" id="optionsImage" alt="options">
 				  </button>
 				  <ul class="dropdown-menu" role="menu">
-				    <li><a href="#" id="saveTeams" data-toggle="modal" data-target="#modalSaveGame">Guardar Partida</a></li>
+				    <li><a href="#" id="loadTeams" data-toggle="modal" data-target="#modalLoadGame" onclick="getAllPartidas();">Cargar Partida</a></li>
 				  </ul>
 				</div>
 			</header>
@@ -97,6 +93,23 @@
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 
+			<div class="modal fade" id="modalLoadGame" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="myModalLabel"><span>Partidas guardadas:</span></h4>
+			      </div>
+			      <div id="divContainerModalLoadGame" class="modal-body classContainerLoadGameModal">
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			        <button type="button" id="buttonCargarModal" class="btn btn-danger" onclick="getPartida();">Cargar</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
 			<article id="articleIndexTeams">
 				<header>
 					<span>Para jugar deben crearse m&#237;nimo dos equipos</span>
@@ -105,7 +118,7 @@
 					<span>A&#241;adir Equipo <button type="button" class="classImageButton classAddButton" onclick="showAddTeam(1);"><img src="images/addButton_Normal.png" class="classAddImage" alt="addButton" title="A&#241;ade un equipo para la carrera"></button></span>
 					<div id="divContainerEquipos"></div>
 
-					<a href="game.html"><button type="button" id="buttonPlay" class="btn btn-danger classButtonsForm"><img src="images/playButton.png" class="innerButtonImage" id="playButton" alt="play">PLAY</button></a>
+					<button type="button" id="buttonPlay" class="btn btn-danger classButtonsForm"  data-toggle="modal" data-target="#modalSaveGame"><img src="images/playButton.png" class="innerButtonImage" id="playButton" alt="play">PLAY</button>
 				</section>
 			</article>
 		</div>

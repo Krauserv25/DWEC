@@ -1,12 +1,10 @@
 var db;
 var arrayTeams;
-var pruebaName;
-var auxPartidaName;
 
-function setArrayTeams (aux, n)
+function setArrayTeams (aux)
 {
 	arrayTeams = aux;
-	pruebaName = n;
+    savePartida();
 }
 
 function indexedDBOk() 
@@ -19,39 +17,23 @@ document.addEventListener("DOMContentLoaded", function()
     //No support? Go in the corner and pout.
     if(!indexedDBOk) return;
 
-    var openRequest = indexedDB.open("Partidas",3);
+    var openRequest = indexedDB.open("PartidasJuego",4);
 
     openRequest.onupgradeneeded = function(e) 
     {
-            var thisDB = e.target.result;
-            var i = 1;
-            var createdTeam = false;
+        var thisDB = e.target.result;
+        var i = 1;
+        var createdTeam = false;
 
-            	if(!thisDB.objectStoreNames.contains("team2")) 
-	            {
-                    thisDB.createObjectStore("team2",{keyPath: 'partida', autoIncrement:true}, false);
-                    //createdTeam = true;
-	            }
-
-           /* while (i <= 5 && !createdTeam)
-            {   
-            	auxPartidaName = "team"+i;
-
-	            if(!thisDB.objectStoreNames.contains(auxPartidaName)) 
-	            {
-                    thisDB.createObjectStore(auxPartidaName);
-                    createdTeam = true;
-	            }
-	            else i++;
-            }*/
+    	if(!thisDB.objectStoreNames.contains("partidas")) 
+        {
+            thisDB.createObjectStore("partidas",{keyPath: 'partida', autoIncrement:true}, false);
+        }
     }
 
     openRequest.onsuccess = function(e) 
     {
         db = e.target.result;
-
-        //Listen for add clicks
-        document.querySelector("#saveTeams").addEventListener("click", addTeam, false);
     }        
 
     openRequest.onerror = function(e) 
@@ -61,23 +43,140 @@ document.addEventListener("DOMContentLoaded", function()
 
 },false);
 
-
-function addTeam(e) 
+function savePartida ()
 {
-    var transaction = db.transaction(["team2"],"readwrite");
-    var store = transaction.objectStore("team2");
+    var cont = 0;
+    var dateInfo = new Date();
+    var auxDate = dateInfo.getDate() + "/" + (dateInfo.getMonth() +1) + "/" + dateInfo.getFullYear();
+    auxDate += "&nbsp;&nbsp;&nbsp;&nbsp;" + dateInfo.getHours() + ":" + dateInfo.getMinutes() + ":" + dateInfo.getSeconds();
 
-    //Perform the add
-    var request = store.add(arrayTeams);
-
-    request.onerror = function(e) 
+    var auxInfo =
     {
-    	console.log("Error",e.target.error.name);
-            //some type of error handler
+        Equipos: arrayTeams,
+        fecha: auxDate
     }
 
-    request.onsuccess = function(e) 
+    var foundPartida = false;
+
+    var transaction = db.transaction(["partidas"],"readwrite");
+    var store = transaction.objectStore("partidas");
+
+    store.openCursor().onsuccess = function(event) 
     {
-    	console.log("Woot! Did it");
+        var cursor = event.target.result;
+
+        if(cursor && !foundPartida) 
+        {
+            var auxNombrePartida = cursor.value.Equipos[0].partida;
+
+            if (auxInfo.Equipos[0].partida === auxNombrePartida)
+            {
+                foundPartida = true;
+
+                cursor.value.Equipos = auxInfo.Equipos;
+                cursor.value.fecha = auxInfo.fecha;
+                cursor.update(cursor.value);
+            }
+            
+            cursor.continue();
+        }
+        else
+        if (!foundPartida)
+        {
+            store.add(auxInfo);
+        }
+    }
+}
+
+function getPartida() 
+{
+    var foundPartida = false;
+    var name = $("#divContainerModalLoadGame input[name$='radioLoad']:checked + span").text();
+
+    var objectStore = db.transaction('partidas').objectStore('partidas');
+
+      objectStore.openCursor().onsuccess = function(event) 
+      {
+          var cursor = event.target.result;
+
+          if(cursor && !foundPartida) 
+          {     
+            var auxNombrePartida = cursor.value.Equipos[0].partida;
+
+            if (name === auxNombrePartida)
+            {
+                
+                foundPartida = true;
+                auxObject = cursor.value.Equipos;
+
+                loadTeamsPartida(auxObject);
+                $('#modalLoadGame').modal('hide');
+            }
+
+            cursor.continue();
+         }
+    }
+}
+
+function getAllPartidas ()
+{
+    var code = "";
+
+    var firstCode = false;
+    var contRadioButtons = 1;
+
+    var objectStore = db.transaction('partidas').objectStore('partidas');
+      objectStore.openCursor().onsuccess = function(event) {
+      var cursor = event.target.result;
+
+      if(cursor) 
+      {
+        
+        var auxNombrePartida = cursor.value.Equipos[0].partida;
+
+        if (!firstCode)
+        {
+            code += "<input type='radio' id="+("radioLoad"+contRadioButtons)+" name='radioLoad' value="+contRadioButtons+" checked='checked'/><span>"+auxNombrePartida+"</span>";
+            firstCode = true;
+        }
+        else code += "<input type='radio' id="+("radioLoad"+contRadioButtons)+" name='radioLoad' value="+contRadioButtons+" /><span>"+auxNombrePartida+"</span>";
+
+        
+        code += "<span>"+cursor.value.fecha+"</span><br />";
+        
+        getElementHTML("divContainerModalLoadGame").innerHTML = code;
+        cursor.continue();
+        contRadioButtons++;
+     }
+  }
+}
+
+function getCurrentPartida (name, callBack)
+{
+    var auxObject;
+    var foundPartida = false;
+
+    var objectStore = db.transaction('partidas').objectStore('partidas');
+
+      objectStore.openCursor().onsuccess = function(event) 
+      {
+          var cursor = event.target.result;
+
+          if(cursor && !foundPartida) 
+          {     
+            var auxNombrePartida = cursor.value.Equipos[0].partida;
+
+            if (name === auxNombrePartida)
+            {     
+                foundPartida = true;
+                auxObject = cursor.value.Equipos;
+            }
+
+            cursor.continue();
+         }
+         else
+         {
+            callBack(auxObject);
+         }
     }
 }

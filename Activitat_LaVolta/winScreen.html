@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			function getWinnerInfo()
+			{
+				var teamName;
+				var color;
+
+			    var url = location.search;
+			    var splitUrl = url.split("?");
+			    var resultsVars = splitUrl[1];
+			    resultsVars = resultsVars.split("&");
+
+			    teamName = resultsVars[0].split("=")[1];
+			    color = resultsVars[1].split("=")[1];
+
+			    document.getElementById("spanTeamName").innerHTML = "EQUIPO GANADOR: "+teamName;
+			    document.getElementById("imgDer").src = "images/snailBoss"+color+".png";
+			}
+		</script>
+	</head>
+	<body onload="getWinnerInfo();">
+		<div id="divTodo" style="margin:10% 25% 10% 25%; width:50%; height: 50%;">
+			<div id="divSuperior" style="width:100%; height: 15%; text-align:center;">
+				<span id="spanTeamName" style="	line-height: 140%;
+	font-family: fantasy;
+	font-weight: bold;
+	font-size:1.5em;
+	color:black;"></span>
+			</div>
+			<img id="imgIzq" src="images/copa.png" style="float:left; width:50%; height: 70%;"></img>
+			<img id="imgDer" src="images/snailBossRed.png" style="float:left; padding-left:2%;width:45%; height: 70%;"></img>
+			<div id="divInferior" style="clear:both; width:100%; height: 15%; text-align:center;">
+				<a href="index.html">VOLVER A LA PÁGINA PRINCIPAL</a>
+			</div>
+		</div>
+	</body>
+</html>
