@@ -1,4 +1,5 @@
 
+//Función que devuelve el nombre de un color según el código pasado
 function getTeamColor (code)
 {
 	var auxColor;
@@ -33,13 +34,14 @@ function getTeamColor (code)
 	return auxColor;
 }
 
-//Función que devuelve el elemento div que contiene el id pasado
+//Función que devuelve el elemento HTML que contiene el id pasado
 function getElementHTML (id)
 {
 	return document.getElementById(id);
 }
 
-function getTeamName()
+//Función que recoge los datos pasados por la URL y poder así identificar la partida a jugar
+function getPartidaName()
 {
     var url = location.search;
     var splitUrl = url.split("=");

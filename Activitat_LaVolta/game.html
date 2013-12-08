@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	</head>
 	<body onload="init();">
-		<div id="divContainerCarreras" style="width:90%; height:95%; margin-top: 3%; margin-left:5%;"></div>
+		<div id="divContainerCarreras"></div>
 
 	<!-- Modal -->
 		<div class="modal fade" id="modalSpeedBolsaCorredores" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -20,12 +20,21 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="myModalLabel">MEJRORAR CARACOL</h4>
+		        <h4 class="modal-title" id="mejorarModalTitle">MEJRORAR CARACOL</h4>
 		      </div>
-		      <div id="divContainerModalBolsa" class="modal-body"></div>
+		      <div id="divContainerModalBolsa" class="modal-body">
+		      	<div id="divIzqMejorarCaracol">
+		      		<img id="imageLeaf" src="images/leaf.png"></img>
+		      		<img id="imageArrowMejorarCaracol" class="class_R_ArrowImage" src="images/R_ArrowNormal.png" onclick="setLeafToSnail();"></img>
+		      		<div id="divTotalLeafs"></div>
+		      	</div>
+		      	<div id="divDerMejorarCaracol">
+		      		<img id="imageSnailMejorarCaracol" src="images/snailBossBlack.png"></img>
+		      		<div id="divCurrentMaxTurnosMejorarCaracol"></div>
+		      	</div>
+		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-		        <button type="button" id="buttonAceptarModalBolsa" class="btn btn-danger" onclick="" disabled>Aceptar</button>
+		        <button type="button" id="buttonAceptarModalBolsa" class="btn btn-danger" data-dismiss="modal" onclick="">Aceptar</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->

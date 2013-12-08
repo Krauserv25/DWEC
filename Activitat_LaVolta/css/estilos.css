@@ -260,7 +260,6 @@ section span
 
 .classAddImage:hover
 {
-	/*height: 8%;*/
 	content: url('../images/addButton_Hover.png');
 }
 
@@ -374,6 +373,7 @@ section span
 {
 	height: 80%;
 	content: url('../images/R_ArrowHover.png');
+	cursor: pointer;
 }
 
 .classSpeedRol

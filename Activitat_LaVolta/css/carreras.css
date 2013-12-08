@@ -1,4 +1,12 @@
 
+#divContainerCarreras
+{
+	width:90%; 
+	height:95%; 
+	margin-top: 3%; 
+	margin-left:5%;
+}
+
 .classFieldsCarrerasImpar
 {
 	float: left;
@@ -58,4 +66,83 @@
 {
 	width: 5%;
 	height: 100%;
+}
+
+#divContainerModalBolsa
+{
+	width:100%; 
+	height:25%;
+}
+
+#divIzqMejorarCaracol
+{
+	float:left; 
+	width:50%; 
+	height:100%; 
+	border-right-style: solid;
+	border-right-color: red;
+	border-right-width: 1;
+}
+
+#imageLeaf
+{
+	float:left; 
+	margin-top:5%; 
+	margin-bottom:5%; 
+	margin-left:15%; 
+	width:50%; 
+	height:50%;
+}
+
+#imageArrowMejorarCaracol
+{
+	float:right; 
+	margin-right:5%; 
+	margin-top:15%; 
+	width:15%; 
+	height:30%;
+}
+
+#divTotalLeafs
+{
+	clear:both; 
+	text-align:center;
+}
+
+#divTotalLeafs > span
+{
+	line-height: 140%;
+	font-family: fantasy;
+	font-weight: bold;
+	font-size:1.5em;
+	color:black;
+}
+
+#divDerMejorarCaracol
+{
+	float:left;
+	width:50%; 
+	height:100%; 
+}
+
+#imageSnailMejorarCaracol
+{
+	width: 50%;
+	height: 60%;
+	margin-left: 25%;
+	margin-bottom:5%; 
+}
+
+#divCurrentMaxTurnosMejorarCaracol
+{
+	text-align:center;
+}
+
+#divCurrentMaxTurnosMejorarCaracol > span
+{
+	line-height: 140%;
+	font-family: fantasy;
+	font-weight: bold;
+	font-size:1.5em;
+	color:black;
 }

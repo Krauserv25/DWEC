@@ -1,29 +1,29 @@
 var db;
 var arrayTeams;
 
+//Función que recoge al información de los equipos de una partida para ser almacenados en la BD
 function setArrayTeams (aux)
 {
 	arrayTeams = aux;
     savePartida();
-}
 
+//Función que indica si existe el indexDB en la ventana
 function indexedDBOk() 
 {
 	return "indexedDB" in window;
 }
 
+//Función que inicializa el DOM e intenta crear una BD con una tabla específica
 document.addEventListener("DOMContentLoaded", function() 
 {
     //No support? Go in the corner and pout.
     if(!indexedDBOk) return;
 
-    var openRequest = indexedDB.open("PartidasJuego",4);
+    var openRequest = indexedDB.open("saveGame",1);
 
     openRequest.onupgradeneeded = function(e) 
     {
         var thisDB = e.target.result;
-        var i = 1;
-        var createdTeam = false;
 
     	if(!thisDB.objectStoreNames.contains("partidas")) 
         {
@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function()
 
 },false);
 
+//Función que genera o modifica los datos de una partida en la BD
+//Si el nombre de la partida no existe se creará añadirá una nueva partida. En caso contrario, se modificará la misma
 function savePartida ()
 {
     var cont = 0;
@@ -88,6 +90,7 @@ function savePartida ()
     }
 }
 
+//Función que devuelve los datos de una partida en concreto para ser cargada en la web
 function getPartida() 
 {
     var foundPartida = false;
@@ -104,8 +107,7 @@ function getPartida()
             var auxNombrePartida = cursor.value.Equipos[0].partida;
 
             if (name === auxNombrePartida)
-            {
-                
+            {              
                 foundPartida = true;
                 auxObject = cursor.value.Equipos;
 
@@ -118,6 +120,7 @@ function getPartida()
     }
 }
 
+//Función que recoge la información de todas las partidas disponibles en la BD y las muestra para poder ser cargadas
 function getAllPartidas ()
 {
     var code = "";
@@ -151,6 +154,7 @@ function getAllPartidas ()
   }
 }
 
+//Función que recoge los datos de una partida en concreto con el fin de representarlos en el juego
 function getCurrentPartida (name, callBack)
 {
     var auxObject;

@@ -4,8 +4,8 @@ var editID;
 var arrayTeams;
 var color;
 var mode;
-var currentRadioLoad;
 
+//Función que inicializa ciertos valores o elementos al cargarse la página
 function init ()
 {
 	getElementHTML("buttonPlay").disabled = true;
@@ -17,10 +17,10 @@ function init ()
 	editID = 1;
 	color = 1;
 	mode = 1;
-	currentRadioLoad = 0;
 	arrayTeams = new Array();
 }
 
+//Función que muestra la pantalla de añadir o editar los equipos
 function showAddTeam (operation)
 {
 	cleanAddTeam(function()
@@ -45,6 +45,7 @@ function showAddTeam (operation)
 		});
 }
 
+//Función que establece los campos o elementos a editar con los datos del equipo elegido
 function fillInfoToEdit (id)
 {
 	editID = id;
@@ -67,12 +68,14 @@ function fillInfoToEdit (id)
 	color = auxColor;
 }
 
+//Función que cancela tanto la operación de crear como la de editar equipos y vuelve a la principal
 function cancelAddTeam ()
 {
 	getElementHTML("articleAddTeams").style.display = 'none';
 	getElementHTML("articleIndexTeams").style.display = 'block';
 }
 
+//Función que limpia los campos o elementos para volver a crear un equipo
 function cleanAddTeam (viewCallback)
 {
 	//Campo del nombre de equipo
@@ -101,6 +104,7 @@ function cleanAddTeam (viewCallback)
 	viewCallback();
 }
 
+//Función que permite modificar el color del caracol de muestra según el elegido
 function changeSnailColor (code)
 {
 	var auxColor = getTeamColor(code);
@@ -109,6 +113,7 @@ function changeSnailColor (code)
 	color = code;
 }
 
+//Función que añade Divs para colocar nuevos corredores
 function appendCorredores (sel)
 {
 	if (totalCorredoresInTeamRegister < 5)
@@ -125,6 +130,7 @@ function appendCorredores (sel)
 	}
 }
 
+//Función que elimina el corredor de la lista cuya X ha sido pulsada
 function removeCorredores (id)
 {
 	var divCorredorX = getElementHTML("divAddCorredores"+id);
@@ -133,11 +139,10 @@ function removeCorredores (id)
 
 	var count = auxContainerCorredores.getElementsByTagName("div").length;
 	totalCorredoresInTeamRegister = count;
-	count++; //Sumamos uno a la cantidad debido a que borramos uno
 
 	var i;
 
-	for (i = id; i < count; i++)
+	for (i = id; i <= count; i++)
 	{
 		var innerDiv = getElementHTML("divAddCorredores"+(i+1));
 		innerDiv.id = "divAddCorredores"+i;
@@ -150,6 +155,7 @@ function removeCorredores (id)
 	checkInfoRegister();
 }
 
+//Función que escribe el código necesario para representar un nuevo corredor dentro de un div creado previamente
 function getInnerCorredorCode (id, sel)
 {
 	var code = "<button type='button' class='classImageButton classRemoveButton' onclick='removeCorredores("+id+")'><img src='images/removeButton_Normal.png'";
@@ -167,6 +173,7 @@ function getInnerCorredorCode (id, sel)
 	return code;
 }
 
+//Función que comprueba si el nombre del equipo ha sido escrito y al menos se haya añadido un corredor para poder crear el equipo
 function checkInfoRegister ()
 {
 	if (getElementHTML("InputTeamName").value != "" && totalCorredoresInTeamRegister >= 1)
@@ -181,6 +188,7 @@ function checkInfoRegister ()
 	}
 }
 
+//Función que dibuja los datos y controles para repartir los 1000 puntos de velocidad entre todos los corredores disponibles
 function setSpeedModal ()
 {
 	var i;
@@ -224,6 +232,7 @@ function setSpeedModal ()
 	getElementHTML("divContainerModalSpeed").innerHTML = code;
 }
 
+//Función que recoge la información de los corredores añadidos para almacenarlos en un array
 function getCorredoresOfRegister ()
 {
 	var arrayCorredores = new Array();
@@ -252,6 +261,7 @@ function getCorredoresOfRegister ()
 	return arrayCorredores;
 }
 
+//Función que controla el reparto de velocidad entre corredores y asegura que se hayan repartido todos
 function changeSpeedValue (arrow, id)
 {
 	var total = parseInt(getElementHTML("spanSpeedPoints").innerHTML);
@@ -282,6 +292,7 @@ function changeSpeedValue (arrow, id)
 	else getElementHTML("buttonAsignarModal").disabled = true;
 }
 
+//Función que asigna la velocidad repartida a cada corredor respectivamente
 function asignarSpeed ()
 {
 	var auxId;
@@ -314,12 +325,14 @@ function asignarSpeed ()
 	getElementHTML("articleIndexTeams").style.display = 'block';
 }
 
+//Función que borra los equipos actuales y establece los equipos cargados de una partida
 function loadTeamsPartida (array)
 {
 	getElementHTML("divContainerEquipos").innerHTML = ""; //Vacíamos los equipos actuales
 	var i;
 	
 	arrayTeams = array;
+
 	var maxTeams = arrayTeams.length;
 
 	for (i = 1; i <= maxTeams; i++)
@@ -329,26 +342,27 @@ function loadTeamsPartida (array)
 	}
 }
 
+//Función que crea un nuevo equipo con sus respectivos datos
 function setTeamInfoOnArray ()
 {
 	var nombreTeam = getElementHTML("InputTeamName").value;
 		
 	var auxTeam = 
     {
-    	partida: "Partida0",
+    	partida: "",
     	id: arrayTeams.length+1,
         nombre: nombreTeam,
         corredores: getCorredoresOfRegister(),
-        color: color
+        color: color,
+        leafsBolsa: 500
     };
 
     return auxTeam;
 }
 
+//Función que genera y añade los divs necesarios para establecer la información de los nuevos equipos
 function appendTeam (id)
 {
-	//var totalTeams = arrayTeams.length;
-
 	if (id < 5)
 	{
 		var iDiv = document.createElement('div');
@@ -362,6 +376,7 @@ function appendTeam (id)
 	checkCountTeams();
 }
 
+//Función que genera el código necesario para representar un equipo y sus datos
 function getInnerTeamCode (id)
 {
 	var nombre = arrayTeams[id-1].nombre;
@@ -402,6 +417,7 @@ function getInnerTeamCode (id)
 	return code;
 }
 
+//Función que elimina un equipo en concreto cuya X ha sido pulsada
 function removeTeams (id)
 {
 	var divTeamX = getElementHTML("divAddTeam"+id);
@@ -425,6 +441,7 @@ function removeTeams (id)
 	checkCountTeams();
 }
 
+//Función que comprueba si la cantidad de equipos actuales es suficiente para poder jugar (2 en este caso)
 function checkCountTeams ()
 {
 	var totalTeams = arrayTeams.length;
@@ -433,6 +450,14 @@ function checkCountTeams ()
 	else getElementHTML("buttonPlay").disabled = true;
 }
 
+//Función que sitúa el focus en el campo del nombre para mayor comodidad e indica el nombre de la partida actual
+function startSaveModal ()
+{
+	getElementHTML("inputGameName").focus();
+	getElementHTML("inputGameName").value = arrayTeams[0].partida;
+}
+
+//Función que establece los equipos con el nombre de partida indicada y la envía para ser almacenada. Luego se dirige al juego
 function setAllTeamsInfo ()
 {
 	var i;
@@ -451,6 +476,7 @@ function setAllTeamsInfo ()
 	}, 1000);
 }
 
+//Función que cambia la pantalla de creación de equipos a la de juego indicando el nombre de la partida guardada
 function goToPage() 
 {
 	location.href= "game.html?teams="+arrayTeams[0].partida;

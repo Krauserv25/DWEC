@@ -4,19 +4,21 @@ var intervalTime;
 var disabledPasarTurno;
 var randomMessagesList;
 var startGame;
+var currentIdToEatLeaf;
 
+//Función que inicializa los datos de una partida para jugar
 function init ()
 {
 	disabledPasarTurno = false;
 	startGame = true;
 
-	var teamName = getTeamName();
+	var partidaName = getPartidaName();
 
 	randomMessagesList = new Array();
 
 	setTimeout(function ()
 	{
-		getCurrentPartida(teamName, function(obj)
+		getCurrentPartida(partidaName, function(obj)
 			{
 				arrayTeams = obj;
 
@@ -29,6 +31,7 @@ function init ()
     setRandomMessages(); 
 }
 
+//Función que añade comentarios para los caracoles en un array
 function setRandomMessages()
 {
 	randomMessagesList.push("Soy el mejor ;)");
@@ -54,12 +57,33 @@ function setRandomMessages()
 	randomMessagesList.push("My team is on fire.");
 }
 
+//Función que dibuja la información de la bolsa en cada caracol
 function setInfoBolsa (id)
 {
+	currentIdToEatLeaf = id;
 
-	console.log("ID -> "+id);
+	var colorSnail;
+	var rolSnail;
+	var colorSrc;
+
+	var splitID = id.split("_");
+	var i = parseInt(splitID[0]);
+	var j = parseInt(splitID[1]);
+
+	colorSnail = getTeamColor(arrayTeams[i-1].color);
+
+	if (arrayTeams[i-1].corredores[j-1].rol === 0) colorSrc = "images/snail"+colorSnail+".png";
+	else colorSrc = "images/snailBoss"+colorSnail+".png";
+
+	getElementHTML("mejorarModalTitle").innerHTML = "MEJORAR CARACOL - "+arrayTeams[i-1].nombre;
+	getElementHTML("imageSnailMejorarCaracol").src = colorSrc;
+
+	var currentLeafsBolsa = arrayTeams[i-1].corredores[j-1].leafsBolsa;
+	getElementHTML("divTotalLeafs").innerHTML = "<span>Max. Hojas en Bolsa de Equipo: "+arrayTeams[i-1].leafsBolsa+"</span>";
+	getElementHTML("divCurrentMaxTurnosMejorarCaracol").innerHTML = "<span>Max. Metros por Turno: "+arrayTeams[i-1].corredores[j-1].metrosMaxPorTurno+"</span>";
 }
 
+//Función principal del juego que dibuja todos las pistas de carrera con sus respectivos caracoles, barras de progresión, etc
 function renderGame ()
 {
 	var totalTeams = arrayTeams.length;
@@ -127,32 +151,8 @@ function renderGame ()
     });
 }
 
-function getCorredores (rA, mA, rB, mB, rC, mC, rD, mD, rE, mE)
-{
-	var arrayCorredores = new Array();
-
-	arrayCorredores.push(getauxInfoCorredor(rA, mA));
-	arrayCorredores.push(getauxInfoCorredor(rB, mB));
-	arrayCorredores.push(getauxInfoCorredor(rC, mC));
-	arrayCorredores.push(getauxInfoCorredor(rD, mD));
-	arrayCorredores.push(getauxInfoCorredor(rE, mE));
-
-	return arrayCorredores;
-}
-
-function getauxInfoCorredor (r, m)
-{
-	var auxInfoCorredores =
-	{
-		rol: r,
-		metrosMaxPorTurno: m,
-		metrosAvanzados: 0,
-		metrosAAvanzar: 0
-	}
-
-	return auxInfoCorredores;
-}
-
+//Función que permite evolucionar la partida (Pasar Tiempo) indicando valores aleatorios de movimiento para cada caracol
+//dentro de los permitido en sus metros máximos por turno
 function updateCorredores ()
 {
 	var i;
@@ -166,7 +166,7 @@ function updateCorredores ()
 
 		for (j = 0; j < totalCorredores; j++)
 		{
-			arrayTeams[i].corredores[j].metrosAAvanzar += Math.floor((Math.random()*(arrayTeams[i].corredores[j].metrosMaxPorTurno/100))+1);
+			arrayTeams[i].corredores[j].metrosAAvanzar += Math.floor((Math.random()*(parseInt(arrayTeams[i].corredores[j].metrosMaxPorTurno)/100))+1);
 		}
 	}
 
@@ -175,6 +175,7 @@ function updateCorredores ()
 	setArrayTeams(arrayTeams); //Al mismo momento actualiza la partida
 }
 
+//Función que avanza los caracoles por sus respectivos carriles y realiza una serie de comprobaciones como si ha llegado a la meta
 function moveToNextPoint ()
 {
 	var i;
@@ -188,14 +189,14 @@ function moveToNextPoint ()
 
 		for (j = 0; j < totalCorredores; j++)
 		{
-			if (arrayTeams[i].corredores[j].metrosAvanzados < 100)
+			if (parseInt(arrayTeams[i].corredores[j].metrosAvanzados) < 100)
 			{
-				if (arrayTeams[i].corredores[j].metrosAvanzados < arrayTeams[i].corredores[j].metrosAAvanzar)
+				if (parseInt(arrayTeams[i].corredores[j].metrosAvanzados) < parseInt(arrayTeams[i].corredores[j].metrosAAvanzar))
 				{
 					disabledPasarTurno = true;
 					var snailInCurse = getElementHTML("snailInCurse"+(i+1)+"_"+(j+1));
 					var progress = getElementHTML("Progress"+(i+1)+"_"+(j+1));
-					arrayTeams[i].corredores[j].metrosAvanzados++;
+					arrayTeams[i].corredores[j].metrosAvanzados = parseInt(arrayTeams[i].corredores[j].metrosAvanzados)+1;
 					snailInCurse.style.marginLeft = arrayTeams[i].corredores[j].metrosAvanzados+'%';
 					progress.style.width = arrayTeams[i].corredores[j].metrosAvanzados+'%';
 				}
@@ -208,7 +209,7 @@ function moveToNextPoint ()
 				getElementHTML("imagenWin"+(i+1)+"_"+(j+1)).style.display = 'block';
 			}
 
-			getElementHTML("spanMetrosAvanzados"+(i+1)+"_"+(j+1)).innerHTML = (arrayTeams[i].corredores[j].metrosAvanzados*10)+"/1000";
+			getElementHTML("spanMetrosAvanzados"+(i+1)+"_"+(j+1)).innerHTML = (parseInt(arrayTeams[i].corredores[j].metrosAvanzados)*10)+"/1000";
 		}
 	}
 
@@ -220,6 +221,7 @@ function moveToNextPoint ()
 	else getElementHTML("buttonPasarTurno").disabled = false;
 }
 
+//Función que comprueba si un equipo entero ha llegado a la meta. En caso afirmativo mostrará la pantalla de victoria
 function checkWinnerTeam ()
 {
 	var i;
@@ -234,7 +236,7 @@ function checkWinnerTeam ()
 
 		for (j = 0; j < totalCorredores; j++)
 		{
-			if (arrayTeams[i].corredores[j].metrosAvanzados < 100)
+			if (parseInt(arrayTeams[i].corredores[j].metrosAvanzados) < 100)
 			{
 				allTeamWin = false;
 			}
@@ -246,5 +248,23 @@ function checkWinnerTeam ()
 		}
 
 		allTeamWin = true;
+	}
+}
+
+//Función que da de comer hojas a los caracoles para aumentar su velocidad. Se podrán alimentar mientras haya hojas en la bolsa
+function setLeafToSnail()
+{
+	var splitID = currentIdToEatLeaf.split("_");
+	var i = parseInt(splitID[0]);
+	var j = parseInt(splitID[1]);
+
+	var currentLeafsBolsa = parseInt(arrayTeams[i-1].leafsBolsa);
+
+	if (currentLeafsBolsa > 0)
+	{
+		arrayTeams[i-1].leafsBolsa = parseInt(arrayTeams[i-1].leafsBolsa)-100;
+		arrayTeams[i-1].corredores[j-1].metrosMaxPorTurno = parseInt(arrayTeams[i-1].corredores[j-1].metrosMaxPorTurno)+100;
+		getElementHTML("divTotalLeafs").innerHTML = "<span>Max. Hojas en Bolsa de Equipo: "+arrayTeams[i-1].leafsBolsa+"</span>";
+		getElementHTML("divCurrentMaxTurnosMejorarCaracol").innerHTML = "<span>Max. Metros por Turno: "+arrayTeams[i-1].corredores[j-1].metrosMaxPorTurno+"</span>";
 	}
 }
