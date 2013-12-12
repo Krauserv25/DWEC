@@ -1,0 +1,208 @@
+<html>
+	<head>
+		<title>POSTAL DE NADAL</title>
+		<script type="text/javascript" src="JS/kinetikJS.js"></script>
+	</head>
+	<body>
+	    <div id="container" style=" background-color:#FFF673;"></div>
+	    <script defer="defer">
+	      var isInFloor = true;
+
+	      var stage = new Kinetic.Stage
+	      ({
+	        container: 'container',
+	        width: 1250,
+	        height: 200
+	      });
+
+	      var layer = new Kinetic.Layer();
+
+	      var backgroundMountains = new Image();
+
+	      backgroundMountains.onload = function() 
+	      {
+		      var santaObj = new Image();
+
+		      santaObj.onload = function() 
+		      {
+		        var santa = new Kinetic.Image
+		        ({
+		          x: 0,
+		          y: 40,
+		          image: santaObj,
+		          width: 106,
+		          height: 118
+		        });
+
+		     	layer.add(santa);
+		     	stage.add(layer);
+
+		     	var Left_Move = new Kinetic.Animation(function(frame) 
+		        {
+		        	var auxX = santa.getX();
+		        	santa.setX((auxX-10));
+		        },layer);
+
+		     	var Right_Move = new Kinetic.Animation(function(frame) 
+		        {
+		        	var auxX = santa.getX();
+		        	santa.setX((auxX+10));
+		        },layer);
+
+		        var Up_Move = new Kinetic.Animation(function(frame) 
+		        {
+		        	var auxY = santa.getY();
+		        	santa.setY((auxY-10));
+		        },layer);
+
+		     	var Down_Move = new Kinetic.Animation(function(frame) 
+		        {
+		        	var auxY = santa.getY();
+		        	santa.setY((auxY+10));
+		        },layer);
+
+		        var Jump_UP = new Kinetic.Animation(function(frame) 
+		        {
+		        	var auxY = santa.getY();
+		        	santa.setY((auxY-3));
+		        },layer);
+
+		       	var Jump_DOWN = new Kinetic.Animation(function(frame) 
+		        {
+		        	var auxY = santa.getY();
+		        	santa.setY((auxY+3));
+		        },layer);
+
+			    window.addEventListener('keydown', function(e) 
+				{
+					var auxX = santa.getX();
+					var auxY = santa.getY();
+
+					switch (e.keyCode)
+					{
+						case 65: //LEFT
+						if (auxX > 2)
+						{
+							Right_Move.stop();
+							Left_Move.start();
+						}
+						else Left_Move.stop();
+						break;
+
+						case 68: //RIGHT
+						if (auxX < 1000)
+						{
+							Left_Move.stop();
+							Right_Move.start();
+						}
+						else Right_Move.stop();
+						break;
+
+						case 87: //UP
+						if (auxY > 0)
+						{
+							Down_Move.stop();
+							Up_Move.start();
+						}
+						else Up_Move.stop();
+						break;
+
+						case 83: //DOWN
+						if (auxY < 100)
+						{
+							Up_Move.stop();
+							Down_Move.start();
+						}
+						else Down_Move.stop();
+						break;
+
+						case 32: //SPACE
+						if (isInFloor)
+						{
+							isInFloor = false;
+							Jump_UP.start();
+							setTimeout(function()
+							{
+								Jump_UP.stop();
+								Jump_DOWN.start();
+								setTimeout(function()
+									{
+										Jump_DOWN.stop();
+										isInFloor = true;
+									}, 200);
+							},200);
+						}
+						break;
+					}
+				});
+
+				window.addEventListener('keyup', function(e) 
+				{
+					switch (e.keyCode)
+					{
+						case 65: //LEFT
+						Left_Move.stop();
+						break;
+
+						case 68: //RIGHT
+						Right_Move.stop();
+						break;
+
+						case 87: //UP
+						Up_Move.stop();
+						break;
+
+						case 83: //DOWN
+						Down_Move.stop();
+						break;
+					}
+				});
+			};
+
+			santaObj.src = 'img/santa.png';
+	}
+
+	backgroundMountains.src = 'img/backMountains.jpg';
+
+
+	    /*  var rect = new Kinetic.Rect({
+	        x: 100,
+	        y: 75,
+	        width: 100,
+	        height: 50,
+	        fill: 'green',
+	        stroke: 'black',
+	        strokeWidth: 4
+	      });
+
+	            var circle = new Kinetic.Circle({
+        x: stage.getWidth() / 2,
+        y: stage.getHeight() / 2,
+        radius: 70,
+        fill: 'black',
+        stroke: 'black',
+        strokeWidth: 4
+      });
+
+	                  var wedge = new Kinetic.Wedge({
+        x: stage.getWidth() / 2,
+        y: stage.getHeight() / 2,
+        radius: 70,
+        angleDeg: 60,
+        fill: 'green',
+        stroke: 'black',
+        strokeWidth: 4,
+        rotationDeg: -120
+      });
+
+
+	      // add the shape to the layer
+	      layer.add(rect);
+	      layer.add(circle);
+	      layer.add(wedge);
+
+	      // add the layer to the stage
+	      stage.add(layer);*/
+	    </script>
+	</body>
+</html>
