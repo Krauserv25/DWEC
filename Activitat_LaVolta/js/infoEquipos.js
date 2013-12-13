@@ -6,6 +6,7 @@ function setArrayTeams (aux)
 {
 	arrayTeams = aux;
     savePartida();
+}
 
 //Función que indica si existe el indexDB en la ventana
 function indexedDBOk() 

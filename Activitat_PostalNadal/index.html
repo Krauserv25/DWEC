@@ -4,7 +4,7 @@
 		<script type="text/javascript" src="JS/kinetikJS.js"></script>
 	</head>
 	<body>
-	    <div id="container" style=" background-color:#FFF673;"></div>
+	    <div id="container" style="height:65%;"></div>
 	    <script defer="defer">
 	      var isInFloor = true;
 
@@ -12,15 +12,62 @@
 	      ({
 	        container: 'container',
 	        width: 1250,
-	        height: 200
+	        height: 433
 	      });
 
 	      var layer = new Kinetic.Layer();
 
-	      var backgroundMountains = new Image();
+	      var backgroundMountains1 = new Image();
+	      var backgroundMountains2 = new Image();
 
-	      backgroundMountains.onload = function() 
+	      backgroundMountains1.onload = function() 
 	      {
+	      		var back1 = new Kinetic.Image
+		        ({
+		          x: 0,
+		          y: -250,
+		          image: backgroundMountains1,
+		          width: 1300,
+		          height: 700
+		        });
+
+		     	layer.add(back1);
+
+		     	backgroundMountains2.onload = function() 
+		     	{
+		     		var back2 = new Kinetic.Image
+			        ({
+			          x: 1300,
+			          y: -250,
+			          image: backgroundMountains2,
+			          width: 1300,
+			          height: 700
+			        });
+
+			     	layer.add(back2);
+
+			     	var Back_Move = new Kinetic.Animation(function(frame) 
+			        {
+			        	var auxX_1 = back1.getX();
+			        	var auxX_2 = back2.getX();
+
+			        	back1.setX((auxX_1-10));
+			        	back2.setX((auxX_2-10));
+
+			        	if (back1.getX() <= -1300) 
+		        		{
+		        			back1.setX(1290);	        			
+		        		}
+
+		        		if (back2.getX() <= -1300) 
+		        		{
+		        			back2.setX(1290);	        			
+		        		}
+			        },layer);
+
+			        Back_Move.start();
+		     	}
+
 		      var santaObj = new Image();
 
 		      santaObj.onload = function() 
@@ -28,13 +75,15 @@
 		        var santa = new Kinetic.Image
 		        ({
 		          x: 0,
-		          y: 40,
+		          y: 250,
 		          image: santaObj,
 		          width: 106,
 		          height: 118
 		        });
 
 		     	layer.add(santa);
+		     	setPresent();
+
 		     	stage.add(layer);
 
 		     	var Left_Move = new Kinetic.Animation(function(frame) 
@@ -108,7 +157,7 @@
 						break;
 
 						case 83: //DOWN
-						if (auxY < 100)
+						if (auxY < stage.getHeight())
 						{
 							Up_Move.stop();
 							Down_Move.start();
@@ -162,7 +211,55 @@
 			santaObj.src = 'img/santa.png';
 	}
 
-	backgroundMountains.src = 'img/backMountains.jpg';
+	backgroundMountains1.src = 'img/backMountains3.png';
+	backgroundMountains2.src = 'img/backMountains4.png';
+
+	function setPresent ()
+	{
+		var rect = new Kinetic.Rect({
+	        x: 800,
+	        y: 250,
+	        width: 25,
+	        height: 25,
+	        fill: 'red',
+	        stroke: 'black',
+	        strokeWidth: 4
+	      });
+
+		var lazoVertical = new Kinetic.Rect({
+	        x: 800+(25/3), //Empieza en un tercio del ancho de regalo
+	        y: 250,
+	        width: (25/3),
+	        height: 25,
+	        fill: 'blue',
+	        stroke: 'black',
+	        strokeWidth: 1
+		});
+
+		var lazoHorizontal = new Kinetic.Rect({
+	        x: 800,
+	        y: 250+(25/3), //Empieza en un tercio del alto de regalo
+	        width: 25,
+	        height: (25/3),
+	        fill: 'blue',
+	        stroke: 'black',
+	        strokeWidth: 1
+		});
+
+		var lazoSuperior = new Kinetic.Circle({
+	        x: 800,
+	        y: 250,
+	        radius: 5,
+	        fill: 'transparent',
+	        stroke: 'blue',
+	        strokeWidth: 3
+      });
+
+		layer.add(rect);
+		layer.add(lazoVertical);
+		layer.add(lazoHorizontal);
+		layer.add(lazoSuperior);
+	}
 
 
 	    /*  var rect = new Kinetic.Rect({
