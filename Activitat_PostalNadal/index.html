@@ -87,14 +87,14 @@
 		     	//SCORE JUEGO
 		     	var scoreImage = new Image();
 		     	
-		     		var presentScore = new Kinetic.Image
-			        ({
-			          x: 50,
-			          y: 10,
-			          image: scoreImage,
-			          width: 100,
-			          height: 100
-			        });
+	     		var presentScore = new Kinetic.Image
+		        ({
+		          x: 50,
+		          y: 10,
+		          image: scoreImage,
+		          width: 100,
+		          height: 100
+		        });
 
 			    var ScoreRect = new Kinetic.Rect({
 			        x: 50,
@@ -119,6 +119,52 @@
 				 layer.add(ScoreRect);
 				 layer.add(presentScore);
 				 layer.add(scoreRegalos);
+
+				 //VIDAS JUEGO
+		     	var lifeImage = new Image();
+		     	
+	     		var vida1 = new Kinetic.Image
+		        ({
+		          x: 900,
+		          y: 10,
+		          image: lifeImage,
+		          width: 100,
+		          height: 100
+		        });	
+
+		        var vida2 = new Kinetic.Image
+		        ({
+		          x: 1000,
+		          y: 10,
+		          image: lifeImage,
+		          width: 100,
+		          height: 100
+		        });		
+
+		        var vida3 = new Kinetic.Image
+		        ({
+		          x: 1100,
+		          y: 10,
+		          image: lifeImage,
+		          width: 100,
+		          height: 100
+		        });					 
+
+			 	var LifesRect = new Kinetic.Rect({
+		        x: 900,
+		        y: 20,
+		        stroke: 'red',
+		        strokeWidth: 5,
+		        fill: '#ddd',
+		        width: 300,
+		        height: 80,
+		        cornerRadius: 10
+		      });
+
+			 layer.add(LifesRect);
+			 layer.add(vida1);
+			 layer.add(vida2);
+			 layer.add(vida3);
 
 		     	setPresent();
 
@@ -246,6 +292,7 @@
 				});
 
 				scoreImage.src = 'img/regalo.png';
+				lifeImage.src = 'img/vida.png';
 			};
 
 			santaObj.src = 'img/santa.png';
