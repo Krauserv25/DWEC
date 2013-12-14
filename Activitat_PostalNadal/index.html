@@ -7,7 +7,10 @@
 	    <div id="container" style="height:65%;"></div>
 	    <script defer="defer">
 	      var isInFloor = true;
-	      var currentPresentX = 1000;
+	      var santa;
+	      var scoreRegalos;
+	      var maxPresents = 300;
+	      var totalPresents = 0;
 
 	      var stage = new Kinetic.Stage
 	      ({
@@ -73,7 +76,7 @@
 
 		      santaObj.onload = function() 
 		      {
-		        var santa = new Kinetic.Image
+		        santa = new Kinetic.Image
 		        ({
 		          x: 0,
 		          y: 300,
@@ -107,10 +110,10 @@
 			        cornerRadius: 10
 			      });
 
-				 var scoreRegalos = new Kinetic.Text({
+				 scoreRegalos = new Kinetic.Text({
 				    x: 185,
 				    y: 27,
-				    text: '300/300',
+				    text: '0/300',
 				    fontSize: 70,
 				    fontFamily: 'Arial',
 				    fill: 'black'
@@ -386,6 +389,25 @@
 	        	lazoHorizontal.setX((x_LazoHorizontal-10));
 	        	lazoSuperior.setX((x_LazoSuperior-10));
 	        	lazoInferior.setX((x_LazoInferior-10));
+
+        		var collision = checkPresentCollision(rect.getX(), rect.getY());
+        		if (collision)
+	        	{
+	        		totalPresents++;
+
+	        		scoreRegalos.setText(totalPresents+"/300");
+	        		rect.remove();
+					lazoVertical.remove();
+					lazoHorizontal.remove();
+					lazoSuperior.remove();
+					lazoInferior.remove();
+					Present_Move.stop();
+					setTimeout(function()
+					{
+						Present_Move.stop();
+						setPresent();   	
+					},2000);
+	        	}
         	}
         	else
         	{
@@ -395,7 +417,7 @@
 				lazoSuperior.remove();
 				lazoInferior.remove();
 				Present_Move.stop();
-				//setPresent();
+
 				setTimeout(function()
 				{
 					Present_Move.stop();
@@ -403,15 +425,6 @@
 				},2000);
         	}
         },layer);
-
-		/*setTimeout(function()
-		{
-			rect.remove();
-			lazoVertical.remove();
-			lazoHorizontal.remove();
-			lazoSuperior.remove();
-			lazoInferior.remove();
-		},6000);*/
 
 		Present_Move.start();
 	}
@@ -452,6 +465,17 @@
 		}
 
 		return auxColor;
+	}
+
+	function checkPresentCollision (present_X, present_Y)
+	{
+		if (present_X >= santa.getX() && present_X <= (santa.getWidth() + santa.getX()) &&
+			present_Y >= santa.getY() && present_Y <= (santa.getHeight() + santa.getY()))
+			{
+				return true;
+			}
+			
+			return false;
 	}
 
 
