@@ -7,6 +7,7 @@
 	    <div id="container" style="height:65%;"></div>
 	    <script defer="defer">
 	      var isInFloor = true;
+	      var currentPresentX = 1000;
 
 	      var stage = new Kinetic.Stage
 	      ({
@@ -75,13 +76,37 @@
 		        var santa = new Kinetic.Image
 		        ({
 		          x: 0,
-		          y: 250,
+		          y: 300,
 		          image: santaObj,
 		          width: 106,
 		          height: 118
 		        });
 
 		     	layer.add(santa);
+
+		     var ScoreRect = new Kinetic.Rect({
+		        x: 50,
+		        y: 20,
+		        stroke: '#555',
+		        strokeWidth: 5,
+		        fill: '#ddd',
+		        width: 380,
+		        height: 70,
+		        cornerRadius: 10
+		      });
+
+			  var scoreRegalos = new Kinetic.Text({
+			    x: stage.getWidth() / 2,
+			    y: 15,
+			    text: 'REGALOS: 0/300',
+			    fontSize: 60,
+			    fontFamily: 'Calibri',
+			    fill: 'red'
+			  });
+
+			  layer.add(ScoreRect);
+			  layer.add(scoreRegalos);
+
 		     	setPresent();
 
 		     	stage.add(layer);
@@ -216,49 +241,155 @@
 
 	function setPresent ()
 	{
+		var auxX = Math.floor(Math.random()*(4000)+1000);
+		var auxY = Math.floor(Math.random()*(200)+170);
+		var auxWidth = Math.floor(Math.random()*(40)+25);
+		var auxHeight = Math.floor(Math.random()*(26)+25);
+
+		var colorBox = getColor(Math.floor(Math.random()*(6)+0));
+		var colorLazo = getColor(Math.floor(Math.random()*(6)+0));
+
+		while (colorLazo === colorBox) //Esto impide que el color del lazo sea el mismo que el de la caja
+		{
+			colorLazo = getColor(Math.floor(Math.random()*(6)+0));
+		}
+		
 		var rect = new Kinetic.Rect({
-	        x: 800,
-	        y: 250,
-	        width: 25,
-	        height: 25,
-	        fill: 'red',
+	        x: auxX,
+	        y: auxY,
+	        width: auxWidth,
+	        height: auxHeight,
+	        fill: colorBox,
 	        stroke: 'black',
 	        strokeWidth: 4
 	      });
 
 		var lazoVertical = new Kinetic.Rect({
-	        x: 800+(25/3), //Empieza en un tercio del ancho de regalo
-	        y: 250,
-	        width: (25/3),
-	        height: 25,
-	        fill: 'blue',
+	        x: auxX+(auxWidth/3), //Empieza en un tercio del ancho de regalo
+	        y: auxY,
+	        width: (auxWidth/3),
+	        height: auxHeight,
+	        fill: colorLazo,
 	        stroke: 'black',
 	        strokeWidth: 1
 		});
 
 		var lazoHorizontal = new Kinetic.Rect({
-	        x: 800,
-	        y: 250+(25/3), //Empieza en un tercio del alto de regalo
-	        width: 25,
-	        height: (25/3),
-	        fill: 'blue',
+	        x: auxX,
+	        y: auxY+(auxHeight/3), //Empieza en un tercio del alto de regalo
+	        width: auxWidth,
+	        height: (auxHeight/3),
+	        fill: colorLazo,
 	        stroke: 'black',
 	        strokeWidth: 1
 		});
 
 		var lazoSuperior = new Kinetic.Circle({
-	        x: 800,
-	        y: 250,
-	        radius: 5,
+	        x: auxX+(auxWidth/3),
+	        y: auxY-4,
+	        radius: 8,
 	        fill: 'transparent',
-	        stroke: 'blue',
-	        strokeWidth: 3
+	        stroke: colorLazo,
+	        strokeWidth: 4
+      });
+
+		var lazoInferior = new Kinetic.Circle({
+	        x: auxX+(auxWidth/3)+(auxWidth/3),
+	        y: auxY-4,
+	        radius: 8,
+	        fill: 'transparent',
+	        stroke: colorLazo,
+	        strokeWidth: 4
       });
 
 		layer.add(rect);
 		layer.add(lazoVertical);
 		layer.add(lazoHorizontal);
 		layer.add(lazoSuperior);
+		layer.add(lazoInferior);
+
+		var Present_Move = new Kinetic.Animation(function(frame) 
+        {
+        	var x_Rect = rect.getX();
+
+        	if (x_Rect >= 0)
+        	{
+	        	var x_LazoVertical = lazoVertical.getX();
+	        	var x_LazoHorizontal = lazoHorizontal.getX();
+	        	var x_LazoSuperior = lazoSuperior.getX();
+	        	var x_LazoInferior = lazoInferior.getX();
+
+	        	rect.setX((x_Rect-10));
+	        	lazoVertical.setX((x_LazoVertical-10));
+	        	lazoHorizontal.setX((x_LazoHorizontal-10));
+	        	lazoSuperior.setX((x_LazoSuperior-10));
+	        	lazoInferior.setX((x_LazoInferior-10));
+        	}
+        	else
+        	{
+				rect.remove();
+				lazoVertical.remove();
+				lazoHorizontal.remove();
+				lazoSuperior.remove();
+				lazoInferior.remove();
+				Present_Move.stop();
+				//setPresent();
+				setTimeout(function()
+				{
+					Present_Move.stop();
+					setPresent();   	
+				},2000);
+        	}
+        },layer);
+
+		/*setTimeout(function()
+		{
+			rect.remove();
+			lazoVertical.remove();
+			lazoHorizontal.remove();
+			lazoSuperior.remove();
+			lazoInferior.remove();
+		},6000);*/
+
+		Present_Move.start();
+	}
+
+	function getColor (code)
+	{
+		var auxColor;
+
+		switch(code)
+		{
+			case 0:
+			auxColor = "red";
+			break;
+
+			case 1:
+			auxColor = "green";
+			break;
+
+			case 2:
+			auxColor = "orange";
+			break;
+
+			case 3:
+			auxColor = "blue";
+			break;
+
+			case 4:
+			auxColor = "yellow";
+			break;
+
+			case 5:
+			auxColor = "purple";
+			break;
+
+			case 6:
+			auxColor = "cyan";
+			break;
+		}
+
+		return auxColor;
 	}
 
 
