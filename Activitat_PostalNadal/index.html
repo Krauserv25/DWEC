@@ -11,6 +11,7 @@
 	      var scoreRegalos;
 	      var maxPresents = 300;
 	      var totalPresents = 0;
+	      var rockObj;
 
 	      var stage = new Kinetic.Stage
 	      ({
@@ -55,8 +56,8 @@
 			        	var auxX_1 = back1.getX();
 			        	var auxX_2 = back2.getX();
 
-			        	back1.setX((auxX_1-10));
-			        	back2.setX((auxX_2-10));
+			        	back1.setX((auxX_1-15));
+			        	back2.setX((auxX_2-15));
 
 			        	if (back1.getX() <= -1300) 
 		        		{
@@ -65,13 +66,14 @@
 
 		        		if (back2.getX() <= -1300) 
 		        		{
-		        			back2.setX(1290);	        			
+		        			back2.setX(1285);	        			
 		        		}
 			        },layer);
 
 			        Back_Move.start();
 		     	}
 
+		      rockObj = new Image();
 		      var santaObj = new Image();
 
 		      santaObj.onload = function() 
@@ -170,6 +172,7 @@
 			 layer.add(vida3);
 
 		     	setPresent();
+		     	setRock();
 
 		     	stage.add(layer);
 
@@ -298,6 +301,7 @@
 				lifeImage.src = 'img/vida.png';
 			};
 
+			rockObj.src = 'img/rock.png';
 			santaObj.src = 'img/santa.png';
 	}
 
@@ -306,7 +310,7 @@
 
 	function setPresent ()
 	{
-		var auxX = Math.floor(Math.random()*(4000)+1000);
+		var auxX = Math.floor(Math.random()*(4000)+1350);
 		var auxY = Math.floor(Math.random()*(200)+170);
 		var auxWidth = Math.floor(Math.random()*(40)+25);
 		var auxHeight = Math.floor(Math.random()*(26)+25);
@@ -384,11 +388,11 @@
 	        	var x_LazoSuperior = lazoSuperior.getX();
 	        	var x_LazoInferior = lazoInferior.getX();
 
-	        	rect.setX((x_Rect-10));
-	        	lazoVertical.setX((x_LazoVertical-10));
-	        	lazoHorizontal.setX((x_LazoHorizontal-10));
-	        	lazoSuperior.setX((x_LazoSuperior-10));
-	        	lazoInferior.setX((x_LazoInferior-10));
+	        	rect.setX((x_Rect-15));
+	        	lazoVertical.setX((x_LazoVertical-15));
+	        	lazoHorizontal.setX((x_LazoHorizontal-15));
+	        	lazoSuperior.setX((x_LazoSuperior-15));
+	        	lazoInferior.setX((x_LazoInferior-15));
 
         		var collision = checkPresentCollision(rect.getX(), rect.getY());
         		if (collision)
@@ -406,7 +410,7 @@
 					{
 						Present_Move.stop();
 						setPresent();   	
-					},2000);
+					},100);
 	        	}
         	}
         	else
@@ -420,9 +424,8 @@
 
 				setTimeout(function()
 				{
-					Present_Move.stop();
 					setPresent();   	
-				},2000);
+				},100);
         	}
         },layer);
 
@@ -476,6 +479,45 @@
 			}
 			
 			return false;
+	}
+
+	function setRock ()
+	{
+		var auxX = Math.floor(Math.random()*(4000)+1350);
+		var auxY = Math.floor(Math.random()*(200)+170);
+
+        rock = new Kinetic.Image
+        ({
+          x: auxX,
+          y: auxY,
+          image: rockObj,
+          width: 60,
+          height: 60
+        });		
+
+		layer.add(rock);
+
+		var Rock_Move = new Kinetic.Animation(function(frame) 
+        {
+        	var x_Rock = rock.getX();
+
+        	if (x_Rock >= 0)
+        	{
+	        	rock.setX((x_Rock-15));
+        	}
+        	else
+        	{
+				rock.remove();
+				Rock_Move.stop();
+
+				setTimeout(function()
+				{
+					setRock();   	
+				},100);
+        	}
+        },layer);
+
+		Rock_Move.start();
 	}
 
 
