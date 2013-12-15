@@ -11,6 +11,10 @@
 	      var scoreRegalos;
 	      var maxPresents = 300;
 	      var totalPresents = 0;
+	      var totalVidas = 3;
+	      var vida1;
+	      var vida2;
+	      var vida3;
 	      var rockObj;
 
 	      var stage = new Kinetic.Stage
@@ -128,7 +132,7 @@
 				 //VIDAS JUEGO
 		     	var lifeImage = new Image();
 		     	
-	     		var vida1 = new Kinetic.Image
+	     		vida1 = new Kinetic.Image
 		        ({
 		          x: 900,
 		          y: 10,
@@ -137,7 +141,7 @@
 		          height: 100
 		        });	
 
-		        var vida2 = new Kinetic.Image
+		        vida2 = new Kinetic.Image
 		        ({
 		          x: 1000,
 		          y: 10,
@@ -146,7 +150,7 @@
 		          height: 100
 		        });		
 
-		        var vida3 = new Kinetic.Image
+		        vida3 = new Kinetic.Image
 		        ({
 		          x: 1100,
 		          y: 10,
@@ -171,46 +175,46 @@
 			 layer.add(vida2);
 			 layer.add(vida3);
 
-		     	setPresent();
-		     	setRock();
+		    setPresent();
+	     	setRock();
 
-		     	stage.add(layer);
+	     	stage.add(layer);
 
-		     	var Left_Move = new Kinetic.Animation(function(frame) 
-		        {
-		        	var auxX = santa.getX();
-		        	santa.setX((auxX-10));
-		        },layer);
+	     	var Left_Move = new Kinetic.Animation(function(frame) 
+	        {
+	        	var auxX = santa.getX();
+	        	santa.setX((auxX-10));
+	        },layer);
 
-		     	var Right_Move = new Kinetic.Animation(function(frame) 
-		        {
-		        	var auxX = santa.getX();
-		        	santa.setX((auxX+10));
-		        },layer);
+	     	var Right_Move = new Kinetic.Animation(function(frame) 
+	        {
+	        	var auxX = santa.getX();
+	        	santa.setX((auxX+10));
+	        },layer);
 
-		        var Up_Move = new Kinetic.Animation(function(frame) 
-		        {
-		        	var auxY = santa.getY();
-		        	santa.setY((auxY-10));
-		        },layer);
+	        var Up_Move = new Kinetic.Animation(function(frame) 
+	        {
+	        	var auxY = santa.getY();
+	        	santa.setY((auxY-10));
+	        },layer);
 
-		     	var Down_Move = new Kinetic.Animation(function(frame) 
-		        {
-		        	var auxY = santa.getY();
-		        	santa.setY((auxY+10));
-		        },layer);
+	     	var Down_Move = new Kinetic.Animation(function(frame) 
+	        {
+	        	var auxY = santa.getY();
+	        	santa.setY((auxY+10));
+	        },layer);
 
-		        var Jump_UP = new Kinetic.Animation(function(frame) 
-		        {
-		        	var auxY = santa.getY();
-		        	santa.setY((auxY-3));
-		        },layer);
+	        var Jump_UP = new Kinetic.Animation(function(frame) 
+	        {
+	        	var auxY = santa.getY();
+	        	santa.setY((auxY-3));
+	        },layer);
 
-		       	var Jump_DOWN = new Kinetic.Animation(function(frame) 
-		        {
-		        	var auxY = santa.getY();
-		        	santa.setY((auxY+3));
-		        },layer);
+	       	var Jump_DOWN = new Kinetic.Animation(function(frame) 
+	        {
+	        	var auxY = santa.getY();
+	        	santa.setY((auxY+3));
+	        },layer);
 
 			    window.addEventListener('keydown', function(e) 
 				{
@@ -394,7 +398,7 @@
 	        	lazoSuperior.setX((x_LazoSuperior-15));
 	        	lazoInferior.setX((x_LazoInferior-15));
 
-        		var collision = checkPresentCollision(rect.getX(), rect.getY());
+        		var collision = checkCollision(rect.getX(), rect.getY());
         		if (collision)
 	        	{
 	        		totalPresents++;
@@ -408,7 +412,6 @@
 					Present_Move.stop();
 					setTimeout(function()
 					{
-						Present_Move.stop();
 						setPresent();   	
 					},100);
 	        	}
@@ -470,10 +473,10 @@
 		return auxColor;
 	}
 
-	function checkPresentCollision (present_X, present_Y)
+	function checkCollision (pos_X, pos_Y)
 	{
-		if (present_X >= santa.getX() && present_X <= (santa.getWidth() + santa.getX()) &&
-			present_Y >= santa.getY() && present_Y <= (santa.getHeight() + santa.getY()))
+		if (pos_X >= santa.getX() && pos_X <= (santa.getWidth() + santa.getX()) &&
+			pos_Y >= santa.getY() && pos_Y <= (santa.getHeight() + santa.getY()))
 			{
 				return true;
 			}
@@ -504,6 +507,34 @@
         	if (x_Rock >= 0)
         	{
 	        	rock.setX((x_Rock-15));
+
+        		var collision = checkCollision(rock.getX(), rock.getY());
+        		if (collision)
+	        	{
+	        		switch(totalVidas)
+	        		{
+	        			case 3:
+	        			vida1.remove();
+	        			break;
+
+	        			case 2:
+	        			vida2.remove();
+	        			break;
+
+	        			case 1:
+	        			vida3.remove();
+	        			break;
+	        		}
+	        		totalVidas--;
+
+	        		rock.remove();
+
+					Rock_Move.stop();
+					setTimeout(function()
+					{
+						setRock();   	
+					},100);
+	        	}        	
         	}
         	else
         	{
