@@ -15,7 +15,10 @@
 	      var vida1;
 	      var vida2;
 	      var vida3;
+	      var vidaOscilation;
 	      var rockObj;
+	      var gameSound = new Audio('sounds/gameSound.mp3');
+	      var painSound = new Audio('sounds/pain.mp3');
 
 	      var stage = new Kinetic.Stage
 	      ({
@@ -54,6 +57,9 @@
 			        });
 
 			     	layer.add(back2);
+
+			     	gameSound.loop = true;
+			     	gameSound.play();
 
 			     	var Back_Move = new Kinetic.Animation(function(frame) 
 			        {
@@ -157,7 +163,52 @@
 		          image: lifeImage,
 		          width: 100,
 		          height: 100
-		        });					 
+		        });
+
+		        vidaOscilation = new Kinetic.Animation(function(frame) 
+		        {
+		        	switch(totalVidas)
+	        		{
+	        			case 3:
+	        			vida1.rotate(-1*frame.timeDiff/100);
+	        			vida1.setY(vida1.getY()-1);
+
+	        			if (vida1.getY() < 0)
+	        			{
+	        				vidaOscilation.stop();
+	        				vida1.remove();
+	        				totalVidas--;
+	        			}
+	        			break;
+
+	        			case 2:
+	        			vida2.rotate(-1*frame.timeDiff/100);
+	        			vida2.setY(vida2.getY()-1);
+
+	        			if (vida2.getY() < 0)
+	        			{
+	        				vidaOscilation.stop();
+	        				vida2.remove();
+	        				totalVidas--;
+	        			}
+	        			break;
+
+	        			case 1:
+	        			vida3.rotate(-1*frame.timeDiff/100);
+	        			vida3.setY(vida3.getY()-1);
+
+	        			if (vida3.getY() < 0)
+	        			{
+	        				vidaOscilation.stop();
+	        				vida3.remove();
+	        				totalVidas--;
+	        			}
+	        			break;
+	        		}
+		        	//vida1.rotate(-1*frame.timeDiff/1000);
+		        },layer);
+
+//		        vidaOscilation.start();	 
 
 			 	var LifesRect = new Kinetic.Rect({
 		        x: 900,
@@ -207,13 +258,13 @@
 	        var Jump_UP = new Kinetic.Animation(function(frame) 
 	        {
 	        	var auxY = santa.getY();
-	        	santa.setY((auxY-3));
+	        	santa.setY((auxY-10));
 	        },layer);
 
 	       	var Jump_DOWN = new Kinetic.Animation(function(frame) 
 	        {
 	        	var auxY = santa.getY();
-	        	santa.setY((auxY+3));
+	        	santa.setY((auxY+10));
 	        },layer);
 
 			    window.addEventListener('keydown', function(e) 
@@ -272,8 +323,8 @@
 									{
 										Jump_DOWN.stop();
 										isInFloor = true;
-									}, 200);
-							},200);
+									}, 300);
+							},300);
 						}
 						break;
 					}
@@ -511,21 +562,24 @@
         		var collision = checkCollision(rock.getX(), rock.getY());
         		if (collision)
 	        	{
+	        		vidaOscilation.start();
+
 	        		switch(totalVidas)
 	        		{
 	        			case 3:
-	        			vida1.remove();
+	        			vida1.setOffset([50,50]);
 	        			break;
 
 	        			case 2:
-	        			vida2.remove();
+	        			vida2.setOffset([50,50]);
 	        			break;
 
 	        			case 1:
-	        			vida3.remove();
+	        			vida3.setOffset([50,50]);
 	        			break;
 	        		}
-	        		totalVidas--;
+
+					painSound.play();
 
 	        		rock.remove();
 
