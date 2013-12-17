@@ -19,6 +19,7 @@
 	      var vidaOscilation;
 	      var rockObj;
 
+	      var menuSound = new Audio('sonuds/menu.mp3');
 	      var gameSound = new Audio('sounds/gameSound.mp3');
 	      var painSound = new Audio('sounds/pain.mp3');
 
@@ -53,7 +54,7 @@
           height: 450
         });
 
-     	layerIntro.add(introBook);
+     	init();
 
      	var gameOverImage = new Kinetic.Image
         ({
@@ -66,6 +67,12 @@
 
 	      function init ()
 	      {
+	      	layerIntro.add(introBook);
+      	  imageBook.onload = function() 
+	      {
+	      	stage.add(layerIntro);
+	      }	      	
+	      imageBook.src = 'img/santaPaper.png';
 			isInFloor = true;
 	      	maxPresents = 300;
 	      	totalPresents = 0;
@@ -77,18 +84,11 @@
 	        container: 'container',
 	        width: 1238,
 	        height: 435
-	      });
-
-      	  imageBook.onload = function() 
-	      {
-	      	stage.add(layerIntro);
-	      }
-	      imageBook.src = 'img/santaPaper.png';
+	      });	      
 
 	      introBook.on('mousedown', function() 
 	      {
 	      	layerIntro.remove();
-	      	init();
 	      	play();
       	  });
 
@@ -272,17 +272,12 @@
 		        				vida3.remove();
 		        				totalVidas--;
 
-		        				
-		        				//stage.removeChild();
 		        				layer.clear();
 		        				layer.remove();
-		        				//init();
-		        				//stage.remove(layer);
 		        				gameOver();
 		        			}
 		        			break;
 		        		}
-			        	//vida1.rotate(-1*frame.timeDiff/1000);
 			        },layer);
 
 				 	var LifesRect = new Kinetic.Rect({
@@ -309,25 +304,41 @@
 		     	Left_Move = new Kinetic.Animation(function(frame) 
 		        {
 		        	var auxX = santa.getX();
-		        	santa.setX((auxX-10));
+		        	if (isInFloor && auxX > 2)
+		        	{
+			        	santa.setX((auxX-10));
+		        	}
+		        	else Left_Move.stop();
 		        },layer);
 
 		     	Right_Move = new Kinetic.Animation(function(frame) 
 		        {
 		        	var auxX = santa.getX();
-		        	santa.setX((auxX+10));	        	
+		        	if (isInFloor && auxX < 1100)
+		        	{		        	
+			        	santa.setX((auxX+10));	
+			        }
+			        else Right_Move.stop();        	
 		        },layer);
 
 		        Up_Move = new Kinetic.Animation(function(frame) 
 		        {
 		        	var auxY = santa.getY();
-		        	santa.setY((auxY-10));	        	
+		        	if (isInFloor && auxY > 100)
+		        	{
+			        	santa.setY((auxY-10));	        
+		        	}
+		        	else Up_Move.stop();	
 		        },layer);
 
 		     	Down_Move = new Kinetic.Animation(function(frame) 
 		        {
 		        	var auxY = santa.getY();
-		        	santa.setY((auxY+10));	        	
+		        	if (isInFloor && auxY < 320)
+		        	{
+			        	santa.setY((auxY+10));	 
+		        	}
+		        	else Down_Move.stop();       	
 		        },layer);
 
 		        Jump_UP = new Kinetic.Animation(function(frame) 
@@ -351,39 +362,23 @@
 						switch (e.keyCode)
 						{
 							case 65: //LEFT
-							if (auxX > 2)
-							{
-								Right_Move.stop();
-								Left_Move.start();
-							}
-							else Left_Move.stop();
+							Right_Move.stop();
+							Left_Move.start();
 							break;
 
 							case 68: //RIGHT
-							if (auxX < 1000)
-							{
-								Left_Move.stop();
-								Right_Move.start();
-							}
-							else Right_Move.stop();
+							Left_Move.stop();
+							Right_Move.start();
 							break;
 
 							case 87: //UP
-							if (auxY > 0)
-							{
-								Down_Move.stop();
-								Up_Move.start();
-							}
-							else Up_Move.stop();
+							Down_Move.stop();
+							Up_Move.start();
 							break;
 
 							case 83: //DOWN
-							if (auxY < stage.getHeight())
-							{
-								Up_Move.stop();
-								Down_Move.start();
-							}
-							else Down_Move.stop();
+							Up_Move.stop();
+							Down_Move.start();
 							break;
 
 							case 32: //SPACE
@@ -726,7 +721,6 @@
 		{
 			layerGameOver.remove();
 			init();
-			play();
 		},10000);
 	}
 
