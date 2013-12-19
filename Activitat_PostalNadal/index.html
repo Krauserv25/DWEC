@@ -24,7 +24,9 @@
 
 	      var menuSound = new Audio('sounds/menu.mp3');
 	      var gameSound = new Audio('sounds/gameSound.mp3');
+	      var presentSound = new Audio('sounds/getPresent.wav');
 	      var painSound = new Audio('sounds/pain.mp3');
+	      var jumpSound = new Audio('sounds/jump.wav');
 
 	      var layer;
 	      var layerIntro;
@@ -70,6 +72,7 @@
 
 	      function init () //Función que inicializa los valores
 	      {
+	      	gameSound.pause();
 			menuSound.src = ""; //Esto lo hago para evitar que la música siga en el mismo punto que se paró
 			menuSound.src = 'sounds/menu.mp3';
 			menuSound.loop = true;
@@ -386,6 +389,7 @@
 				case 32: //SPACE
 				if (isInFloor)
 				{
+					jumpSound.play();
 					isInFloor = false;
 					Jump_UP.start();
 					setTimeout(function()
@@ -528,6 +532,7 @@
         		var collision = checkCollision(rect.getX(), rect.getY());
         		if (collision) //Si el regalo ha sido cogido...
 	        	{
+	        		presentSound.play();
 	        		totalPresents++;
 
 	        		scoreRegalos.setText(totalPresents+"/10"); //Actualizamos puntuación
@@ -715,9 +720,7 @@
 
 	//Función que visualiza la pantalla final y en cierto tiempo regresa al inicio
 	function gameOver ()
-	{
-		gameSound.pause();
-		
+	{	
 		transition = true;
 
 		//Para todas las animaciones en marcha
