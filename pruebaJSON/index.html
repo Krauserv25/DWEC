@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script href="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jsonFunctions.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	</head>
+	<body onload="init();">
+		<input type="button" href="'archivoPrueba.txt'" id="buttonDownload" value='<a>hola</a>'>
+		<button id="download"><a href="archivoPrueba.txt" download="archivoPrueba.txt"
+		style="text-decoration: none; color: black; font-size:20pt;">pruebaaaa</a></button>
+
+		  <button type="button" class="btn btn-success">
+<a href="archivoPrueba.txt" download="archivoPrueba.txt"
+		style="text-decoration: none; color: black; font-size:15pt;">pruebaaaa</a>
+  </button><br />
+
+  <input type="button" id="buttonLoad" value="CARGAR JSON" onclick="loadJSON();" />
+  <input type="text" id='iframe' x-webkit-speech onwebkitspeechchange="hablar();"/>
+  <input type="text" id="resultAudio"/>
+  <input type="file" id="fileJSON" name="files[]" multiple/>
+  <output id="list"></output>
+	</body>
+</html>

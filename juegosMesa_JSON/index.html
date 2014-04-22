@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/gameFunctions.js"></script>
+		<script type="text/javascript" src="js/gameRules.js"></script>
+		<script type="text/javascript" src="js/selectGame.js"></script>
+		<script type="text/javascript" src="js/gameEvents.js"></script>
+		<script type="text/javascript" src="js/simpleFunctions.js"></script>
+		<script type="text/javascript" src="js/saveAndLoadJSON.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="css/gameStyle.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	</head>
+
+	<body onload="init();">
+		<div id="divTodo">
+			<div id="divTablero"></div>
+				<div id="divPanelRight">
+					<div id="divPanelOptions">
+						<div id="divSelectorJuego1" class="classSelectorGame">
+							<input type="button" id="buttonJuegoA" class="classButtonGames" value="RACISTA1" onclick="selectGameItem(1);">
+							<input type="button" id="buttonPlay1" class="buttonPlay" value="PLAY" onclick="startGame(1);" hidden>
+						</div>
+						<div id="divSelectorJuego2" class="classSelectorGame">
+							<input type="button" id="buttonJuegoB" class="classButtonGames" value="RACISTA2" onclick="selectGameItem(2);">
+							<input type="button" id="buttonPlay2" class="buttonPlay" value="PLAY" onclick="startGame(2);" hidden>
+						</div>
+						<div id="divSelectorJuego3" class="classSelectorGame">
+							<input type="button" id="buttonJuegoC" class="classButtonGames" value="OTELLO" onclick="selectGameItem(3);">
+							<input type="button" id="buttonPlay3" class="buttonPlay" value="PLAY" onclick="startGame(3);" hidden>
+						</div>			
+					</div>
+					<div id="divInfoGames" hidden>
+						<div id="divInfoJugadasOtello">
+							<div id="divCabeceraTurno">
+								<span style="float:left; margin-left:10%;">TURNO</span>
+								<span style="float:right; margin-right:10%;">PUNTUACION</span>
+							</div>
+							<div id="divImagenTurno">
+								<img src='img/ficha1_Normal.png' id="imageTurn" class='classImageTurn1' alt='fichaTurn'>
+								<div id="divPuntuationA" class="classDivsPuntuations">
+									<span class="badge pull-right" id="spanTotalRojo" style="width:25%; height:60%; margin-top:5%; background-color:white; color:black; font-size:20pt;">2</span>
+									<img src='img/ficha1_Normal.png' alt='fichaPuntuation'>
+								</div>
+								<div id="divPuntuationB" class="classDivsPuntuations">
+									<span class="badge pull-right" id="spanTotalAzul" style="width:25%; height:60%; margin-top:5%; background-color:white; color:black; font-size:20pt;">2</span>
+									<img src='img/ficha2_Normal.png' alt='fichaPuntuation'>
+								</div>								
+							</div>						
+						</div>
+					</div>
+
+					<div id="divExplicacion">
+						<div id="divCabeceraExplicacion"><span>RACISTA 1</span></div>
+						<span id="spanIntroJuego1" class="classIntroGames">Para que las fichas no estén tristes deben ser colocadas junto a otras tres de su mismo color como mínimo. Al situar el puntero del ratón sobre una de las fichas tristes se representarán las ubicaciones dónde ésta pueda colocarse para ser feliz.</span>
+						<span id="spanIntroJuego2" class="classIntroGames" hidden>Para que las fichas no estén tristes deben ser colocadas junto a mínimo, una ficha del color opuesto. Al situar el puntero del ratón sobre una de las fichas tristes se representarán las ubicaciones dónde ésta pueda colocarse para ser feliz.</span>
+						<span id="spanIntroJuego3" class="classIntroGames" hidden>Este juego consiste en lograr más fichas del color correspondiente
+						que el rival.<br />
+						Para ello es necesario cerrar una fila del color contrario con dos del color del jugador para convertir 
+						las fichas interiores a ese color. Solo será posible colocar fichas ahí donde se pueda cerrar o convertir colores a favor.</span>				
+					</div>
+
+					<div id="divSaveLoad">
+						<input type="file" id="loadJSON" name="files[]" />
+					</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,301 @@
+#divTodo
+{
+	padding: 0;
+	margin: 0;
+	width: 1000px;
+}
+
+#divTablero
+{
+	float: left;
+	margin-top: 1%;
+	margin-left: 10%;
+	width: 50%;
+	height: 81%; /*CORRECTO PARA 8x8 -> 81%*/
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+}
+
+#divPanelRight
+{
+	float: left;
+	margin-top: 1%;
+	margin-left: 5%;
+	width: 30%;
+	height: 80%;
+}
+
+#divPanelOptions
+{
+	margin-top: 10%;
+	width: 100%;
+	height: 35%;
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+	background-color: #B8860B;
+	/*background-color: orange;*/
+}
+
+.classSelectorGame
+{
+	width: 100%;
+	height: 33.33%;
+}
+
+.classCurrentSelectedGame
+{
+	width: 100%;
+	height: 33.33%;
+	background-color: white;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+}
+
+.classButtonGames
+{
+	width: 30%;
+	height: 100%;
+	border-style: solid;
+	border-width: 2px;
+}
+
+.classButtonGames:focus 
+{
+    outline: none;
+}
+
+.classSelectorGame > .classButtonGames
+{
+	float: right;
+	color: white;
+	background-color: black;
+	-webkit-border-top-left-radius: 50px;
+	-webkit-border-bottom-left-radius: 50px;
+	-moz-border-radius-topleft: 50px;
+	-moz-border-radius-bottomleft: 50px;
+	border-top-left-radius: 50px;
+	border-bottom-left-radius: 50px;
+}
+
+.classCurrentSelectedGame > .classButtonGames
+{
+	float: left;
+	font-weight: bold;
+	color: lightgreen;
+	background-color: black;
+	-webkit-border-top-right-radius: 50px;
+	-webkit-border-bottom-right-radius: 50px;
+	-moz-border-radius-topright: 50px;
+	-moz-border-radius-bottomright: 50px;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
+
+.buttonPlay
+{
+	float: left;
+	width: 25%;
+	height: 50%;
+	margin-left: 25%;
+	margin-top: 5%;
+	font-weight: bold;
+	background-color: #32CD32;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #228B22;
+}
+
+.buttonPlay:hover
+{
+	margin-top: 3%;
+	width: 30%;
+	height: 70%;
+}
+
+.buttonPlay:focus 
+{
+    outline: none;
+}
+
+#divInfoGames
+{
+	margin-top: 10%;
+	width: 100%;
+	height: 30%;
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+	-webkit-border-top-left-radius: 20px;
+	-webkit-border-top-right-radius: 20px;
+	-moz-border-radius-topleft: 20px;
+	-moz-border-radius-topright: 20px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+#divExplicacion
+{
+	margin-top: 10%;
+	width: 100%;
+	height: 55%;
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+	-webkit-border-top-left-radius: 20px;
+	-webkit-border-top-right-radius: 20px;
+	-moz-border-radius-topleft: 20px;
+	-moz-border-radius-topright: 20px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	background-color: #B8860B;
+}
+
+#divExplicacion > span
+{
+	color:black;
+	font-weight: bold;
+}
+
+#divCabeceraExplicacion
+{
+	width: 100%;
+	height: 10%;
+	background-color: black;
+	text-align: center;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#divCabeceraExplicacion > span
+{
+	color:white;
+	font-weight: bold;
+	font-size: 13pt;
+	line-height: 20px;
+}
+
+.classCasillas
+{
+	width: 12.5%; /*ACORDARSE DE EEEEEEEEEEEEEEEEEEESTTTTTTOOOOOOOOOOOOOOOOOOOOOOOOOO*/
+	height: 12.5%; /*ACORDARSE DE EEEEEEEEEEEEEEEEEEESTTTTTTOOOOOOOOOOOOOOOOOOOOOOOOOO*/
+	float: left;
+	background-color: #FFFFE0;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+}
+
+.classFicha1_Normal
+{
+	width: 100%;
+	height: 100%;
+	content:url('../img/ficha1_Normal.png');
+}
+
+.classFicha1_Triste
+{
+	width: 100%;
+	height: 100%;
+	content:url('../img/ficha1_Triste.png');
+}
+
+.classFicha1_Triste:hover
+{
+	cursor: pointer;
+}
+
+.classFicha2_Normal
+{
+	width: 100%;
+	height: 100%;
+	content:url('../img/ficha2_Normal.png');
+}
+
+.classFicha2_Triste
+{
+	width: 100%;
+	height: 100%;
+	content:url('../img/ficha2_Triste.png');
+}
+
+.classFicha2_Triste:hover
+{
+	cursor: pointer;
+}
+
+#divInfoJugadasOtello
+{
+	width: 100%;
+	height: 100%;
+	background-color: #B8860B;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#divCabeceraTurno
+{
+	width: 100%;
+	height: 10%;
+	background-color: black;
+
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#divCabeceraTurno > span
+{
+	color:white;
+	font-weight: bold;
+	font-size: 13pt;
+	line-height: 10px;
+}
+
+#divImagenTurno
+{
+	width: 100%;
+	height: 90%;
+}
+
+.classImageTurn1
+{
+	width: 45%;
+	height: 100%;
+	float: left;
+	content:url('../img/ficha1_Normal.png');
+}
+
+.classImageTurn2
+{
+	width: 45%;
+	height: 100%;
+	float: left;
+	content:url('../img/ficha2_Normal.png');
+}
+
+.classDivsPuntuations
+{
+	width: 100%;
+	height: 50%;
+}
+
+.classDivsPuntuations > img
+{
+	float: right;
+	width: 22%;
+	height: 100%;
+}

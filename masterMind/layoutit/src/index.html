@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Master Mind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+
+<link href="myCSS_Styles/masterMind_Styles.css" rel="stylesheet">
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="img/favicon.png">
+  
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+
+	
+	<script type="text/javascript" src="myJS_Scripts/events.js"></script> <!--Script de eventos-->
+	<script type="text/javascript" src="myJS_Scripts/masterUI.js"></script> <!--Script de eventos-->
+</head>
+
+<body>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-2 column">
+					<img id="imageLogo" alt="Logo" src="img/masterMind_Logo.png">
+				</div>
+				<div class="col-md-4 column">
+					<img id="masterMindTitle" alt="Title" src="img/mastermind.png">
+				</div>
+				<div class="col-md-3 column">
+				</div>
+					<div id="divHeadRight" class="col-md-3 column">
+						<label id="labelMensajeSlider">Máximo número de intentos/<br />Número restante de intentos</label>
+
+						<div id="slider-range-min"></div>
+					
+					</div>
+			</div>
+			<div class="row clearfix">
+				<div id="divContainerDragColors" class="col-md-6 column">
+					<div id="divContainerColor1" class="containerDragColor">
+						<div class="dragColor circleColor colorRed"></div>
+					</div>
+					<div id="divContainerColor2" class="containerDragColor">
+						<div class="dragColor circleColor colorBlue"></div>
+					</div>
+					<div id="divContainerColor3" class="containerDragColor">
+						<div class="dragColor circleColor colorGreen"></div>
+					</div>
+					<div id="divContainerColor4" class="containerDragColor">
+						<div class="dragColor circleColor colorPurple"></div>
+					</div>
+					<div id="divContainerColor5" class="containerDragColor">
+						<div class="dragColor circleColor colorYellow"></div>
+					</div>
+					<div id="divContainerColor6" class="containerDragColor">
+						<div class="dragColor circleColor colorGrey"></div>
+					</div>
+				</div>
+				<div class="col-md-5 column">
+				<input type="text" id="textBoxCajaRapida" class="">
+				<input type="button" value="MOSTRAR PISTAS" class="classButtonPistas">
+
+				</div>
+				<div class="col-md-1 column">
+					<label id="labelResultSlider" class="classLabelsInfo">8</label>
+				</div>
+			</div>
+			<div class="row clearfix">
+
+
+
+				<div id="divPushList" class="col-md-12 column">
+
+					<div class="row clearfix">	
+						<div id="divSetColors1" class="col-md-5 column classContainerSetColors">
+							<div class="containerListColor dropCircle">
+								<div class="circleColor"></div>
+							</div>
+							<div class="containerListColor dropCircle">
+								<div class="circleColor"></div>
+							</div>
+							<div class="containerListColor dropCircle">
+								<div class="circleColor"></div>
+							</div>
+							<div class="containerListColor dropCircle">
+								<div class="circleColor"></div>
+							</div>
+							<div class="containerListColor dropCircle">
+								<div class="circleColor"></div>
+							</div>
+						</div>
+
+						<div class="col-md-2 column"><label id="labelCurrentIntent" class="classLabelsInfo">1</label>
+						</div>
+
+						<div class="col-md-5 column classContainerSetColors">
+
+							<div class="containerListColor">
+								<div class="circleColor"></div>
+							</div>
+							<div class="containerListColor">
+								<div class=""></div>
+							</div>
+							<div class="containerListColor">
+								<div class="circleColor"></div>
+							</div>
+							<div class="containerListColor">
+								<div class="circleColor"></div>
+							</div>
+							<div class="containerListColor">
+								<div class="circleColor"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

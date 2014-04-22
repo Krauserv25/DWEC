@@ -1,0 +1,140 @@
+#imageLogo
+{
+	margin-top: 10%;
+	height: 80%;
+	width: 80%;
+}
+
+#masterMindTitle
+{
+	margin-top: 8%;
+}
+
+#divHeadRight
+{
+	padding-top: 3%;
+}
+
+.classLabelsInfo
+{
+	margin-top: 0;
+	font-size: 7em;
+}
+
+#divContainerDragColors
+{
+	 -webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	margin-top:1%; 
+	height:100px; 
+	
+	background-color: #A0522D;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+}
+
+.containerDragColor
+{
+	float:left;
+	margin-top: 2.5%;
+	margin-left: 3.8%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+	height: 69.5%;
+	width: 12.3%;
+	-webkit-border-radius: 700px;
+	-moz-border-radius: 700px;
+	border-radius: 700px;
+}
+
+.containerListColor
+{
+	float:left;
+	margin-top: 2.5%;
+	margin-left: 3.8%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+	height: 70%;
+	width: 14.9%;
+	-webkit-border-radius: 700px;
+	-moz-border-radius: 700px;
+	border-radius: 700px;
+}
+
+.classContainerSetColors
+{
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	margin-top:1%; 
+	height:100px; 
+	
+	/*background-color: #A0522D;*/
+	background-color: green;
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;	
+}
+
+.classButtonPistas
+{
+	width:30%; 
+	height:80%;
+}
+
+.circleColor
+{
+	 -webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	height:100%; 	
+	width: 100%;
+	/*
+		background-color: #D1D9DC;
+	*/
+	
+}
+
+.colorRed
+{
+	background-color: red;
+}
+
+.colorBlue
+{
+	background-color: #1E90FF;
+}
+
+.colorGreen
+{
+	background-color: #ADFF2F;
+}
+
+.colorPurple
+{
+	background-color: #9370DB;
+}
+
+.colorYellow
+{
+	background-color: #FFD700;
+}
+
+.colorGrey
+{
+	background-color: grey;
+}
+
+.colorWhite
+{
+	background-color: white;
+}
+
+.colorBlack
+{
+	background-color: black;
+}

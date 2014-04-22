@@ -1,0 +1,300 @@
+
+body
+{
+	background-image: url('../img/back.jpg');
+	background-repeat: no-repeat;
+}
+
+#divTodo
+{
+	margin: 0;
+	padding: 0;
+}
+
+#divHeader
+{
+	width: 100%;
+	height: 20%;
+}
+
+#imageTitle
+{
+	float: left;
+	margin-left: 3%;
+	margin-top: 0.75%;
+	width: 30%;
+	height: 85%;
+}
+
+#divContainerSlider
+{
+	float: left;
+	margin-left: 18%;
+	width: 25%;
+	margin-top: 3%;
+	height: 25%;	
+	font-size: 1.6em;
+}
+
+#divSlider
+{
+    background-color: rgba(187,145,19,0.2);
+    background-image: none;
+}
+
+#divSlider .ui-slider-range
+{
+	background-color: #0B3B0B;
+    background-image: none;
+}
+
+#divSlider .ui-slider-handle
+{
+	background-color: #497D39;
+    background-image: none;
+    outline-color: lightgreen;
+}
+
+#divSlider .ui-slider-handle:hover
+{
+
+    cursor: pointer;
+}
+
+#divContainerSlider > div
+{
+	height: 50%;
+}
+
+#inputCajaRapida
+{
+	outline-color: green;
+	font-weight: bold;
+	color: #106A31;
+	font-size: 2em;
+}
+
+#labelResultSlider
+{
+	float: right;
+	margin-right: 15%;
+	font-size: 6em;
+}
+
+#divGameControls
+{
+	width: 100%;
+	height: 20%;
+}
+
+#divContainerDragColors
+{
+	float: left;
+	 -webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	margin-left: 3%;
+	margin-top:1%; 
+	width: 50%;
+	height:100px; 
+	
+	background-color: #A0522D;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #5C3622;
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.43, #8F3428),
+	color-stop(1, #A15030)
+);
+background-image: -o-linear-gradient(top, #8F3428 43%, #A15030 100%);
+background-image: -moz-linear-gradient(top, #8F3428 43%, #A15030 100%);
+background-image: -webkit-linear-gradient(top, #8F3428 43%, #A15030 100%);
+background-image: -ms-linear-gradient(top, #8F3428 43%, #A15030 100%);
+background-image: linear-gradient(to top, #8F3428 43%, #A15030 100%);
+}
+
+.gameControls
+{
+	float: left;
+	text-align: center;
+	width: 16%;
+	height: 60%;
+	margin-left: 5%;
+	margin-top: 0.75%;
+}
+
+.containerDragColor
+{
+	float:left;
+	margin-top: 2%;
+	margin-left: 3.8%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+	height: 75%;
+	width: 12%;
+	-webkit-border-radius: 700px;
+	-moz-border-radius: 700px;
+	border-radius: 700px;
+}
+
+.classContainerSetColors
+{
+	float: left;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	margin-right: 3%;
+	margin-left: 3%;
+	margin-top:1%; 
+	width: 40%;
+	height:100px; 
+	border-style: solid;
+	border-width: 2px;
+	border-color: #6F9364;	
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.43, #8FE3A0),
+	color-stop(1, #D5F7B9)
+);
+background-image: -o-linear-gradient(top, #8FE3A0 43%, #D5F7B9 100%);
+background-image: -moz-linear-gradient(top, #8FE3A0 43%, #D5F7B9 100%);
+background-image: -webkit-linear-gradient(top, #8FE3A0 43%, #D5F7B9 100%);
+background-image: -ms-linear-gradient(top, #8FE3A0 43%, #D5F7B9 100%);
+background-image: linear-gradient(to top, #8FE3A0 43%, #D5F7B9 100%);
+}
+
+.classDivCurrentIntent
+{
+	float: left;
+	width: 5%;
+	text-align: center;
+}
+
+.containerDragColor:hover
+{
+	border-color: orange;
+}
+
+.dragColor:hover
+{
+	cursor: pointer;
+}
+
+.classCurrentIntent
+{
+	font-weight: bold;
+	font-size: 5em;
+}
+
+.containerListColor
+{
+	float:left;
+	margin-top: 2.5%;
+	margin-left: 3.8%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #163C24;
+	height: 76%;
+	width: 15.2%;
+	-webkit-border-radius: 700px;
+	-moz-border-radius: 700px;
+	border-radius: 700px;
+background: rgb(228,239,192); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover, rgba(228,239,192,1) 0%, rgba(171,189,115,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(228,239,192,1)), color-stop(100%,rgba(171,189,115,1))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center, rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4efc0', endColorstr='#abbd73',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.circleColor
+{
+	 -webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	height:100%; 	
+	width: 100%;	
+	text-align: center;
+	font-size: 3em;
+}
+
+.colorRed
+{
+	background-color: red;
+}
+
+.colorBlue
+{
+	background-color: #1E90FF;
+}
+
+.colorGreen
+{
+	background-color: #ADFF2F;
+}
+
+.colorPurple
+{
+	background-color: #9370DB;
+}
+
+.colorYellow
+{
+	background-color: #FFD700;
+}
+
+.colorGrey
+{
+	background-color: grey;
+}
+
+.colorWhite
+{
+	background-color: white;
+}
+
+.colorBlack
+{
+	background-color: black;
+}
+
+#finalModal
+{
+	text-align: center;
+}
+
+.classModalText
+{
+	font-weight: bold;
+	font-size: 2em;
+}
+
+.classButtons
+{
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	background-color: #8258FA;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #642EFE;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	outline: none;
+}
+
+.classButtons:hover
+{
+	color:#ACFA58;
+	font-size: 1.3em;
+}

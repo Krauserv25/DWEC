@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>Master Mind</title>
+	<meta charset="utf-8">
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="MyCSS_Styles/master_Styles.css">
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="cookies/jquery.cookie.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/config.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/utils.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/events.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/master.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/masterUI.js"></script> 
+</head>
+<body>
+	<div id="divTodo">
+		<div id="divHeader">
+
+			<img id="imageTitle" src="img/mastermind_Title.png">
+			<div id="divContainerSlider">
+				<label id="labelInfoIntents" class="classLabelsInfo">Número máx. de intentos:</label>
+				<div id="divSlider"></div>
+			</div>
+			<label id="labelResultSlider" class="classLabelsInfo">8</label>
+		</div>
+		<div id="divGameControls">
+			<div id="divContainerDragColors">
+					<div id="divContainerColorRed" class="containerDragColor">
+						<div class="dragColor circleColor colorRed"><span>1</span></div>
+					</div>
+					<div id="divContainerColorBlue" class="containerDragColor">
+						<div class="dragColor circleColor colorBlue"><span>2</span></div>
+					</div>
+					<div id="divContainerColorGreen" class="containerDragColor">
+						<div class="dragColor circleColor colorGreen"><span>3</span></div>
+					</div>
+					<div id="divContainerColorPurple" class="containerDragColor">
+						<div class="dragColor circleColor colorPurple"><span>4</span></div>
+					</div>
+					<div id="divContainerColorYellow" class="containerDragColor">
+						<div class="dragColor circleColor colorYellow"><span>5</span></div>
+					</div>
+					<div id="divContainerColorGrey" class="containerDragColor">
+						<div class="dragColor circleColor colorGrey"><span>6</span></div>
+					</div>
+			</div>
+				<form action="JavaScript:masterUI.CapturarCajaRapida();">
+				<input id="inputCajaRapida" type="text" placeholder="CAJA RÁPIDA" class="gameControls" />
+				</form>
+				<input id="inputPasarTurno" type="button" value="MOSTRAR PISTAS" class="gameControls classButtons"/>
+		</div>
+
+		<div id="divPushList"></div>
+		<div class="modal fade" id="finalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div id="divInfoResultadoFinal" class="modal-body"></div>
+			    </div>
+			  </div>
+			</div>
+	</div>
+</body>
+</html>
