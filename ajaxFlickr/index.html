@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>FLICKR_AJAX</title>
+	<meta charset="utf-8">
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="MyCSS_Styles/flickrAjax_Styles.css">
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/config.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/utils.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/events.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/flickrAjax.js"></script>
+	<script type="text/javascript" src="myJS_Scripts/flickrAjaxUI.js"></script> 
+	<script type="text/javascript" src="myJS_Scripts/ajaxCalls.js"></script> 
+</head>
+<body>
+	<div id="divTodo">
+		<div id="divHeader">
+			<div class="classCircleLogo blue"></div>
+			<div class="classCircleLogo pink"></div>
+
+			<div id="divIDSearch"> <!-- EJEMPLO ID BRITISH ==> 12403504@N02-->
+				<input type="text" id="inputUserID" placeholder="USER ID..." />
+				<input type="button" id="buttonLoadAjax" value="LOAD IMAGES"> 
+			</div>
+		</div>
+		<div id="divResult">
+			<div id="divImages"></div>
+			<div id="divFiltros">
+				<span class="classTextA">FILTRO:</span><br />
+				<input type="radio" class="classTextA" texto="all" name="tagFormat" checked="true"> ALL
+				<input type="radio" class="classTextA" texto="any" name="tagFormat"> ANY		
+				<br /><br /><br />
+				<span id="spanMaxImages" class="classTextB">MAX. IMAGES: </span>
+				
+				<select id="maxImagesSelect" class="classSelects">
+				  <option value="max5">5</option>
+				  <option value="max10">10</option>
+				  <option value="max15">15</option>
+				  <option value="max20" selected="true">20</option>
+				</select>	
+				<br /><br /><br />
+				<div id="divTagsMode">
+					<span id="spanTags" class="classTextB">TAGS:</span>
+					<select id="tagsSelect" class="classSelects" multiple="multiple"></select>
+				</div>		
+
+				<input type="button" id="buttonFilter" value="FILTRAR"> 
+			</div>
+		</div>
+	</div>
+</body>
+</html>

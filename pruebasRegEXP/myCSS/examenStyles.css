@@ -1,0 +1,28 @@
+
+#divTodo
+{
+	margin: 0;
+	padding: 0;
+}
+
+#divForm
+{
+	float: left;
+	width: 25%;
+	height: 300px;
+}
+
+#divInfoPersonas
+{
+	float: left;
+	width: 25%;
+	height: 300px;
+}
+
+.classInfoPersona
+{
+	width: 100%;
+	height: 50px;
+	border-style: solid;
+	border-width: 1px;
+}

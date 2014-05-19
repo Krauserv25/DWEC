@@ -68,10 +68,16 @@ body
 
 #inputCajaRapida
 {
+	margin-top: 2%;
 	outline-color: green;
 	font-weight: bold;
 	color: #106A31;
 	font-size: 2em;
+}
+
+#inputPasarTurno
+{
+	margin-top: 2%;
 }
 
 #labelResultSlider

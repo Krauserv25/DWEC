@@ -65,6 +65,7 @@ var masterUI =
 			}
 
 			$('#inputCajaRapida').val("");
+			master.nextIntent();
 		}
 	},
 

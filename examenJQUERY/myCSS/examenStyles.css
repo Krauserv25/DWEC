@@ -1,0 +1,39 @@
+
+#divTodo
+{
+	margin: 0;
+	padding: 0;
+}
+
+#divTablero
+{
+	width: 300px;
+	height: 300px;
+}
+
+.classCasilla
+{
+	float: left;
+	border-style: solid;
+	border-width: 1px;
+
+	width: 32.5%;
+	height: 32.5%;
+	background-color: green;
+}
+
+.classFicha
+{
+	width: 50%;
+	height: 50%;
+}
+
+.red
+{
+	background-color: red;
+}
+
+.purple
+{
+	background-color: purple;
+}

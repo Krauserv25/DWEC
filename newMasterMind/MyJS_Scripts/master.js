@@ -193,5 +193,38 @@ var master =
 				$(this).css("border-width", "3px");
 			}
 	  });
+	},
+	//Método que permite avanzar a otra fila de intento de juego
+	nextIntent: function()
+	{
+		//Paso 1: Copiar al auxiliar los datos de la combinación oculta
+		//Paso 2: Comprobar cuántas han sido correctas y bien ubicadas
+		//Paso 3: Según los aciertos se sigue jugando o bien termina en victoria
+		//Paso 4: En caso de seguir el juego se comprueba la cantidad de intentos sobre los posibles
+		//Paso 5: En caso de superarlos se pierde la partida. En caso contrario se sigue el juego.
+		//Paso 6: Se comprueba las que están KO (correctas mal ubicadas)
+		//Paso 7: Se incrementa la cantidad de intentos actuales y se procede con una nueva fila de juego 
+				
+		this.aux_CombOculta = config.combOculta.slice();
+		
+		var totalCorrectas = this.CuantasOK();
+
+		if (totalCorrectas < 5)
+		{
+			if (config.currentFilaNum < parseInt($('#labelResultSlider').text()))
+			{
+				this.CuantasKO();
+
+				config.currentFilaNum++;
+
+				masterUI.MostrarPistasEnLista();
+				this.setDroppable();
+			}
+			else masterUI.ShowFinalModal('¡HAS PERDIDO!');
+		}
+		else
+		{
+			masterUI.ShowFinalModal('¡ENHORABUENA!');
+		}			
 	}
 };
